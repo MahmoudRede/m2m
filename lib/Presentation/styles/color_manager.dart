@@ -4,13 +4,17 @@ class ColorManager {
 
   static const Color primary = Color(0xff4B42C6);
   static const Color primary2 = Color(0xff7917FF);
-  static const Color backgroundColor = Color(0xffFBF5FF);
+  static const Color backgroundColor = Color(0xFFe8f0fc);
+  static Color SecondDarkColor = Color.fromARGB(255, 44, 41, 40);
+  static Color primaryLightColor = Color.fromARGB(255, 244, 237, 237);
   static Color lightYallow = const Color(0xffFFECDB);
   static Color dartGrey = const Color(0xff262626);
   static Color grey = const Color(0xff737477);
   static Color lightGrey = const Color(0xffc4c4c4);
   static Color white = const Color(0xffFFFFFF);
   static Color whiteDark = const Color(0xfff9f9f9);
+  static Color ovWhite = const Color(0xfff9f9f9);
+  ///e8f0fd
   static Color black = const Color(0xff000000);
   static Color red = const Color(0xffff5147);
   static Color orange = const Color(0xffff9401);
