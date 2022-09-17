@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "680642491416",
+    "project_id": "m2mapp-91014",
+    "storage_bucket": "m2mapp-91014.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680642491416:android:24931db1a59adda6807f6d",
+        "android_client_info": {
+          "package_name": "com.example.m2m"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680642491416-8jccne3b5r5b8kgm9tdgqjjorsacftvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD26Xsfct8PgF5dhAO2svVb-Uyzri4yw24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680642491416-8jccne3b5r5b8kgm9tdgqjjorsacftvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
