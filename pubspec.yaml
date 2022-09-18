@@ -46,6 +46,7 @@ dependencies:
   url_launcher: ^6.1.5
   font_awesome_flutter: ^10.1.0
   get: ^4.6.5
+  percent_indicator: ^4.2.2
 
   #Firebase
   firebase_core: ^1.20.0

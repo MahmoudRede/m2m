@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/details_screen/screen/details_screen.dart';
 import 'package:m2m/Presentation/screens/home_screen/screen/home_screen.dart';
+import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/firebase_options.dart';
 
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: const TasksScreen(),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/CustomBoxInformation.dart';
 import 'package:m2m/Presentation/widgets/custome_action_button.dart';
+import 'package:m2m/Presentation/widgets/default_button.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key}) : super(key: key);
@@ -94,25 +95,7 @@ class DetailsScreen extends StatelessWidget {
                     SizedBox(
                         height: SizeConfig.height *0.05,
                     ),
-                    GestureDetector(
-                      onTap: (){},
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: SizeConfig.width,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: ColorManager.lightBlue,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: const Text(
-                          "Participate  \$200",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    )
+                    DefaultButton(text: 'Participate  \$200', onPressed: (){}),
                   ],
                 ),
               ),

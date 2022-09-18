@@ -20,7 +20,7 @@ class ColorManager {
   static Color orange = const Color(0xffff9401);
   static Color gold = const Color(0xfff9c50b);
   static Color blue = const Color(0xff395ffd);
-  static Color lightBlue = const Color(0xff92a6f3);
+  static const Color lightBlue = Color(0xff92a6f3);
   static Color lightBlue2 = const Color(0xffb9c4f4);
   static Color teal = const Color(0xff4ca6a8);
   static Color white1 = const Color(0xffe9f4ff);
