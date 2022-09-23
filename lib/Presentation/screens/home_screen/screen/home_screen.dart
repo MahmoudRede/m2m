@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:m2m/Presentation/screens/home_screen/widget/custom_investment_row.dart';
 import 'package:m2m/Presentation/screens/home_screen/widget/custom_package_card.dart';
@@ -8,6 +9,7 @@ import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/custome_action_button.dart';
+import 'package:m2m/Presentation/widgets/text_manager.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -15,7 +17,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    var size=MediaQuery.of(context).size;
     List<String> packageTitle = [
       '1st Package 200\$',
       '2nd Package 350\$',
@@ -62,30 +64,39 @@ class HomeScreen extends StatelessWidget {
                       boxIcon: FontAwesomeIcons.bars,
                       iconColor: const Color.fromARGB(255, 245, 238, 238),
                     ),
-                    const Expanded(
-                        child: Center(
-                          child: Text(
-                            'M2M',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                    ),
+                     Expanded(
+                       child: Row(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         children: [
+                           Text('M ',style: GoogleFonts.bungee(
+                               color: ColorManager.black,
+                               fontSize: size.height*.045,
+                               fontWeight: FontWeight.bold
+                           ),),
+                           Text('2',style: GoogleFonts.bungee(
+                               color: ColorManager.primary,
+                               fontSize: size.height*.05,
+                               fontWeight: FontWeight.bold
+                           ),),
+                           Text(' M',style: GoogleFonts.bungee(
+                               color: ColorManager.black,
+                               fontSize: size.height*.045,
+                               fontWeight: FontWeight.bold
+                           ),),
+                         ],
+                       ),
+                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                  height:  SizeConfig.height * 0.01,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 20.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0),
                 child: Text(
                   "Packages",
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w800,
+                  style: GoogleFonts.aBeeZee(
+                    color: ColorManager.black,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -117,20 +128,18 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Investment Department",
-                      style: TextStyle(
-                          fontSize: 23,
+                      style: GoogleFonts.aBeeZee(
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: ColorManager.black),
                     ),
-                    const Expanded(
-                        child: Text(""),
-                    ),
+                    Spacer(),
                     Text(
                       "More",
                       style:
-                      TextStyle(
+                      textManager(
                           fontSize: 14,
-                          color: ColorManager.blue,
+                          color: ColorManager.primary,
                       ),
                     ),
                   ],

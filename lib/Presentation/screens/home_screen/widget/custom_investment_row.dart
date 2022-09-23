@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/Presentation/widgets/text_manager.dart';
 
 class CustomInvestmentRow extends StatelessWidget {
   const CustomInvestmentRow({
@@ -52,26 +53,28 @@ class CustomInvestmentRow extends StatelessWidget {
                   Text(
                     title,
                     textAlign: TextAlign.left,
-                    style: const TextStyle(
+                    style:textManager(
+                      color: ColorManager.black,
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 5),
                   Expanded(
                     child: Text(
                       description,
-                      style: const TextStyle(
-                          fontSize: 14,
-                          color: Color.fromARGB(136, 110, 103, 103),
-                          fontWeight: FontWeight.w600),
+                      style: textManager(
+                        color: ColorManager.grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                       maxLines: 3,
                     ),
                   ),
                 ],
               ),
             ),
-            const Expanded(child: Text("")),
+            Spacer(),
             Container(
               alignment: Alignment.center,
               width: 45,
@@ -89,7 +92,8 @@ class CustomInvestmentRow extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
-            )
+            ),
+            SizedBox(width: 10,),
           ],
         ),
       ),

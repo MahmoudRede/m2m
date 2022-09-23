@@ -4,6 +4,7 @@ import 'package:m2m/Presentation/screens/details_screen/screen/details_screen.da
 import 'package:m2m/Presentation/screens/home_screen/screen/home_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/Presentation/widgets/text_manager.dart';
 
 class CustomPackageCard extends StatelessWidget {
   final String image;
@@ -37,9 +38,10 @@ class CustomPackageCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+                style: textManager(
+                  color: ColorManager.black,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               const SizedBox(
@@ -53,13 +55,14 @@ class CustomPackageCard extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: ColorManager.white,
                       borderRadius: BorderRadius.circular(10)),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
                       "More",
-                      style: TextStyle(
+                      style: textManager(
+                        color: ColorManager.black,
                         fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -70,8 +73,10 @@ class CustomPackageCard extends StatelessWidget {
               ),
               Text(
                 tasksNum,
-                style: const TextStyle(
+                style: textManager(
+                  color: ColorManager.black,
                   fontSize: 20,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ],

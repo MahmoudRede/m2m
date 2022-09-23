@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 
@@ -14,6 +15,7 @@ class DefaultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size =MediaQuery.of(context).size;
     return GestureDetector(
       onTap: (){
         onPressed();
@@ -21,16 +23,16 @@ class DefaultButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: SizeConfig.width,
-        height: 50,
+        height:  size.height*.07,
         decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(10)),
         child: Text(
           text,
-          style: const TextStyle(
+          style: GoogleFonts.roboto(
             color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontSize: size.height*.025,
+            fontWeight: FontWeight.w400,
           ),
         ),
       ),
