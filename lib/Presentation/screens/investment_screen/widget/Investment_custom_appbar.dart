@@ -3,8 +3,8 @@ import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 
-class TasksCustomAppbar extends StatelessWidget {
-  const TasksCustomAppbar({
+class InvestmentCustomAppbar extends StatelessWidget {
+  const InvestmentCustomAppbar({
     // required this.title,
     // required this.userImage,
     Key? key}) : super(key: key);
@@ -22,9 +22,9 @@ class TasksCustomAppbar extends StatelessWidget {
           height: SizeConfig.topPadding,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20.0,
-            vertical: 20.0,
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.width*0.05,
+            vertical: SizeConfig.height * 0.03,
           ),
           child: Row(
             children: [

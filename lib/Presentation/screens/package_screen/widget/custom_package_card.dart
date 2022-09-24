@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:m2m/Presentation/screens/details_screen/screen/details_screen.dart';
-import 'package:m2m/Presentation/screens/home_screen/screen/home_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';

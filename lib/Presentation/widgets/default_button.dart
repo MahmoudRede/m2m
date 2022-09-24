@@ -15,7 +15,6 @@ class DefaultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size =MediaQuery.of(context).size;
     return GestureDetector(
       onTap: (){
         onPressed();
@@ -23,7 +22,7 @@ class DefaultButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: SizeConfig.width,
-        height:  size.height*.07,
+        height:  SizeConfig.height*.065,
         decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(10)),
@@ -31,7 +30,7 @@ class DefaultButton extends StatelessWidget {
           text,
           style: GoogleFonts.roboto(
             color: Colors.white,
-            fontSize: size.height*.025,
+            fontSize: SizeConfig.height*.025,
             fontWeight: FontWeight.w400,
           ),
         ),

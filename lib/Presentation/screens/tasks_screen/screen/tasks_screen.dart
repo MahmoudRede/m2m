@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/custom_task_row.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/task_divider.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/tasks_custom_appbar.dart';
-import 'package:m2m/Presentation/screens/tasks_screen/widget/welcome_card.dart';
+import 'package:m2m/Presentation/screens/tasks_screen/widget/task_welcome_card.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -29,7 +29,7 @@ class TasksScreen extends StatelessWidget {
                     SizedBox(
                       height: SizeConfig.height* 0.01,
                     ),
-                    const WelcomeCard(),
+                    const TaskWelcomeCard(),
                     SizedBox(
                       height: SizeConfig.height *0.01,
                     ),

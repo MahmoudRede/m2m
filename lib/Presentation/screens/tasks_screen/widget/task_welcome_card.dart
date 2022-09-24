@@ -5,8 +5,8 @@ import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class WelcomeCard extends StatelessWidget {
-  const WelcomeCard({Key? key}) : super(key: key);
+class TaskWelcomeCard extends StatelessWidget {
+  const TaskWelcomeCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class WelcomeCard extends StatelessWidget {
         width: SizeConfig.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
-          color: ColorManager.SecondDarkColor,
+          color: ColorManager.secondDarkColor,
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),

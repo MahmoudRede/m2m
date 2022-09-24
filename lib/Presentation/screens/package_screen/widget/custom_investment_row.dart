@@ -80,7 +80,7 @@ class CustomInvestmentRow extends StatelessWidget {
               width: 45,
               height: 45,
               decoration: BoxDecoration(
-                color: ColorManager.SecondDarkColor,
+                color: ColorManager.secondDarkColor,
                 borderRadius: BorderRadius.circular(50),
               ),
               child: Text(

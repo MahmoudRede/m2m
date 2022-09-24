@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:m2m/Presentation/screens/home_screen/screen/home_screen.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/on_boarding_screen/widget/custom_title.dart';
 import 'package:m2m/Presentation/screens/on_boarding_screen/widget/pageview_item.dart';
@@ -104,7 +103,7 @@ class _OnBoardingState extends State<OnBoarding> {
             ),
             SizedBox(height: size.height*.03,),
             DefaultButton(
-              color: ColorManager.primary,
+              color: ColorManager.lightBlue,
               text: 'Get Started',
               onPressed: (){
 

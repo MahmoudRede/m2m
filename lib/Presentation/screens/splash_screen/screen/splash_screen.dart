@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
-import 'package:m2m/Presentation/screens/home_screen/screen/home_screen.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/on_boarding_screen/screen/on_boarding_screen.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
@@ -20,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
 
-    Future.delayed(const Duration(seconds: 6),(){
+    Future.delayed(const Duration(seconds: 7),(){
 
       return navigateTo(OnBoarding(), context);
 
@@ -53,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
                Lottie.asset(
                     height: MediaQuery.of(context).size.height*.28,
                     width: MediaQuery.of(context).size.width*1,
-                   AssetsManager.testSplash
+                   AssetsManager.testSplash,
                )
           ],
         ),

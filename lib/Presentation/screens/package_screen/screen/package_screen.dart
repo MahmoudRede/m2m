@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:m2m/Presentation/screens/home_screen/widget/custom_investment_row.dart';
-import 'package:m2m/Presentation/screens/home_screen/widget/custom_package_card.dart';
+import 'package:m2m/Presentation/screens/package_screen/widget/custom_investment_row.dart';
+import 'package:m2m/Presentation/screens/package_screen/widget/custom_package_card.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -12,8 +12,8 @@ import 'package:m2m/Presentation/widgets/custome_action_button.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';
 
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class PackageScreen extends StatelessWidget {
+  const PackageScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     CustomActionButton(
-                      backgroundColor: ColorManager.SecondDarkColor,
+                      backgroundColor: ColorManager.secondDarkColor,
                       boxIcon: FontAwesomeIcons.bars,
                       iconColor: const Color.fromARGB(255, 245, 238, 238),
                     ),
@@ -122,38 +122,38 @@ class HomeScreen extends StatelessWidget {
                 height: SizeConfig.height*0.008,
               ),
               /// Investment Title and more button
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
-                child: Row(
-                  children: [
-                    Text(
-                      "Investment Department",
-                      style: GoogleFonts.aBeeZee(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: ColorManager.black),
-                    ),
-                    Spacer(),
-                    Text(
-                      "More",
-                      style:
-                      textManager(
-                          fontSize: 14,
-                          color: ColorManager.primary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                  height: 10,
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+              //   child: Row(
+              //     children: [
+              //       Text(
+              //         "Investment Department",
+              //         style: GoogleFonts.aBeeZee(
+              //             fontSize: 20,
+              //             fontWeight: FontWeight.bold,
+              //             color: ColorManager.black),
+              //       ),
+              //       Spacer(),
+              //       Text(
+              //         "More",
+              //         style:
+              //         textManager(
+              //             fontSize: 14,
+              //             color: ColorManager.primary,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // const SizedBox(
+              //     height: 10,
+              // ),
               /// Investment Information Row
-              const CustomInvestmentRow(
-                title: 'Investment for 6 months',
-                description: '10% profit for each months ,total Capital will return 25%',
-                profit: '10%',
-              ),
+              // const CustomInvestmentRow(
+              //   title: 'Investment for 6 months',
+              //   description: '10% profit for each months ,total Capital will return 25%',
+              //   profit: '10%',
+              // ),
             ],
           ),
         ));

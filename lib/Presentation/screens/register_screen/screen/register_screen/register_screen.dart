@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/register_screen/screen/follow_register/follow_register.dart';
+import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/styles/icon_broken.dart';
@@ -87,11 +88,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               'Create your new account',
                               style: textManager(
                                 color: Colors.grey.shade500,
-                                fontSize: size.height*.025,
-
+                                fontSize: size.height*.02,
                               ),
                             ),
-                            SizedBox(height: size.height *.03,),
+                            SizedBox(height: size.height *.05,),
                             Container(
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 25,
@@ -191,19 +191,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   navigateTo(const FollowRegister(), context);
                                 },
                                 text: 'Sign up',
-                                color: ColorManager.primary,
+                                color: ColorManager.lightBlue,
                               ),
                             ),
-                            SizedBox(height: size.height *.025,),
+                            SizedBox(height: size.height *0.1,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   'Already have an account?',
                                   style: textManager(
-                                      color: Colors.grey.shade700,
-                                      fontSize: size.height*.022,
-                                      fontWeight: FontWeight.w500
+                                    color: ColorManager.black,
+                                    fontSize: SizeConfig.headline3Size,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                                 
@@ -214,9 +214,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   child: Text(
                                     ' Sign in',
                                     style: textManager(
-                                        color: ColorManager.primary,
-                                        fontSize: size.height*.025,
-                                        fontWeight: FontWeight.w500
+                                      color: ColorManager.lightBlue,
+                                      fontSize: SizeConfig.headline3Size,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -224,9 +224,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                               ],
                             ),
-
-
-
                           ],
                         ),
                       ),
