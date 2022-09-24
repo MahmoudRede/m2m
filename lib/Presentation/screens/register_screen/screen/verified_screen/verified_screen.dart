@@ -9,11 +9,9 @@ import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/styles/icon_broken.dart';
-import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
-import 'package:m2m/Presentation/widgets/text_manager.dart';
-import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
-import 'package:m2m/business_logic/app_cubit/app_states.dart';
+import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
+import 'package:m2m/business_logic/register_cubit/register_state.dart';
 
 class VerifiedRegister extends StatefulWidget {
   const VerifiedRegister({Key? key}) : super(key: key);
@@ -35,12 +33,12 @@ class _VerifiedRegisterState extends State<VerifiedRegister> {
   @override
   Widget build(BuildContext context) {
     var size=MediaQuery.of(context).size;
-    return BlocConsumer<AppCubit,AppState>(
+    return BlocConsumer<RegisterCubit,RegisterState>(
       listener: (context,state){
 
       },
       builder: (context,state){
-        var cubit=AppCubit.get(context);
+        var cubit=RegisterCubit.get(context);
         return Scaffold(
           backgroundColor: ColorManager.white,
           appBar: AppBar(

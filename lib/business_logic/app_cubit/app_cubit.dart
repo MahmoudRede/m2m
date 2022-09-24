@@ -11,35 +11,5 @@ class AppCubit extends Cubit<AppState>{
 
   static AppCubit get(context) => BlocProvider.of(context);
 
-  File? uploadedNationalCard ;
-  var picker = ImagePicker();
 
-  Future <void> getNationalCard() async {
-    final pickedFile = await picker.pickImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedFile != null) {
-      uploadedNationalCard = File(pickedFile.path);
-      emit(PickNationalCardSuccessState());
-    } else {
-      print('No Image selected.');
-      emit(PickNationalCardErrorState());
-    }
-  }
-
-  File? uploadedPersonalImage ;
-  var picker2 = ImagePicker();
-
-  Future <void> getPersonalImage() async {
-    final pickedFile = await picker2.pickImage(
-      source: ImageSource.camera,
-    );
-    if (pickedFile != null) {
-      uploadedPersonalImage = File(pickedFile.path);
-      emit(PickPersonalImageSuccessState());
-    } else {
-      print('No Image selected.');
-      emit(PickPersonalImageErrorState());
-    }
-  }
 }
