@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     SizedBox(height: size.height *.05,),
-                     Text(
+                    Text(
                        'Welcome back',
                        style: GoogleFonts.aBeeZee(
                           color: ColorManager.black,
