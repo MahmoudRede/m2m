@@ -34,4 +34,5 @@ class PackageDivider extends StatelessWidget {
       ),
     );
   }
+
 }

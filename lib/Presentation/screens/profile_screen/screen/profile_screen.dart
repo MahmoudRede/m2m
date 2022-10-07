@@ -51,6 +51,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             // package information card
             const PackageInfoCard(),
+
           ],
         ),
       ),

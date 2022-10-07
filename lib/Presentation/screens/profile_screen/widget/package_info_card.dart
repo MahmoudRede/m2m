@@ -8,6 +8,7 @@ class PackageInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       height: SizeConfig.height*0.2,
       width: SizeConfig.width*0.8,
