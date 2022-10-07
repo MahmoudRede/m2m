@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Presentation/screens/register_screen/screen/register_screen/register_screen.dart';
+import 'package:m2m/Presentation/screens/start_screen/screen/start_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/styles/icon_broken.dart';
+import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/default_form_field.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';
+import 'package:m2m/business_logic/login_cubit/login_cubit.dart';
+import 'package:m2m/business_logic/login_cubit/login_state.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -31,172 +36,199 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        toolbarHeight: 0.0,
-        backwardsCompatibility: false,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarIconBrightness: Brightness.dark,
-            statusBarColor: Colors.white
-        ),
-      ),
-      body: Form(
-        key: formKey,
-        child: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              child: Image(
-                  height:size.height*.32,
-                  width: size.width,
-                  fit: BoxFit.cover,
-                  image: const AssetImage(AssetsManager.login),
-              ),
-            ),
-            Positioned(
-              top: size.height*.22,
-              child: Container(
-                width: size.width,
-                height: size.height,
-                decoration: BoxDecoration(
-                  color: ColorManager.white,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(60)
-                  )
+    return BlocConsumer<LoginCubit,LoginState>(
+        listener: (context,state){
+           if(state is UserLoginSuccessState){
+
+             customToast(title: 'Welcome Back',color:ColorManager.primary );
+             navigateAndRemove(StartScreen(), context);
+
+           }
+
+           if(state is UserLoginErrorState){
+
+             customToast(title: 'Email or Password isn\'t correct',color:ColorManager.red );
+
+           }
+        },
+        builder: (context,state){
+          var cubit=LoginCubit.get(context);
+          return Scaffold(
+              appBar: AppBar(
+                elevation: 0.0,
+                toolbarHeight: 0.0,
+                backwardsCompatibility: false,
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarIconBrightness: Brightness.dark,
+                    statusBarColor: Colors.white
                 ),
-                child: Column(
+              ),
+              body: Form(
+                key: formKey,
+                child: Stack(
                   children: [
-                    SizedBox(height: size.height *.05,),
-                    Text(
-                       'Welcome back',
-                       style: GoogleFonts.aBeeZee(
-                          color: ColorManager.black,
-                          fontSize: size.height*.045,
-                         fontWeight: FontWeight.w600
-                       ),
-                     ),
-                    SizedBox(height: size.height *.01,),
-                    Text(
-                      'Login to your account',
-                       style: textManager(
-                          color: Colors.grey.shade500,
-                         fontSize: size.height*.022,
-
+                    Positioned(
+                      top: 0,
+                      child: Image(
+                        height:size.height*.32,
+                        width: size.width,
+                        fit: BoxFit.cover,
+                        image: const AssetImage(AssetsManager.login),
                       ),
                     ),
-                    SizedBox(height: size.height *.05,),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 25,
-                        vertical: 10
-                      ),
-                      child: DefaultFormField(
-                        prefixWidget: const Icon(
-                          IconBroken.User
+                    Positioned(
+                      top: size.height*.22,
+                      child: Container(
+                        width: size.width,
+                        height: size.height,
+                        decoration: BoxDecoration(
+                            color: ColorManager.white,
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(60)
+                            )
                         ),
-                        hint: 'Email',
-                        controller: emailController,
-                        textInputType: TextInputType.emailAddress,
-                        validText: 'Please enter your email',
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 25,
-                          vertical: 10
-                      ),
-                      child: DefaultFormField(
-                        prefixWidget: const Icon(
-                          IconBroken.Lock
-                        ),
-                        suffixIcon: isPassword? Icons.visibility_off:Icons.visibility,
-                        suffixFunction: (){
-                          setState(() {
-                            isPassword=!isPassword;
-
-                          });
-                        },
-                        hint: 'Password',
-                        isPassword: isPassword,
-                        controller: passController,
-                        textInputType: TextInputType.visiblePassword,
-                        validText: 'Please enter your password',
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                        onTap: (){},
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 25,
-                              vertical: 10
-                          ),
-                          child: Text(
-                            'Forget password',
-                            style: textManager(
-                              color: ColorManager.lightBlue,
-                              fontSize: SizeConfig.headline4Size,
+                        child: Column(
+                          children: [
+                            SizedBox(height: size.height *.05,),
+                            Text(
+                              'Welcome back',
+                              style: GoogleFonts.aBeeZee(
+                                  color: ColorManager.black,
+                                  fontSize: size.height*.045,
+                                  fontWeight: FontWeight.w600
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: size.height *.05,),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 25,
-                          vertical: 10
-                      ),
-                      child: DefaultButton(
-                        onPressed: (){
-                           if(formKey.currentState!.validate()){
+                            SizedBox(height: size.height *.01,),
+                            Text(
+                              'Login to your account',
+                              style: textManager(
+                                color: Colors.grey.shade500,
+                                fontSize: size.height*.022,
 
-                           }
-                        },
-                        color: ColorManager.lightBlue,
-                        text: 'Sign in',
-                      ),
-                    ),
-                    SizedBox(height: size.height *0.1,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Don\'t have an account?',
-                          style: textManager(
-                              color: ColorManager.black,
-                              fontSize: SizeConfig.headline3Size,
-                              fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                              ),
+                            ),
+                            SizedBox(height: size.height *.05,),
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 25,
+                                  vertical: 10
+                              ),
+                              child: DefaultFormField(
+                                prefixWidget: const Icon(
+                                    IconBroken.User
+                                ),
+                                hint: 'Email',
+                                controller: emailController,
+                                textInputType: TextInputType.emailAddress,
+                                validText: 'Please enter your email',
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 25,
+                                  vertical: 10
+                              ),
+                              child: DefaultFormField(
+                                prefixWidget: const Icon(
+                                    IconBroken.Lock
+                                ),
+                                suffixIcon: isPassword? Icons.visibility_off:Icons.visibility,
+                                suffixFunction: (){
+                                  setState(() {
+                                    isPassword=!isPassword;
 
-                        GestureDetector(
-                          onTap: (){
-                            navigateAndRemove(RegisterScreen(), context);
-                          },
-                          child: Text(
-                            ' Sign up',
-                            style: textManager(
+                                  });
+                                },
+                                hint: 'Password',
+                                isPassword: isPassword,
+                                controller: passController,
+                                textInputType: TextInputType.visiblePassword,
+                                validText: 'Please enter your password',
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: GestureDetector(
+                                onTap: (){},
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 25,
+                                      vertical: 10
+                                  ),
+                                  child: Text(
+                                    'Forget password',
+                                    style: textManager(
+                                      color: ColorManager.lightBlue,
+                                      fontSize: SizeConfig.headline3Size,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: size.height *.045,),
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 25,
+                                  vertical: 10
+                              ),
+                              child: state is UserLoginLoadingState?
+                                const CircularProgressIndicator(
+                                  color: ColorManager.primary,
+                                )
+                                :DefaultButton(
+                                onPressed: (){
+                                  if(formKey.currentState!.validate()){
+                                      cubit.userLogin(
+                                          email: emailController.text,
+                                          password: passController.text
+                                      );
+                                  }
+                                },
                                 color: ColorManager.lightBlue,
-                                fontSize: SizeConfig.headline3Size,
-                                fontWeight: FontWeight.w500
+                                text: 'Sign in',
+                              ),
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
+                            SizedBox(height: size.height *0.05,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Don\'t have an account?',
+                                  style: textManager(
+                                      color: Colors.grey.shade700,
+                                      fontSize: size.height*.02,
+                                      fontWeight: FontWeight.w500
+                                  ),
+                                ),
 
-                      ],
-                    ),
+                                GestureDetector(
+                                  onTap: (){
+                                    navigateAndRemove(RegisterScreen(), context);
+                                  },
+                                  child: Text(
+                                    ' Sign Up',
+                                    style: textManager(
+                                        color: ColorManager.primary,
+                                        fontSize: size.height*.023,
+                                        fontWeight: FontWeight.w500
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
-              ),
-            )
-          ],
-        ),
-      )
+              )
 
+          );
+
+        },
     );
   }
 }
