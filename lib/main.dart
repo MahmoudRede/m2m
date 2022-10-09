@@ -1,21 +1,23 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
+import 'package:m2m/Presentation/screens/details_screen/screen/details_screen.dart';
+import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
+import 'package:m2m/Presentation/screens/on_boarding_screen/screen/on_boarding_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
+import 'package:m2m/Presentation/screens/profile_screen/screen/profile_screen.dart';
+import 'package:m2m/Presentation/screens/register_screen/screen/follow_register/follow_register.dart';
+import 'package:m2m/Presentation/screens/register_screen/screen/follow_register/national_id.dart';
+import 'package:m2m/Presentation/screens/register_screen/screen/register_screen/register_screen.dart';
 import 'package:m2m/Presentation/screens/splash_screen/screen/splash_screen.dart';
+import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
-import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/login_cubit/login_cubit.dart';
-import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
-import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
-import 'package:m2m/constants/constants.dart';
 import 'package:m2m/firebase_options.dart';
 
 
@@ -28,25 +30,21 @@ void main() async {
 
   await CashHelper.init();
 
-  uId = CashHelper.getData(key: 'uId');
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => AppCubit()..getUser()),
+        BlocProvider(create: (BuildContext context) => AppCubit()),
         BlocProvider(create: (BuildContext context) => LoginCubit()),
         BlocProvider(create: (BuildContext context) => RegisterCubit()),
-        BlocProvider(create: (BuildContext context) => PaymentCubit()),
-        BlocProvider(create: (BuildContext context) => TasksCubit()..getUser()),
       ],
-      child: BlocConsumer<AppCubit,AppStates>(
+      child: BlocConsumer<AppCubit,AppState>(
         listener: (context,state){},
         builder: (context,state){
           return MaterialApp(
@@ -58,38 +56,13 @@ class MyApp extends StatelessWidget {
               appBarTheme: AppBarTheme(
                 backgroundColor: ColorManager.white,
                 elevation: 0.0,
-                iconTheme: IconThemeData(
-                  color: ColorManager.black,
-                ),
                 systemOverlayStyle: const SystemUiOverlayStyle(
                   statusBarColor: Colors.transparent,
                   statusBarBrightness: Brightness.dark,
                 ),
               ),
             ),
-            home: const SplashScreen(),
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              DefaultCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale("en",""),
-              Locale("ar",""),
-            ],
-            locale: const Locale("en"),
-            localeResolutionCallback: (currentLang , supportLang){
-              if(currentLang != null) {
-                for(Locale locale in supportLang){
-                  if(locale.languageCode == currentLang.languageCode){
-                    return currentLang;
-                  }
-                }
-              }
-              return supportLang.first;
-            },
+            home: const PackageScreen(),
           );
         },
       ),
