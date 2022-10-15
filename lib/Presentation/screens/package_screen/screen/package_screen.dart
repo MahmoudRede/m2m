@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:m2m/Presentation/screens/package_screen/widget/custom_investment_row.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/custom_package_card.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/screen_drawer.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/custome_action_button.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 
 
 class PackageScreen extends StatelessWidget {
@@ -100,7 +98,7 @@ class PackageScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Text(
-                  "Packages",
+                AppLocalizations.of(context)!.translate('packages').toString(),
                   style: GoogleFonts.aBeeZee(
                     color: ColorManager.black,
                     fontSize: 32,
@@ -114,7 +112,7 @@ class PackageScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Container(
+                child: SizedBox(
                   height: SizeConfig.height * 0.55,
                   width: SizeConfig.width,
                   child: ListView.separated(
@@ -132,39 +130,6 @@ class PackageScreen extends StatelessWidget {
               SizedBox(
                 height: SizeConfig.height*0.008,
               ),
-              /// Investment Title and more button
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
-              //   child: Row(
-              //     children: [
-              //       Text(
-              //         "Investment Department",
-              //         style: GoogleFonts.aBeeZee(
-              //             fontSize: 20,
-              //             fontWeight: FontWeight.bold,
-              //             color: ColorManager.black),
-              //       ),
-              //       Spacer(),
-              //       Text(
-              //         "More",
-              //         style:
-              //         textManager(
-              //             fontSize: 14,
-              //             color: ColorManager.primary,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // const SizedBox(
-              //     height: 10,
-              // ),
-              /// Investment Information Row
-              // const CustomInvestmentRow(
-              //   title: 'Investment for 6 months',
-              //   description: '10% profit for each months ,total Capital will return 25%',
-              //   profit: '10%',
-              // ),
             ],
           ),
         ),

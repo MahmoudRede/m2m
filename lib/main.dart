@@ -1,21 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
-import 'package:m2m/Presentation/screens/details_screen/screen/details_screen.dart';
-import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
-import 'package:m2m/Presentation/screens/on_boarding_screen/screen/on_boarding_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
-import 'package:m2m/Presentation/screens/profile_screen/screen/profile_screen.dart';
-import 'package:m2m/Presentation/screens/register_screen/screen/follow_register/follow_register.dart';
-import 'package:m2m/Presentation/screens/register_screen/screen/follow_register/national_id.dart';
-import 'package:m2m/Presentation/screens/register_screen/screen/register_screen/register_screen.dart';
-import 'package:m2m/Presentation/screens/splash_screen/screen/splash_screen.dart';
-import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/login_cubit/login_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
 import 'package:m2m/firebase_options.dart';
@@ -63,6 +57,28 @@ class MyApp extends StatelessWidget {
               ),
             ),
             home: const PackageScreen(),
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              DefaultCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale("en",""),
+              Locale("ar",""),
+            ],
+            locale: const Locale("en"),
+            localeResolutionCallback: (currentLang , supportLang){
+              if(currentLang != null) {
+                for(Locale locale in supportLang){
+                  if(locale.languageCode == currentLang.languageCode){
+                    return currentLang;
+                  }
+                }
+              }
+              return supportLang.first;
+            },
           );
         },
       ),
