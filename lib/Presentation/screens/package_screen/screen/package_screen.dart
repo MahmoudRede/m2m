@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/custom_package_card.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/package_slider_item.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/screen_drawer.dart';
+import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -186,7 +187,7 @@ class PackageScreen extends StatelessWidget {
                 ),
                 child: DefaultButton(
                   text: AppLocalizations.of(context)!.translate('viewTasks').toString(),
-                  onPressed: (){},
+                  onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const TasksScreen())),
                   color: ColorManager.secondDarkColor,
                 ),
               ),
