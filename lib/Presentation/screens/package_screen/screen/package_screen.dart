@@ -1,12 +1,15 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/custom_package_card.dart';
+import 'package:m2m/Presentation/screens/package_screen/widget/package_slider_item.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/screen_drawer.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/custome_action_button.dart';
+import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/business_logic/app_localization.dart';
 
 
@@ -42,6 +45,13 @@ class PackageScreen extends StatelessWidget {
       AssetsManager.investmentImage,
     ];
 
+    List carouselImage = [
+      'https://img.freepik.com/free-vector/hand-drawn-colorful-space-background_52683-12648.jpg',
+      'https://img.freepik.com/free-vector/hand-drawn-colorful-space-background_52683-12648.jpg',
+      'https://img.freepik.com/free-vector/hand-drawn-colorful-space-background_52683-12648.jpg',
+      'https://img.freepik.com/free-vector/hand-drawn-colorful-space-background_52683-12648.jpg',
+    ];
+
     return Scaffold(
       key: scaffoldKey,
       body: Container(
@@ -52,12 +62,15 @@ class PackageScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                  height: SizeConfig.height * 0.04,
-              ),
               /// Screen Custom Appbar
+              SizedBox(
+                height: SizeConfig.topPadding,
+              ),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: EdgeInsets.symmetric(
+                  horizontal:SizeConfig.height*0.03,
+                  vertical: SizeConfig.height*0.01,
+                ),
                 child: Row(
                   children: [
                     CustomActionButton(
@@ -94,9 +107,45 @@ class PackageScreen extends StatelessWidget {
               SizedBox(
                 height: SizeConfig.height*0.02,
               ),
+
+
+              /// screen slider
+              SizedBox(
+                width: MediaQuery.of(context).size.width *1,
+                height: SizeConfig.height*0.15,
+                child: CarouselSlider.builder(
+                    itemCount: carouselImage.length,
+                    itemBuilder: (BuildContext context, int index, int pageViewIndex) => PackageSliderItem(
+                      title: "Title",
+                      image: carouselImage[index],
+                    ),
+                    options: CarouselOptions(
+                      height: SizeConfig.height*0.15,
+                      aspectRatio: 16/9,
+                      viewportFraction: 0.8,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 5),
+                      autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                    )
+                ),
+              ),
+              SizedBox(
+                height: SizeConfig.height*0.02,
+              ),
+
+
               // package title
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.height*0.03,
+                  vertical: SizeConfig.height*0.01,
+                ),
                 child: Text(
                 AppLocalizations.of(context)!.translate('packages').toString(),
                   style: GoogleFonts.aBeeZee(
@@ -106,14 +155,15 @@ class PackageScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
+
               /// Packages Card List
-              SizedBox(
-                height: SizeConfig.height*0.04,
-              ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding : EdgeInsets.symmetric(
+                  horizontal: SizeConfig.height*0.01,
+                ),
                 child: SizedBox(
-                  height: SizeConfig.height * 0.55,
+                  height: SizeConfig.height * 0.5,
                   width: SizeConfig.width,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
@@ -127,8 +177,18 @@ class PackageScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: SizeConfig.height*0.008,
+
+              /// View tasks Button
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.height*0.01,
+                  vertical: SizeConfig.height*0.02,
+                ),
+                child: DefaultButton(
+                  text: AppLocalizations.of(context)!.translate('viewTasks').toString(),
+                  onPressed: (){},
+                  color: ColorManager.secondDarkColor,
+                ),
               ),
             ],
           ),

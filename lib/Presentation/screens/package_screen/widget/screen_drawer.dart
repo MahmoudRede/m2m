@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:m2m/Presentation/screens/investment_screen/screen/investment_screen.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/drawer_row_item.dart';
@@ -92,14 +91,6 @@ class HomeDrawer extends StatelessWidget {
               title: 'Packages',
               icon: FontAwesomeIcons.moneyBill,
               onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const PackageScreen())),
-            ),
-            SizedBox(
-              height: SizeConfig.height*0.05,
-            ),
-            DrawerRowItem(
-              title: 'Investment',
-              icon: FontAwesomeIcons.dollarSign,
-              onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const InvestmentScreen())),
             ),
             SizedBox(
               height: SizeConfig.height*0.05,
