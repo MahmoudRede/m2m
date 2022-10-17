@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
-import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
-import 'package:m2m/Presentation/widgets/navigate_to.dart';
+import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
+import 'package:m2m/business_logic/app_cubit/app_states.dart';
 import 'package:m2m/business_logic/app_localization.dart';
-import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
-import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
 
 class UploadTaskScreen extends StatelessWidget {
   const UploadTaskScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TasksCubit,TasksStates>(
+    return BlocConsumer<AppCubit,AppStates>(
       listener: (context,state){},
       builder: (context,state){
-        var cubit = TasksCubit.get(context);
-
+        var cubit = AppCubit.get(context);
         return Scaffold(
           appBar: AppBar(
             title: Text(
@@ -89,22 +85,9 @@ class UploadTaskScreen extends StatelessWidget {
                 ),
 
                 // upload button
-                state is UploadTaskScreenLoadingState?
-                const CircularProgressIndicator(
-                  color: ColorManager.primary,
-                ):DefaultButton(
+                DefaultButton(
                   text: AppLocalizations.of(context)!.translate('upload').toString(),
-                  onPressed: (){
-                    if(cubit.uploadedTaskImage != null){
-                      cubit.uploadTaskScreen().then((value) async{
-                            await customToast(title: 'Task is uploaded', color: ColorManager.gold);
-                            cubit.uploadedTaskImage = null;
-                            await navigateAndRemove(context, const TasksScreen());
-                      });
-                    }else{
-                      customToast(title: 'please select image', color: ColorManager.red);
-                    }
-                  },
+                  onPressed: (){},
                   color: ColorManager.secondDarkColor,
                 ),
               ],

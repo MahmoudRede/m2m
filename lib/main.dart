@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (BuildContext context) => LoginCubit()),
         BlocProvider(create: (BuildContext context) => RegisterCubit()),
       ],
-      child: BlocConsumer<AppCubit,AppState>(
+      child: BlocConsumer<AppCubit,AppStates>(
         listener: (context,state){},
         builder: (context,state){
           return MaterialApp(
@@ -50,6 +50,9 @@ class MyApp extends StatelessWidget {
               appBarTheme: AppBarTheme(
                 backgroundColor: ColorManager.white,
                 elevation: 0.0,
+                iconTheme: IconThemeData(
+                  color: ColorManager.black,
+                ),
                 systemOverlayStyle: const SystemUiOverlayStyle(
                   statusBarColor: Colors.transparent,
                   statusBarBrightness: Brightness.dark,

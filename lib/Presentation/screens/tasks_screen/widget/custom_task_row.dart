@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/task_item_button.dart';
+import 'package:m2m/Presentation/screens/upload_task_screen/upload_task_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -183,7 +184,7 @@ class CustomTaskRow extends StatelessWidget {
                 ),
                 TaskItemButton(
                   text: AppLocalizations.of(context)!.translate('upload').toString(),
-                  onPressed: (){},
+                  onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>const UploadTaskScreen())),
                   // color: ColorManager.lightBlue,
                 ),
               ],
