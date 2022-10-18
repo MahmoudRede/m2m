@@ -37,11 +37,12 @@ class OnBoarding extends StatefulWidget {
 class _OnBoardingState extends State<OnBoarding> {
   var pageController=PageController();
   int currentIndex=1;
+  late Timer timer;
 
   @override
   void initState() {
 
-    Timer.periodic(const Duration(seconds: 10), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 10), (timer) {
       Future.delayed(const Duration(seconds: 7),(){
         if(currentIndex==3){
           navigateAndRemove(LoginScreen(), context);
@@ -54,6 +55,15 @@ class _OnBoardingState extends State<OnBoarding> {
     });
     super.initState();
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    timer.cancel();
+    super.dispose();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
