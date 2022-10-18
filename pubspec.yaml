@@ -31,10 +31,10 @@ dependencies:
   image_picker: ^0.8.5+3
 
   #Firebase
-  firebase_core: ^1.20.0
-  firebase_auth: ^3.6.1
-  cloud_firestore: ^3.4.2
-  firebase_storage: ^10.3.4
+  firebase_core:
+  firebase_auth:
+  cloud_firestore:
+  firebase_storage:
 
 
 

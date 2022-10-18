@@ -12,7 +12,8 @@ class DefaultFormField extends StatelessWidget {
   IconData ?suffixIcon;
   Function ?suffixFunction;
   Widget? prefixWidget;
-  final String validText;
+  String ?validText;
+  int ?maxLines;
 
   DefaultFormField({
     required this.hint,
@@ -22,7 +23,8 @@ class DefaultFormField extends StatelessWidget {
     this.suffixIcon,
     this.suffixFunction,
     this.prefixWidget,
-    required this.validText,
+    this.validText,
+    this.maxLines=1,
     Key? key
   }) : super(key: key);
 
@@ -33,9 +35,10 @@ class DefaultFormField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         filled: true,
+        iconColor: ColorManager.primary,
         fillColor: Colors.grey[150],
         hintStyle: GoogleFonts.lato(
-          fontSize: 16.0,
+          fontSize: 14.0,
           color: Colors.black54,
         ),
         errorStyle: GoogleFonts.roboto(
@@ -52,6 +55,7 @@ class DefaultFormField extends StatelessWidget {
         color: Colors.black,
         fontSize: 15,
       ),
+      maxLines: maxLines,
       controller: controller,
       keyboardType: textInputType,
       obscureText: isPassword,

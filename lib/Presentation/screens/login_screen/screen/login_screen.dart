@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
+import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/register_screen/screen/register_screen/register_screen.dart';
-import 'package:m2m/Presentation/screens/start_screen/screen/start_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -13,11 +14,12 @@ import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/default_form_field.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';
+import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/login_cubit/login_cubit.dart';
 import 'package:m2m/business_logic/login_cubit/login_state.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -28,8 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   var passController=TextEditingController();
 
-  @override
-  var formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey();
 
   bool isPassword=true;
 
@@ -41,7 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
            if(state is UserLoginSuccessState){
 
              customToast(title: 'Welcome Back',color:ColorManager.primary );
-             navigateAndRemove(StartScreen(), context);
+             CashHelper.saveData(key: 'uId',value: state.uid);
+             AppCubit.get(context).getUser();
+             navigateAndRemove(context,const PackageScreen());
 
            }
 
@@ -57,7 +60,6 @@ class _LoginScreenState extends State<LoginScreen> {
               appBar: AppBar(
                 elevation: 0.0,
                 toolbarHeight: 0.0,
-                backwardsCompatibility: false,
                 systemOverlayStyle: const SystemUiOverlayStyle(
                     statusBarIconBrightness: Brightness.dark,
                     statusBarColor: Colors.white
@@ -203,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                 GestureDetector(
                                   onTap: (){
-                                    navigateAndRemove(RegisterScreen(), context);
+                                    navigateAndRemove(context,RegisterScreen());
                                   },
                                   child: Text(
                                     ' Sign Up',

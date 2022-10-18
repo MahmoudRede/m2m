@@ -1,10 +1,8 @@
-import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/register_screen/screen/follow_register/national_id.dart';
 import 'package:m2m/Presentation/screens/register_screen/screen/follow_register/personal_image.dart';
 import 'package:m2m/Presentation/screens/register_screen/screen/verified_screen/verified_screen.dart';
@@ -14,16 +12,29 @@ import 'package:m2m/Presentation/styles/icon_broken.dart';
 import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
-import 'package:m2m/Presentation/widgets/text_manager.dart';
-import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
-import 'package:m2m/business_logic/app_cubit/app_states.dart';
 import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_state.dart';
 
 class FollowRegister extends StatelessWidget {
+  final String name;
+  final String phone;
+  final String pass;
+  final String email;
+  final String government;
+  final String age;
+  final String code;
+  final String skills;
 
-  FollowRegister({
+  const FollowRegister({
     Key? key,
+    required this.name,
+    required this.email,
+    required this.pass,
+    required this.age,
+    required this.phone,
+    required this.code,
+    required this.government,
+    required this.skills,
 
   }) : super(key: key);
 
@@ -32,6 +43,13 @@ class FollowRegister extends StatelessWidget {
     var size=MediaQuery.of(context).size;
     return BlocConsumer<RegisterCubit,RegisterState>(
         listener: (context,state){
+
+          if(state is UserRegisterSuccessState){
+            navigateTo(context,const VerifiedRegister());
+          }
+          if(state is UserRegisterErrorState){
+            customToast(title: 'Invalid data , please try again', color: ColorManager.red);
+          }
 
         },
         builder: (context,state){
@@ -90,7 +108,7 @@ class FollowRegister extends StatelessWidget {
                       child: GestureDetector(
                         onTap: (){
                           cubit.getNationalCard().then((value) {
-                            navigateTo(NationalId(), context);
+                            navigateTo( context,NationalId());
                           });
                         },
                         child: Container(
@@ -132,8 +150,8 @@ class FollowRegister extends StatelessWidget {
                       child: GestureDetector(
                         onTap: (){
                           cubit.getPersonalImage().then((value) {
+                            navigateTo(context,const PersonalImage());
                           });
-                          navigateTo(PersonalImage(), context);
 
                         },
                         child: Container(
@@ -153,14 +171,28 @@ class FollowRegister extends StatelessWidget {
                       )
                   ),
                   SizedBox(height: size.height*.05,),
+                  state is UserRegisterLoadingState?
+                  const CircularProgressIndicator(
+                    color: ColorManager.primary,
+                  ):
                   DefaultButton(
-                      text: 'Send',
+                      text: 'Sign Up',
                       color: ColorManager.primary,
                       onPressed: (){
 
-                         if(cubit.uploadedNationalCard!=null && cubit.uploadedPersonalImage!=null  ){
+                         if(cubit.uploadedNationalCard!=null && cubit.uploadedPersonalImage!=null){
 
-                           navigateTo(const VerifiedRegister(), context);
+                           cubit.userRegister(
+                               email: email,
+                               pass: pass,
+                               name: name,
+                               phone: phone,
+                               age: age,
+                               government: government,
+                               nationalIdImage:  CashHelper.getData(key: 'nationalId'),
+                               personalImage: CashHelper.getData(key: 'personalImage'),
+                               inviteCode: code,
+                               skills: skills);
 
                          }else{
 

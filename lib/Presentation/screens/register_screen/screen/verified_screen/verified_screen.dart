@@ -1,9 +1,6 @@
-import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
@@ -25,7 +22,7 @@ class _VerifiedRegisterState extends State<VerifiedRegister> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3),(){
-      return navigateTo(LoginScreen(), context);
+      return navigateTo( context,LoginScreen(),);
     });
     super.initState();
   }

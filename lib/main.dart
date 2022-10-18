@@ -13,6 +13,7 @@ import 'package:m2m/business_logic/app_cubit/app_states.dart';
 import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/login_cubit/login_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
+import 'package:m2m/constants/constants.dart';
 import 'package:m2m/firebase_options.dart';
 
 
@@ -25,17 +26,19 @@ void main() async {
 
   await CashHelper.init();
 
+  uId = CashHelper.getData(key: 'uId');
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => AppCubit()),
+        BlocProvider(create: (BuildContext context) => AppCubit()..getUser()),
         BlocProvider(create: (BuildContext context) => LoginCubit()),
         BlocProvider(create: (BuildContext context) => RegisterCubit()),
       ],

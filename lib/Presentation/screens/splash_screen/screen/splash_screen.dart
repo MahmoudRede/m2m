@@ -3,9 +3,11 @@ import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/on_boarding_screen/screen/on_boarding_screen.dart';
+import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
+import 'package:m2m/constants/constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -19,9 +21,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
 
-    Future.delayed(const Duration(seconds: 7),(){
+    Future.delayed(const Duration(seconds: 6),(){
 
-      return navigateTo(OnBoarding(), context);
+      if(uId == null){
+        return navigateTo(context,OnBoarding());
+      }else{
+        return navigateTo(context,PackageScreen());
+
+      }
 
     });
 

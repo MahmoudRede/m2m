@@ -21,5 +21,8 @@ class AssetsManager {
   static const String idCard = 'assets/images/id_card.jpg';
   static const String selife = 'assets/images/selife.jpg';
   static const String verifiedRegister = 'assets/images/verified.json';
+  static const String start = 'assets/images/start.png';
+  static const String marketing = 'assets/images/marketing1.jpg';
+  static const String investment = 'assets/images/investment1.jpg';
 
 }

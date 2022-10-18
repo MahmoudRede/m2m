@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future navigateTo(Widget widget , context){
+Future navigateTo( context,Widget widget){
 
   return Navigator.push(context, MaterialPageRoute(builder: (_){
      return widget;
@@ -8,7 +8,7 @@ Future navigateTo(Widget widget , context){
 
 }
 
-Future navigateAndRemove(Widget widget , context){
+Future navigateAndRemove( context,Widget widget ,){
 
   return Navigator.pushReplacement(context, MaterialPageRoute(builder: (_){
     return widget;

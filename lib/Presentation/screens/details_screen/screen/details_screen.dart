@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/CustomBoxInformation.dart';
 import 'package:m2m/Presentation/widgets/custome_action_button.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
+import 'package:m2m/Presentation/widgets/navigate_to.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key}) : super(key: key);
@@ -30,7 +33,7 @@ class DetailsScreen extends StatelessWidget {
                 height: SizeConfig.height * 0.02,
             ),
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(25.0),
               child: CustomActionButton(
                 boxIcon: FontAwesomeIcons.chevronLeft,
                 iconColor: ColorManager.white,
@@ -44,7 +47,7 @@ class DetailsScreen extends StatelessWidget {
                 ),
             ),
             Container(
-              height: SizeConfig.height * 0.5,
+              height: SizeConfig.height * 0.55,
               width: SizeConfig.width,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
@@ -59,20 +62,20 @@ class DetailsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "1st Package 200\$",
                       textAlign: TextAlign.left,
-                      style: TextStyle(
+                      style: GoogleFonts.aBeeZee(
                         color: Colors.white,
-                        fontSize: 40,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
+                     Text(
                       "Deposite 200\$, 5 Tasks for each Task 1.2\$, total income for months 180\$. "
                           "\nIf you don\'t invite anyone after the first months the task rate become 0.2\$.",
-                      style: TextStyle(
+                      style: GoogleFonts.roboto(
                         color: Color.fromARGB(141, 255, 255, 255),
                         height: 1.4,
                         fontSize: 15,
@@ -97,7 +100,9 @@ class DetailsScreen extends StatelessWidget {
                     SizedBox(
                         height: SizeConfig.height *0.05,
                     ),
-                    DefaultButton(text: 'Participate  \$200', onPressed: (){}),
+                    DefaultButton(text: 'Participate  \$200', onPressed: (){
+                      navigateTo( context,TasksScreen());
+                    }),
                   ],
                 ),
               ),

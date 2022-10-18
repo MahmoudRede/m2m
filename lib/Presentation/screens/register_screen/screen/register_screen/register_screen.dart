@@ -3,11 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
-import 'package:m2m/Presentation/screens/register_screen/screen/follow_register/follow_register.dart';
+import 'package:m2m/Presentation/screens/register_screen/screen/next_screen/next_screen.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/styles/icon_broken.dart';
-import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/default_form_field.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
@@ -16,7 +15,7 @@ import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_state.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -29,8 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   var nameController=TextEditingController();
   var phoneController=TextEditingController();
 
-  @override
-  var formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   bool isPassword=true;
 
@@ -39,16 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     var size = MediaQuery.of(context).size;
     return BlocConsumer<RegisterCubit,RegisterState>(
         listener: (context,state){
-           if(state is UserRegisterSuccessState){
 
-             navigateTo(FollowRegister(), context);
-
-           }
-
-           if(state is UserRegisterErrorState){
-
-               customToast(title: 'Invalid Data , Try again', color: Colors.red);
-           }
         },
         builder: (context,state){
             var cubit=RegisterCubit.get(context);
@@ -56,7 +45,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 appBar: AppBar(
                   elevation: 0.0,
                   toolbarHeight: 0.0,
-                  backwardsCompatibility: false,
                   systemOverlayStyle: const SystemUiOverlayStyle(
                       statusBarIconBrightness: Brightness.dark,
                       statusBarColor: Colors.white
@@ -65,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 body: Form(
                   key: formKey,
                   child: SingleChildScrollView(
-                    child: Container(
+                    child: SizedBox(
                       height: size.height*1.05,
                       child: Stack(
                         children: [
@@ -105,9 +93,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     Text(
                                       'Create your new account',
                                       style: textManager(
-                                        color: Colors.grey.shade500,
-                                        fontSize: size.height*.022,
-
+                                          color: Colors.grey.shade500,
+                                          fontSize: size.height*.021,
+                                          fontWeight: FontWeight.w400
                                       ),
                                     ),
                                     SizedBox(height: size.height *.03,),
@@ -118,7 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                       child: DefaultFormField(
                                         prefixWidget: const Icon(
-                                            IconBroken.User1
+                                            IconBroken.User1,
                                         ),
                                         hint: 'User Name',
                                         controller: nameController,
@@ -179,23 +167,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         validText: 'Please enter your phoneNumber',
                                       ),
                                     ),
-                                    // Container(
-                                    //   margin: EdgeInsets.symmetric(
-                                    //     horizontal: 25,
-                                    //     vertical: 10
-                                    //   ),
-                                    //   child: Text(
-                                    //     'By signing you accept to our Terms of use and privacy policy',
-                                    //     style: textManager(
-                                    //       color: Colors.grey.shade700,
-                                    //       fontSize: size.height*.018,
-                                    //       fontWeight: FontWeight.w500
-                                    //     ),
-                                    //     textAlign: TextAlign.center,
-                                    //   ),
-                                    // ),
-                                    //
-                                    // SizedBox(height: size.height *.014,),
                                     SizedBox(height: size.height *.015,),
                                     Container(
                                       margin: const EdgeInsets.symmetric(
@@ -208,19 +179,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ):
                                         DefaultButton(
                                         onPressed: (){
+
                                           if(formKey.currentState!.validate()){
-
-                                            cubit.userRegister(
+                                            navigateTo( context,NextScreen(
+                                              userName: nameController.text,
                                               email: emailController.text,
-                                              pass: passController.text,
-                                              name: nameController.text,
+                                              password: passController.text,
                                               phone: phoneController.text,
-
-                                            );
-
+                                            ));
                                           }
+
                                         },
-                                        text: 'Sign up',
+                                        text: 'Next',
                                         color: ColorManager.primary,
                                       ),
                                     ),
@@ -239,7 +209,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                                         GestureDetector(
                                           onTap: (){
-                                            navigateAndRemove(LoginScreen(), context);
+                                            navigateAndRemove( context, LoginScreen(),);
                                           },
                                           child: Text(
                                             ' Sign in',

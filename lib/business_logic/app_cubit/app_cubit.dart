@@ -1,8 +1,13 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:image_picker/image_picker.dart';
+import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
+import 'package:m2m/constants/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppCubit extends Cubit<AppStates>{
@@ -11,6 +16,26 @@ class AppCubit extends Cubit<AppStates>{
 
   static AppCubit get(context) => BlocProvider.of(context);
 
+  UserModel ?userModel;
+
+  Future<void>getUser()async{
+
+    emit(GetUserLoadingState());
+
+    FirebaseFirestore.instance.collection('users')
+        .doc(uId)
+        .get().then((value) {
+      debugPrint('Get User Success');
+      userModel=UserModel.formJson(value.data()!);
+      debugPrint(userModel!.email);
+      emit(GetUserSuccessState());
+    }).catchError((error){
+
+         debugPrint('Error is ${error.toString()}');
+         emit(GetUserErrorState());
+    });
+
+  }
 
   File? uploadedTaskImage ;
   var imagePicker = ImagePicker();

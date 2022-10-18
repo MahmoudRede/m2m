@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:image_picker/image_picker.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/business_logic/register_cubit/register_state.dart';
 import 'package:m2m/constants/constants.dart';
@@ -27,7 +28,7 @@ class RegisterCubit extends Cubit<RegisterState>{
       uploadedNationalCard = File(pickedFile.path);
       emit(PickNationalCardSuccessState());
     } else {
-      print('No Image selected.');
+      debugPrint('No Image selected.');
       emit(PickNationalCardErrorState());
     }
   }
@@ -43,14 +44,8 @@ class RegisterCubit extends Cubit<RegisterState>{
 
         debugPrint('uploadedNationalCard Success');
 
-        FirebaseFirestore.instance.collection('users').doc(uId).update(
-          {
-            'nationalIdImage':value
-          }
-        ).then((value) {
-          debugPrint('nationalIdImage update done');
-        });
-       
+        CashHelper.saveData(key: 'nationalId',value: value);
+
         emit(UploadNationalIdSuccessState());
 
       }).catchError((error){
@@ -79,9 +74,10 @@ class RegisterCubit extends Cubit<RegisterState>{
     );
     if (pickedFile != null) {
       uploadedPersonalImage = File(pickedFile.path);
+      debugPrint('pick image');
       emit(PickPersonalImageSuccessState());
     } else {
-      print('No Image selected.');
+      debugPrint('No Image selected.');
       emit(PickPersonalImageErrorState());
     }
   }
@@ -97,13 +93,7 @@ class RegisterCubit extends Cubit<RegisterState>{
 
         debugPrint('uploadedPersonalImage Success');
 
-        FirebaseFirestore.instance.collection('users').doc(uId).update(
-            {
-              'personalImage':value
-            }
-        ).then((value) {
-          debugPrint('personalImage update done');
-        });
+       CashHelper.saveData(key: 'personalImage',value: value);
 
         emit(UploadPersonalImageSuccessState());
 
@@ -130,6 +120,12 @@ class RegisterCubit extends Cubit<RegisterState>{
          required String pass,
          required String name,
          required String phone,
+         required String age,
+         required String government,
+         required String skills,
+         required String nationalIdImage,
+         required String personalImage,
+         String ?inviteCode,
 
       }
       )async{
@@ -145,10 +141,16 @@ class RegisterCubit extends Cubit<RegisterState>{
       uId=value.user!.uid;
 
       saveUserInfo(
-          email: email,
-          name: name,
-          phone: phone,
-          id: uId,
+        email: email,
+        name: name,
+        phone: phone,
+        id: uId!,
+        government: government,
+        nationalIdImage: nationalIdImage,
+        personalImage: personalImage,
+        skills: skills,
+        age: age,
+        inviteCode: inviteCode,
       );
       emit(UserRegisterSuccessState());
     }).catchError((error){
@@ -164,8 +166,12 @@ class RegisterCubit extends Cubit<RegisterState>{
         required String email,
         required String name,
         required String phone,
-        String ?nationalIdImage,
-        String ?personalImage,
+        required String age,
+        required String skills,
+        required String government,
+        required String nationalIdImage,
+        String ?inviteCode,
+        required String personalImage,
         required String id,
         String ?package,
       }
@@ -175,10 +181,15 @@ class RegisterCubit extends Cubit<RegisterState>{
         email: email,
         phone: phone,
         username: name,
-        nationalIdImage: nationalIdImage??'',
-        personalImage: personalImage??'',
+        nationalIdImage: nationalIdImage,
+        personalImage: personalImage,
         uId: id,
-        package: package??'not selected yet'
+        package: package??'not selected yet',
+        isConfirmed: false,
+        age: age,
+        government: government,
+        skills: skills,
+        inviteCode: inviteCode??''
       );
 
     emit(SaveInfoLoadingState());

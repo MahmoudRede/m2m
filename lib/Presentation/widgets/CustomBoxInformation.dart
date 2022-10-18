@@ -14,7 +14,7 @@ class CustomBoxInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width * 0.25,
-      height: Get.height * 0.1,
+      height: Get.height * 0.11,
       decoration: BoxDecoration(
           border: Border.all(
             width: 1.6,

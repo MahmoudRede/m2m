@@ -7,10 +7,12 @@ class DefaultButton extends StatelessWidget {
   final String text;
   final Function() onPressed;
   Color? color;
+  double? height;
    DefaultButton({
     required this.text,
     required this.onPressed,
     this.color = ColorManager.lightBlue,
+    this.height = 50,
     Key? key}) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class DefaultButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         width: SizeConfig.width,
-        height:  SizeConfig.height*.065,
+        height:  height,
         decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(10)),

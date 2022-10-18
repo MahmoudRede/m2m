@@ -7,6 +7,11 @@ class UserModel{
   String ?nationalIdImage;
   String ?personalImage;
   String ?package;
+  String ?government;
+  String ?age;
+  String ?skills;
+  String ?inviteCode;
+  bool ?isConfirmed;
 
 
   UserModel({
@@ -17,6 +22,11 @@ class UserModel{
     this.nationalIdImage,
     this.personalImage,
     this.package,
+    this.government,
+    this.age,
+    this.skills,
+    this.inviteCode,
+    this.isConfirmed,
 
   });
 
@@ -28,6 +38,11 @@ class UserModel{
     nationalIdImage=json['nationalIdImage'];
     personalImage=json['personalImage'];
     package=json['package'];
+    government=json['government'];
+    age=json['age'];
+    skills=json['skills'];
+    inviteCode=json['inviteCode'];
+    isConfirmed=json['isConfirmed'];
 
   }
 
@@ -40,6 +55,11 @@ class UserModel{
       'nationalIdImage':nationalIdImage,
       'personalImage':personalImage,
       'package':package,
+      'government':government,
+      'age':age,
+      'skills':skills,
+      'inviteCode':inviteCode,
+      'isConfirmed':isConfirmed,
     };
   }
 

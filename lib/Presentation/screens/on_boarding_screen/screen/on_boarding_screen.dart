@@ -45,7 +45,7 @@ class _OnBoardingState extends State<OnBoarding> {
     timer = Timer.periodic(const Duration(seconds: 10), (timer) {
       Future.delayed(const Duration(seconds: 7),(){
         if(currentIndex==3){
-          navigateAndRemove(LoginScreen(), context);
+          navigateAndRemove(context,LoginScreen());
         }
         else{
           currentIndex++;
@@ -117,7 +117,7 @@ class _OnBoardingState extends State<OnBoarding> {
               text: 'Get Started',
               onPressed: (){
 
-                navigateAndRemove(LoginScreen(), context);
+                navigateAndRemove(context,LoginScreen());
 
               },
             ),
