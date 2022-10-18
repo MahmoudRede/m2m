@@ -1,22 +1,24 @@
-abstract class AppState{
+abstract class AppStates{
 
 
 }
 
-class InitialState extends AppState{
+class InitialState extends AppStates{
 
 }
 
-class PickNationalCardSuccessState extends AppState{
+class PickNationalCardSuccessState extends AppStates{
 
 }
-class PickNationalCardErrorState extends AppState{
+class PickNationalCardErrorState extends AppStates{
 
 }
 
-class PickPersonalImageSuccessState extends AppState{
+class PickPersonalImageSuccessState extends AppStates{
 
 }
-class PickPersonalImageErrorState extends AppState{
+class PickPersonalImageErrorState extends AppStates{}
 
-}
+class UploadImageSuccessState extends AppStates{}
+class UploadImageErrorState extends AppStates{}
+class UrlLaunchState extends AppStates{}
