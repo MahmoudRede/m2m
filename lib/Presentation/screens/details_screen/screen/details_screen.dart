@@ -37,7 +37,7 @@ class DetailsScreen extends StatelessWidget {
               child: CustomActionButton(
                 boxIcon: FontAwesomeIcons.chevronLeft,
                 iconColor: ColorManager.white,
-                backgroundColor: ColorManager.black,
+                backgroundColor: ColorManager.secondDarkColor,
                 onTap: ()=>  Navigator.pop(context),
               ),
             ),
