@@ -1,0 +1,14 @@
+{
+  "appTitle": "App Name",
+  "langEnglish": "English",
+  "langArabic": "العربية",
+
+  "packages" : "Packages",
+  "viewTasks": "View Tasks",
+  "confirm" : "Confirm",
+  "upload": "Upload",
+
+
+  "next":"Next"
+
+}
