@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:m2m/Presentation/screens/tasks_screen/widget/task_item_button.dart';
+import 'package:m2m/Presentation/screens/upload_task_screen/upload_task_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 
 class CustomTaskRow extends StatelessWidget {
   const CustomTaskRow({
     Key? key,
     required this.title,
     required this.description,
-    required this.profit,
+    required this.index,
   }) : super(key: key);
 
   final String title;
   final String description;
-  final String profit;
+  final String index;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +25,11 @@ class CustomTaskRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
       ),
-      child: Container(
-        height: SizeConfig.height * 0.13,
+      child: SizedBox(
         width: SizeConfig.width,
         child: Column(
           children: [
+            //task title, count and icon
             Row(
               children: [
                 Container(
@@ -44,22 +47,26 @@ class CustomTaskRow extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 20),
-                Container(
-                  width: SizeConfig.width * 0.6,
+                SizedBox(
+                    width: SizeConfig.height*0.02,
+                ),
+                Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         title,
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(
-                          fontSize: 18,
+                        style: TextStyle(
+                          fontSize: SizeConfig.headline3Size,
                           fontWeight: FontWeight.bold,
                         ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 5),
+                      SizedBox(
+                          height:SizeConfig.height*0.005,
+                      ),
                       Text(
                         description,
                         style: const TextStyle(
@@ -72,7 +79,6 @@ class CustomTaskRow extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Expanded(child: Text("")),
                 Container(
                   alignment: Alignment.center,
                   width: 45,
@@ -82,7 +88,7 @@ class CustomTaskRow extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Text(
-                    profit,
+                    index,
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w900,
@@ -94,12 +100,94 @@ class CustomTaskRow extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: SizeConfig.height *0.01,
+              height: SizeConfig.height *0.02,
             ),
-            DefaultButton(
-              text: 'Confirm',
-              onPressed: (){} ,
-              color: ColorManager.secondDarkColor,
+            // task info (type , time , state)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'Type : ',
+                      style: TextStyle(
+                        fontSize: SizeConfig.headline3Size,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Like',
+                      style: TextStyle(
+                        fontSize: SizeConfig.headline3Size,
+                        fontWeight: FontWeight.bold,
+                        color: ColorManager.lightBlue,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: SizeConfig.height*0.02,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Time : ',
+                      style: TextStyle(
+                        fontSize: SizeConfig.headline3Size,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '01:30:59',
+                      style: TextStyle(
+                        fontSize: SizeConfig.headline3Size,
+                        fontWeight: FontWeight.bold,
+                        color: ColorManager.lightBlue,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: SizeConfig.height*0.02,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'State : ',
+                      style: TextStyle(
+                        fontSize: SizeConfig.headline3Size,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Done',
+                      style: TextStyle(
+                        fontSize: SizeConfig.headline3Size,
+                        fontWeight: FontWeight.bold,
+                        color: ColorManager.lightBlue,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: SizeConfig.height *0.02,
+            ),
+            // confirm and upload button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TaskItemButton(
+                  text: AppLocalizations.of(context)!.translate('confirm').toString(),
+                  onPressed: (){},
+                ),
+                TaskItemButton(
+                  text: AppLocalizations.of(context)!.translate('upload').toString(),
+                  onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>const UploadTaskScreen())),
+                  // color: ColorManager.lightBlue,
+                ),
+              ],
             ),
           ],
         ),

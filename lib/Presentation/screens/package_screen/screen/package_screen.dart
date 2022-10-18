@@ -1,15 +1,17 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:m2m/Presentation/screens/package_screen/widget/custom_investment_row.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/custom_package_card.dart';
+import 'package:m2m/Presentation/screens/package_screen/widget/package_slider_item.dart';
+import 'package:m2m/Presentation/screens/package_screen/widget/screen_drawer.dart';
+import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/custome_action_button.dart';
-import 'package:m2m/Presentation/widgets/text_manager.dart';
+import 'package:m2m/Presentation/widgets/default_button.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 
 
 class PackageScreen extends StatelessWidget {
@@ -18,6 +20,8 @@ class PackageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size=MediaQuery.of(context).size;
+    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+
     List<String> packageTitle = [
       '1st Package 200\$',
       '2nd Package 350\$',
@@ -42,8 +46,16 @@ class PackageScreen extends StatelessWidget {
       AssetsManager.investmentImage,
     ];
 
+    List carouselImage = [
+      'https://img.freepik.com/free-vector/hand-drawn-colorful-space-background_52683-12648.jpg',
+      'https://img.freepik.com/free-vector/hand-drawn-colorful-space-background_52683-12648.jpg',
+      'https://img.freepik.com/free-vector/hand-drawn-colorful-space-background_52683-12648.jpg',
+      'https://img.freepik.com/free-vector/hand-drawn-colorful-space-background_52683-12648.jpg',
+    ];
+
     return Scaffold(
-        body: Container(
+      key: scaffoldKey,
+      body: Container(
           width: SizeConfig.width,
           height: SizeConfig.height,
           color: Colors.white,
@@ -51,20 +63,24 @@ class PackageScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                  height: SizeConfig.height * 0.04,
-              ),
               /// Screen Custom Appbar
+              SizedBox(
+                height: SizeConfig.topPadding,
+              ),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: EdgeInsets.symmetric(
+                  horizontal:SizeConfig.height*0.03,
+                  vertical: SizeConfig.height*0.01,
+                ),
                 child: Row(
                   children: [
                     CustomActionButton(
                       backgroundColor: ColorManager.secondDarkColor,
                       boxIcon: FontAwesomeIcons.bars,
-                      iconColor: const Color.fromARGB(255, 245, 238, 238),
+                      iconColor: ColorManager.white,
+                      onTap: ()=> scaffoldKey.currentState!.openDrawer(),
                     ),
-                     Expanded(
+                    Expanded(
                        child: Row(
                          mainAxisAlignment: MainAxisAlignment.center,
                          children: [
@@ -89,10 +105,50 @@ class PackageScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(
+                height: SizeConfig.height*0.02,
+              ),
+
+
+              /// screen slider
+              SizedBox(
+                width: MediaQuery.of(context).size.width *1,
+                height: SizeConfig.height*0.15,
+                child: CarouselSlider.builder(
+                    itemCount: carouselImage.length,
+                    itemBuilder: (BuildContext context, int index, int pageViewIndex) => PackageSliderItem(
+                      title: "Title",
+                      image: carouselImage[index],
+                    ),
+                    options: CarouselOptions(
+                      height: SizeConfig.height*0.15,
+                      aspectRatio: 16/9,
+                      viewportFraction: 0.8,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 5),
+                      autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                    )
+                ),
+              ),
+              SizedBox(
+                height: SizeConfig.height*0.02,
+              ),
+
+
+              // package title
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.height*0.03,
+                  vertical: SizeConfig.height*0.01,
+                ),
                 child: Text(
-                  "Packages",
+                AppLocalizations.of(context)!.translate('packages').toString(),
                   style: GoogleFonts.aBeeZee(
                     color: ColorManager.black,
                     fontSize: 32,
@@ -100,11 +156,15 @@ class PackageScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
+
               /// Packages Card List
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: SizeConfig.height * 0.55,
+                padding : EdgeInsets.symmetric(
+                  horizontal: SizeConfig.height*0.01,
+                ),
+                child: SizedBox(
+                  height: SizeConfig.height * 0.5,
                   width: SizeConfig.width,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
@@ -118,45 +178,24 @@ class PackageScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: SizeConfig.height*0.008,
+
+              /// View tasks Button
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.height*0.01,
+                  vertical: SizeConfig.height*0.02,
+                ),
+                child: DefaultButton(
+                  text: AppLocalizations.of(context)!.translate('viewTasks').toString(),
+                  onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const TasksScreen())),
+                  color: ColorManager.secondDarkColor,
+                ),
               ),
-              /// Investment Title and more button
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
-              //   child: Row(
-              //     children: [
-              //       Text(
-              //         "Investment Department",
-              //         style: GoogleFonts.aBeeZee(
-              //             fontSize: 20,
-              //             fontWeight: FontWeight.bold,
-              //             color: ColorManager.black),
-              //       ),
-              //       Spacer(),
-              //       Text(
-              //         "More",
-              //         style:
-              //         textManager(
-              //             fontSize: 14,
-              //             color: ColorManager.primary,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // const SizedBox(
-              //     height: 10,
-              // ),
-              /// Investment Information Row
-              // const CustomInvestmentRow(
-              //   title: 'Investment for 6 months',
-              //   description: '10% profit for each months ,total Capital will return 25%',
-              //   profit: '10%',
-              // ),
             ],
           ),
-        ));
+        ),
+      drawer: const HomeDrawer(),
+    );
   }
 }
 

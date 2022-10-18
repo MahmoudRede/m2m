@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/custom_task_row.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/task_divider.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/tasks_custom_appbar.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/task_welcome_card.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
-import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -39,9 +37,17 @@ class TasksScreen extends StatelessWidget {
                     ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context , index)=> const CustomTaskRow(title: 'Your first Task', description: 'Like this page in facebook', profit: '20'),
+                        itemBuilder: (context , index)=>  CustomTaskRow(title: 'Your first Task', description: 'Like this page in facebook', index: '${index+1}'),
                         separatorBuilder: (context , index)=> SizedBox(
                           height: SizeConfig.height *0.05,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal :SizeConfig.height *0.03,
+                            ),
+                            child: Divider(
+                              color: ColorManager.black,
+                            ),
+                          ),
                         ),
                         itemCount: 5,
                     ),

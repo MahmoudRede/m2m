@@ -5,22 +5,24 @@ import 'package:get/get.dart';
 
 class CustomActionButton extends StatelessWidget {
   final IconData boxIcon;
+  final GestureTapCallback onTap;
   Color? backgroundColor;
   Color? iconColor;
+
 
   CustomActionButton(
       {Key? key,
         required this.boxIcon,
+        required this.onTap,
         this.backgroundColor = Colors.white,
-        this.iconColor = Colors.black})
+        this.iconColor = Colors.black,
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (() {
-        Navigator.pop(context);
-      }),
+      onTap: onTap,
       child: Container(
         width: Get.width * 0.13,
         decoration: BoxDecoration(

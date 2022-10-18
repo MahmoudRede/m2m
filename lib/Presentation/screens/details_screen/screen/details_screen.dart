@@ -13,6 +13,7 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -34,6 +35,7 @@ class DetailsScreen extends StatelessWidget {
                 boxIcon: FontAwesomeIcons.chevronLeft,
                 iconColor: ColorManager.white,
                 backgroundColor: ColorManager.black,
+                onTap: ()=>  Navigator.pop(context),
               ),
             ),
             Expanded(
