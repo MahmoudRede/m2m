@@ -19,3 +19,7 @@ class UrlLaunchState extends TasksStates{}
 class UploadTaskScreenLoadingState extends TasksStates{}
 class UploadTaskScreenSuccessState extends TasksStates{}
 class UploadTaskScreenErrorState extends TasksStates{}
+
+class GetTodayTaskLoadingState extends TasksStates{}
+class GetTodayTaskSuccessState extends TasksStates{}
+class GetTodayTaskErrorState extends TasksStates{}

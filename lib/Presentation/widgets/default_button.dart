@@ -31,9 +31,9 @@ class DefaultButton extends StatelessWidget {
         child: Text(
           text,
           style: GoogleFonts.roboto(
-            color: Colors.white,
-            fontSize: SizeConfig.height*.025,
-            fontWeight: FontWeight.w400,
+            color: ColorManager.white,
+            fontSize: SizeConfig.headline2Size,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),

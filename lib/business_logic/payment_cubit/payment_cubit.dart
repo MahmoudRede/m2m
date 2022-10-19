@@ -5,20 +5,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:m2m/Data/model/task_model.dart';
-import 'package:m2m/Data/model/upload_task_model.dart';
+import 'package:m2m/Data/model/payment_model.dart';
 import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/custom_toast.dart';
-import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
+import 'package:m2m/business_logic/payment_cubit/payment_states.dart';
 import 'package:m2m/constants/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TasksCubit extends Cubit<TasksStates>{
+class PaymentCubit extends Cubit<PaymentStates>{
 
-  TasksCubit() : super(InitialState());
+  PaymentCubit() : super(InitialState());
 
-  static TasksCubit get(context) => BlocProvider.of(context);
+  static PaymentCubit get(context) => BlocProvider.of(context);
 
   UserModel ?userModel;
 
@@ -39,7 +38,7 @@ class TasksCubit extends Cubit<TasksStates>{
 
   }
 
-  File? uploadedTaskImage;
+  File? uploadedPaymentImage;
   var imagePicker = ImagePicker();
 
   Future <void> getTaskImage() async {
@@ -47,7 +46,7 @@ class TasksCubit extends Cubit<TasksStates>{
       source: ImageSource.gallery,
     );
     if (pickedFile != null) {
-      uploadedTaskImage = File(pickedFile.path);
+      uploadedPaymentImage = File(pickedFile.path);
       emit(UploadImageSuccessState());
     } else {
       print('No Image selected.');
@@ -56,90 +55,63 @@ class TasksCubit extends Cubit<TasksStates>{
   }
 
 
-  Future <void> urlLunch({required String taskLink}) async {
-    String url= taskLink;
+  Future <void> urlLunch({required String paymentLink}) async {
+    String url= paymentLink;
     await launch(url , forceSafariVC: false);
     emit(UrlLaunchState());
   }
 
 
-  Future<void> uploadTaskScreen ()async
+  Future<void> uploadPaymentImage ()async
   {
     await getUser();
-    emit(UploadTaskScreenLoadingState());
+    emit(UploadPaymentImageLoadingState());
     FirebaseStorage.instance.ref()
-        .child('tasksImages/${Uri.file(uploadedTaskImage!.path)
-        .pathSegments.last}').putFile(uploadedTaskImage!)
+        .child('paymentImages/${Uri.file(uploadedPaymentImage!.path)
+        .pathSegments.last}').putFile(uploadedPaymentImage!)
         .then((value){
-
       value.ref.getDownloadURL().then((value) {
-        // uploaded task model data
-        final UploadTaskModel uploadTaskModel = UploadTaskModel(
-            taskId: "id",
-            taskImage: value.toString(),
+        // upload payment model data
+        final PaymentModel paymentModel = PaymentModel(
+            packageId: 'packageId',
+            paymentImage: value.toString(),
             userName: userModel!.username.toString(),
             userImage: userModel!.personalImage.toString(),
             userUId: userModel!.uId.toString(),
-            taskConfirmed: false,
-            package: userModel!.package.toString(),
-            phone: userModel!.phone.toString(),
+            isVerified: false,
+            packageName: userModel!.package.toString(),
+            userPhone: userModel!.phone.toString(),
         );
 
-        FirebaseFirestore.instance.collection('uploadedTasks').doc().set(uploadTaskModel.toMap())
+        FirebaseFirestore.instance.collection('paymentImages').doc(userModel!.uId.toString()).set(paymentModel.toMap())
             .then((value){
           if (kDebugMode) {
-            print('task screen Added Successfully');
+            print('payment image Added Successfully');
           }
-          emit(UploadTaskScreenSuccessState());
+          emit(UploadPaymentImageSuccessState());
         }).catchError((error){
           if (kDebugMode) {
-            print('Error When upload task screen : ${error.toString()}');
+            print('Error When upload payment image : ${error.toString()}');
           }
           customToast(title: 'Sorry time is out try again', color: ColorManager.red);
-          emit(UploadTaskScreenErrorState());
+          emit(UploadPaymentImageErrorState());
         });
       }).catchError((error){
         if (kDebugMode) {
-          print('Error When get upload task image link : ${error.toString()}');
+          print('Error When get upload payment image link : ${error.toString()}');
         }
         customToast(title: 'Sorry time is out try again', color: ColorManager.red);
-        emit(UploadTaskScreenErrorState());
+        emit(UploadPaymentImageErrorState());
       });
     }).catchError((error){
       if (kDebugMode) {
         print('Error When Upload image in Firesorage : ${error.toString()}');
       }
       customToast(title: 'Sorry time is out try again', color: ColorManager.red);
-      emit(UploadTaskScreenErrorState());
+      emit(UploadPaymentImageErrorState());
     });
   }
 
-  List<TaskModel> todayTasks = [];
-
-  // get user today tasks
-  Future<void> getTodayTasks()async{
-    await getUser();
-    emit(GetTodayTaskLoadingState());
-    FirebaseFirestore.instance.collection('users')
-        .doc(userModel!.uId.toString())
-        .collection('tasks')
-        .get().then((value){
-          for (var element in value.docs) {
-            todayTasks.add(TaskModel.fromMap(element.data()));
-          }
-          if (kDebugMode) {
-            print('Get tasks is success : ${todayTasks[0].toString()}');
-          }
-          emit(GetTodayTaskSuccessState());
-    }).catchError((error){
-      if (kDebugMode) {
-        print('Error when get Tasks ===> ${error.toString()}');
-      }
-      customToast(title: 'Sorry time is out try again', color: ColorManager.red);
-      emit(GetTodayTaskErrorState());
-    });
-
-  }
 
 
 }

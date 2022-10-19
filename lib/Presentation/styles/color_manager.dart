@@ -13,7 +13,7 @@ class ColorManager {
   static Color white = const Color(0xffFFFFFF);
   static Color whiteDark = const Color(0xfff9f9f9);
   static Color ovWhite = const Color(0xfff9f9f9);
-  static Color black = const Color.fromARGB(255, 44, 41, 40);
+  static Color black = const Color(0xff000000);
   static Color red = const Color(0xffff5147);
   static Color orange = const Color(0xffff9401);
   static Color gold = const Color(0xfff9c50b);

@@ -12,6 +12,7 @@ import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
 import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/login_cubit/login_cubit.dart';
+import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
 import 'package:m2m/constants/constants.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (BuildContext context) => AppCubit()..getUser()),
         BlocProvider(create: (BuildContext context) => LoginCubit()),
         BlocProvider(create: (BuildContext context) => RegisterCubit()),
+        BlocProvider(create: (BuildContext context) => PaymentCubit()),
         BlocProvider(create: (BuildContext context) => TasksCubit()..getUser()),
       ],
       child: BlocConsumer<AppCubit,AppStates>(
