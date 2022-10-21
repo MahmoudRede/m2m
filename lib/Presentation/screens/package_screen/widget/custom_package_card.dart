@@ -47,20 +47,20 @@ class CustomPackageCard extends StatelessWidget {
                 height: 10,
               ),
               InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const DetailsScreen()));
-                },
+                onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) => const DetailsScreen())),
                 child: Container(
                   decoration: BoxDecoration(
                       color: ColorManager.white,
                       borderRadius: BorderRadius.circular(10)),
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(
+                      SizeConfig.height*0.01,
+                    ),
                     child: Text(
                       "More",
                       style: textManager(
                         color: ColorManager.black,
-                        fontSize: 14,
+                        fontSize: SizeConfig.headline3Size,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -74,7 +74,7 @@ class CustomPackageCard extends StatelessWidget {
                 tasksNum,
                 style: textManager(
                   color: ColorManager.black,
-                  fontSize: 20,
+                  fontSize: SizeConfig.headline2Size,
                   fontWeight: FontWeight.w500,
                 ),
               ),

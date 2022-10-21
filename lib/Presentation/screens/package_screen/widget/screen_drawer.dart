@@ -5,6 +5,7 @@ import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/drawer_row_item.dart';
 import 'package:m2m/Presentation/screens/profile_screen/screen/profile_screen.dart';
+import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -98,6 +99,14 @@ class HomeDrawer extends StatelessWidget {
                   title: 'Profile',
                   icon: FontAwesomeIcons.user,
                   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const ProfileScreen())),
+                ),
+                SizedBox(
+                  height: SizeConfig.height*0.05,
+                ),
+                DrawerRowItem(
+                  title: 'Today Tasks',
+                  icon: FontAwesomeIcons.tasks,
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const TasksScreen())),
                 ),
                 SizedBox(
                   height: SizeConfig.height*0.05,

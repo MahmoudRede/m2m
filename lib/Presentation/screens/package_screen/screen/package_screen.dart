@@ -25,19 +25,17 @@ class PackageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return BlocConsumer<AppCubit,AppStates>(
-        listener: (context,state){
-
-        },
-        builder: (context,state){
-            var cubit=AppCubit.get(context);
-            return cubit.userModel!=null?
-                cubit.userModel!.isConfirmed==false?
-            PackageScreenItem():const Center(
-                  child: CircularProgressIndicator(color: Colors.red),
-                ):const Center(
-              child: CircularProgressIndicator(),
-            );
-        },
+      listener: (context,state){},
+      builder: (context,state){
+        var cubit=AppCubit.get(context);
+        return cubit.userModel!=null?
+        cubit.userModel!.isConfirmed==false?
+        PackageScreenItem():const Center(
+          child: CircularProgressIndicator(color: Colors.red),
+        ):const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
