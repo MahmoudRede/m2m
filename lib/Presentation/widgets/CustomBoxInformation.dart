@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:m2m/Presentation/styles/app_size_config.dart';
+import 'package:m2m/Presentation/styles/color_manager.dart';
 
 class CustomBoxInformation extends StatelessWidget {
   const CustomBoxInformation({
@@ -18,22 +21,29 @@ class CustomBoxInformation extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(
             width: 1.6,
-            color: const Color.fromARGB(123, 255, 249, 249),
+            color: ColorManager.lightGrey2,
           ),
-          borderRadius: BorderRadius.circular(11)),
+          borderRadius: BorderRadius.circular(10),
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(
+          SizeConfig.height*0.005,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               boxIcon,
-              color: const Color.fromARGB(255, 193, 189, 189),
+              color: ColorManager.lightGrey2,
             ),
-            const SizedBox(height: 15),
+            SizedBox(
+              height: SizeConfig.height*0.015,
+            ),
             Text(
               label,
-              style: const TextStyle(color: Color.fromARGB(255, 193, 189, 189)),
+              style: GoogleFonts.roboto(
+                  color: ColorManager.lightGrey2,
+              ),
             )
           ],
         ),

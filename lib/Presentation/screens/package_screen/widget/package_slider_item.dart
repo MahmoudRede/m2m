@@ -17,7 +17,7 @@ class PackageSliderItem extends StatelessWidget {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Container(
         width: MediaQuery.of(context).size.width *1,
-        height: SizeConfig.height*0.15,
+        height: SizeConfig.height*0.2,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -29,7 +29,7 @@ class PackageSliderItem extends StatelessWidget {
                 image,
               ),
               width: MediaQuery.of(context).size.width *1,
-              height: SizeConfig.height*0.15,
+              height: SizeConfig.height*0.2,
               fit: BoxFit.fill,
             ),
             Container(
