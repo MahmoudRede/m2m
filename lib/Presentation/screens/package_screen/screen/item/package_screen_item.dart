@@ -92,7 +92,7 @@ class PackageScreenItem extends StatelessWidget {
                             fontSize: size.height*.05,
                             fontWeight: FontWeight.bold
                         ),),
-                        Text(' M',style: GoogleFonts.bungee(
+                        Text('M',style: GoogleFonts.bungee(
                             color: ColorManager.black,
                             fontSize: size.height*.045,
                             fontWeight: FontWeight.bold

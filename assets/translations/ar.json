@@ -8,6 +8,51 @@
   "upload": "رفع",
 
   "packages" : "عروض",
+  "waiting": "شكرا لاختيارك M2M ,معلوماتك سوف يتم مراجعتها و يتم تاكيد حسابك قريبا",
+
+  "government": "المحافظه",
+  "package": "المجموعه",
+  "skills": "المهارات",
+  "month": "الشهر",
+  "year": "السنه",
+
+
+  "january": "يناير",
+  "february": "فبراير",
+  "march": "مارس",
+  "april": "ابرايل",
+  "may": "مايو",
+  "June": "يونيو",
+  "july": "يوليو",
+  "august": "أغسطس",
+  "september": "سبتمبر",
+  "october": "اكتوبر",
+  "November": "نوفمبر",
+  "december": "ديسمبر",
+
+  "alexandria": "الإسكندرية",
+  "ismailia": "الإسماعيلية",
+  "aswan": "اسوان",
+  "asyut": "اسيوط",
+  "luxor": "الاقصر",
+  "red_Sea": "البحر الاحمر",
+  "beheira": "البحيره",
+  "bani_Sweif": "بني سويف",
+  "port_Said": "بورسعيد",
+  "south_of_Sina": "جنوب سينا",
+
+  "send_task": "ارسل المهام",
+  "select_all": "تحديد الكل",
+
+  "all_users": "كل المستخدمين",
+  "payment_screens": "صفحات الدفع",
+  "add_tasks": "اضافه مهام",
+  "users_request": "طلبات المستخدمين",
+
+
+
+
+
   "next":"التالي"
 
 }

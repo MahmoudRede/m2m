@@ -7,6 +7,54 @@
   "viewTasks": "View Tasks",
   "confirm" : "Confirm",
   "upload": "Upload",
+  "waiting": "Thanks for choose M2M ,your information will be checked and will verified your account soon",
+
+  "government": "Government",
+  "package": "Package",
+  "skills": "Skills",
+  "month": "Month",
+  "year": "Year",
+
+
+  "january": "January",
+  "february": "February",
+  "march": "March",
+  "april": "April",
+  "may": "May",
+  "June": "june",
+  "july": "July",
+  "august": "August",
+  "september": "September",
+  "october": "October",
+  "November": "November",
+  "december": "December",
+
+  "alexandria": "Alexandria",
+  "ismailia": "Ismailia",
+  "aswan": "Aswan",
+  "asyut": "Asyut",
+  "luxor": "Luxor",
+  "red_Sea": "Red Sea",
+  "beheira": "Beheira",
+  "bani_Sweif": "Bani Sweif",
+  "port_Said": "Port Said",
+  "south_of_Sina": "South of Sina",
+
+
+  "send_task": "Send Task",
+  "select_all": "Select All",
+  "all_users": "All Users",
+  "payment_screens": "Payment Screens",
+  "add_tasks": "Add Tasks",
+  "users_request": "Users Request",
+
+
+
+
+
+
+
+
 
 
   "next":"Next"

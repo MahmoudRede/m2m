@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
+import 'package:m2m/Presentation/screens/admin_screens/admin_home/admin_home.dart';
+import 'package:m2m/Presentation/screens/admin_screens/filter_users/filter_users.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/splash_screen/screen/splash_screen.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -67,7 +69,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            home: const SplashScreen(),
+            home: const AdminHome(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
