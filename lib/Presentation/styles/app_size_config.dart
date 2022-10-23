@@ -36,7 +36,7 @@ class SizeConfig extends StatelessWidget {
 //#endregion
 
   //#region headline 2 Size
-  static double headline2Size = SizeConfig.height * 0.021; //20 px
+  static double headline2Size = SizeConfig.height * 0.025; //20 px
 //#endregion
 
   //#region headline 3 Size
