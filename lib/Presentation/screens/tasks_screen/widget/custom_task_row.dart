@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/task_item_button.dart';
-import 'package:m2m/Presentation/screens/upload_task_screen/upload_task_screen.dart';
+import 'package:m2m/Presentation/screens/upload_task_screen/add_task_image.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -14,12 +14,10 @@ class CustomTaskRow extends StatelessWidget {
   const CustomTaskRow({
     Key? key,
     required this.title,
-    required this.description,
     required this.index,
   }) : super(key: key);
 
   final String title;
-  final String description;
   final String index;
 
   @override
@@ -70,18 +68,18 @@ class CustomTaskRow extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(
-                            height:SizeConfig.height*0.005,
-                          ),
-                          Text(
-                            description,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Color.fromARGB(136, 110, 103, 103),
-                              fontWeight: FontWeight.w600,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          // SizedBox(
+                          //   height:SizeConfig.height*0.005,
+                          // ),
+                          // Text(
+                          //   description,
+                          //   style: const TextStyle(
+                          //     fontSize: 14,
+                          //     color: Color.fromARGB(136, 110, 103, 103),
+                          //     fontWeight: FontWeight.w600,
+                          //   ),
+                          //   overflow: TextOverflow.ellipsis,
+                          // ),
                         ],
                       ),
                     ),
@@ -193,7 +191,7 @@ class CustomTaskRow extends StatelessWidget {
                     // upload task button
                     TaskItemButton(
                       text: AppLocalizations.of(context)!.translate('upload').toString(),
-                      onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>const UploadTaskScreen())),
+                      onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>const AddTaskImageScreen())),
                       // color: ColorManager.lightBlue,
                     ),
                   ],

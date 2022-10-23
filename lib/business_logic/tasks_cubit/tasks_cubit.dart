@@ -63,56 +63,65 @@ class TasksCubit extends Cubit<TasksStates>{
   }
 
 
-  Future<void> uploadTaskScreen ()async
-  {
-    await getUser();
-    emit(UploadTaskScreenLoadingState());
+  List<String> userTaskImages = [];
+
+  Future<void> uploadTaskImage ()async {
+    emit(UploadTaskImageLoadingState());
     FirebaseStorage.instance.ref()
         .child('tasksImages/${Uri.file(uploadedTaskImage!.path)
         .pathSegments.last}').putFile(uploadedTaskImage!)
         .then((value){
-
       value.ref.getDownloadURL().then((value) {
-        // uploaded task model data
-        final UploadTaskModel uploadTaskModel = UploadTaskModel(
-            taskId: "id",
-            taskImage: value.toString(),
-            userName: userModel!.username.toString(),
-            userImage: userModel!.personalImage.toString(),
-            userUId: userModel!.uId.toString(),
-            taskConfirmed: false,
-            package: userModel!.package.toString(),
-            phone: userModel!.phone.toString(),
-        );
 
-        FirebaseFirestore.instance.collection('uploadedTasks').doc().set(uploadTaskModel.toMap())
-            .then((value){
-          if (kDebugMode) {
-            print('task screen Added Successfully');
-          }
-          emit(UploadTaskScreenSuccessState());
-        }).catchError((error){
-          if (kDebugMode) {
-            print('Error When upload task screen : ${error.toString()}');
-          }
-          customToast(title: 'Sorry time is out try again', color: ColorManager.red);
-          emit(UploadTaskScreenErrorState());
-        });
+        // add uploaded image to userTasks images
+        userTaskImages.add(value.toString());
+
+        emit(UploadTaskImageSuccessState());
       }).catchError((error){
-        if (kDebugMode) {
-          print('Error When get upload task image link : ${error.toString()}');
-        }
+        debugPrint('Error When get upload task image link : ${error.toString()}');
         customToast(title: 'Sorry time is out try again', color: ColorManager.red);
-        emit(UploadTaskScreenErrorState());
+        emit(UploadTaskImageErrorState());
       });
     }).catchError((error){
-      if (kDebugMode) {
-        print('Error When Upload image in Firesorage : ${error.toString()}');
-      }
+      debugPrint('Error When Upload image in Firesorage : ${error.toString()}');
       customToast(title: 'Sorry time is out try again', color: ColorManager.red);
-      emit(UploadTaskScreenErrorState());
+      emit(UploadTaskImageErrorState());
     });
   }
+
+
+
+  Future<void> uploadTask ()async {
+    await getUser();
+    emit(UploadTaskLoadingState());
+
+    final UploadTaskModel uploadTaskModel = UploadTaskModel(
+      taskId: "id",
+      taskImages: userTaskImages,
+      userName: userModel!.username.toString(),
+      userImage: userModel!.personalImage.toString(),
+      userUId: userModel!.uId.toString(),
+      taskConfirmed: false,
+      packageName: userModel!.package.toString(),
+      phone: userModel!.phone.toString(),
+    );
+
+    FirebaseFirestore.instance.collection('uploadedTasks').doc().set(uploadTaskModel.toMap())
+        .then((value){
+          debugPrint('task Added Successfully');
+          emit(UploadTaskSuccessState());
+    }).catchError((error){
+      debugPrint('Error When upload task screen : ${error.toString()}');
+      customToast(title: 'Sorry time is out try again', color: ColorManager.red);
+      emit(UploadTaskErrorState());
+    });
+
+  }
+
+
+
+
+
 
   List<TaskModel> todayTasks = [];
 

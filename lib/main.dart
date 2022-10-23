@@ -8,6 +8,7 @@ import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/details_screen/screen/details_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/splash_screen/screen/splash_screen.dart';
+import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            home: const PackageScreen(),
+            home: const TasksScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,

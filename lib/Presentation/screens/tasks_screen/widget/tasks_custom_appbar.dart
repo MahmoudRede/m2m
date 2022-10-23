@@ -64,7 +64,7 @@ class TasksCustomAppbar extends StatelessWidget {
                           cubit.userModel!.username.toString(),
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                            fontSize: SizeConfig.headline1Size,
+                            fontSize: SizeConfig.headline2Size,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

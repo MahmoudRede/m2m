@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
+import 'package:m2m/Presentation/screens/upload_task_screen/upload_task_images.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/custom_toast.dart';
@@ -10,8 +10,8 @@ import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
 
-class UploadTaskScreen extends StatelessWidget {
-  const UploadTaskScreen({Key? key}) : super(key: key);
+class AddTaskImageScreen extends StatelessWidget {
+  const AddTaskImageScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class UploadTaskScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Upload Task',
+              'Add task image',
               style: TextStyle(
                 fontSize: SizeConfig.headline2Size,
                 fontWeight: FontWeight.bold,
@@ -41,11 +41,11 @@ class UploadTaskScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
 
-                // uploaded image widget
+                // add task from gallery
                 InkWell(
                   onTap: ()=>cubit.getTaskImage(),
                   child: Container(
-                    height: SizeConfig.height*0.7,
+                    height: SizeConfig.height*0.4,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -64,7 +64,7 @@ class UploadTaskScreen extends StatelessWidget {
                           size: SizeConfig.height*0.05,
                         ),
                         Text(
-                          'Upload your task screen',
+                          'Choose image',
                           style: TextStyle(
                             fontSize: SizeConfig.headline4Size,
                             color: ColorManager.lightBlue,
@@ -89,17 +89,17 @@ class UploadTaskScreen extends StatelessWidget {
                 ),
 
                 // upload button
-                state is UploadTaskScreenLoadingState?
+                state is UploadTaskImageLoadingState?
                 const CircularProgressIndicator(
                   color: ColorManager.primary,
                 ):DefaultButton(
-                  text: AppLocalizations.of(context)!.translate('upload').toString(),
+                  text: AppLocalizations.of(context)!.translate('add').toString(),
                   onPressed: (){
                     if(cubit.uploadedTaskImage != null){
-                      cubit.uploadTaskScreen().then((value) async{
-                            await customToast(title: 'Task is uploaded', color: ColorManager.gold);
-                            cubit.uploadedTaskImage = null;
-                            await navigateAndRemove(context, const TasksScreen());
+                      cubit.uploadTaskImage().then((value) async{
+                        await customToast(title: 'image is uploaded', color: ColorManager.gold);
+                        cubit.uploadedTaskImage = null;
+                        await navigateAndRemove(context, const UploadTaskImagesScreen());
                       });
                     }else{
                       customToast(title: 'please select image', color: ColorManager.red);
@@ -110,7 +110,6 @@ class UploadTaskScreen extends StatelessWidget {
               ],
             ),
           ),
-
         );
       },
     );
