@@ -41,7 +41,7 @@ class PaymentCubit extends Cubit<PaymentStates>{
   File? uploadedPaymentImage;
   var imagePicker = ImagePicker();
 
-  Future <void> getTaskImage() async {
+  Future <void> getPaymentImage() async {
     final pickedFile = await imagePicker.pickImage(
       source: ImageSource.gallery,
     );
@@ -76,10 +76,10 @@ class PaymentCubit extends Cubit<PaymentStates>{
             packageId: 'packageId',
             paymentImage: value.toString(),
             userName: userModel!.username.toString(),
-            userImage: userModel!.personalImage.toString(),
+            userImage: userModel!.profileImage.toString(),
             userUId: userModel!.uId.toString(),
             isVerified: false,
-            packageName: userModel!.package.toString(),
+            packageName: "packageName",
             userPhone: userModel!.phone.toString(),
         );
 
@@ -109,6 +109,24 @@ class PaymentCubit extends Cubit<PaymentStates>{
       }
       customToast(title: 'Sorry time is out try again', color: ColorManager.red);
       emit(UploadPaymentImageErrorState());
+    });
+  }
+
+  List<PaymentModel> paymentData =[];
+  Future<void> getPaymentData ()async{
+    emit(GetPaymentDataLoadingState());
+    
+    FirebaseFirestore.instance
+        .collection('paymentImages')
+        .get().then((value) {
+          for (var element in value.docs) {
+            paymentData.add(PaymentModel.fromMap(element.data()));
+          }
+          debugPrint("get payment data success ==> ${paymentData[0].paymentImage}");
+          emit(GetPaymentDataSuccessState());
+    }).catchError((error){
+      debugPrint("Error when get payment data ==> ${error.toString()}");
+      emit(GetPaymentDataErrorState());
     });
   }
 

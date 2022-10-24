@@ -16,3 +16,7 @@ class UrlLaunchState extends PaymentStates{}
 class UploadPaymentImageLoadingState extends PaymentStates{}
 class UploadPaymentImageSuccessState extends PaymentStates{}
 class UploadPaymentImageErrorState extends PaymentStates{}
+
+class GetPaymentDataLoadingState extends PaymentStates{}
+class GetPaymentDataSuccessState extends PaymentStates{}
+class GetPaymentDataErrorState extends PaymentStates{}
