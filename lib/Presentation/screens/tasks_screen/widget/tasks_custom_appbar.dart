@@ -82,6 +82,8 @@ class TasksCustomAppbar extends StatelessWidget {
                       cubit.userModel!.profileImage.toString(),
                     ),
                   ),
+
+
                 ],
               ),
             ),
