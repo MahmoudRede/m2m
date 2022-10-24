@@ -29,7 +29,7 @@ class TasksCubit extends Cubit<TasksStates>{
         .doc(uId)
         .get().then((value) {
       debugPrint('Get User Success');
-      userModel=UserModel.formJson(value.data()!);
+      userModel=UserModel.fromMap(value.data()!);
       debugPrint(userModel!.email);
       emit(GetUserSuccessState());
     }).catchError((error){

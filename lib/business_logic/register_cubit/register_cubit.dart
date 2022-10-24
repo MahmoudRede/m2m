@@ -173,7 +173,6 @@ class RegisterCubit extends Cubit<RegisterState>{
         String ?inviteCode,
         required String personalImage,
         required String id,
-        String ?package,
       }
       )async{
 
@@ -184,7 +183,8 @@ class RegisterCubit extends Cubit<RegisterState>{
         nationalIdImage: nationalIdImage,
         personalImage: personalImage,
         uId: id,
-        package: package??'not selected yet',
+        profileImage: "null",
+        package: Package(packageName: "not selected" , packageId: "id", isVerified: false),
         isConfirmed: false,
         age: age,
         government: government,
