@@ -36,4 +36,34 @@ class AppCubit extends Cubit<AppStates>{
   }
 
 
+  //  Get Users
+
+  List <UserModel> users=[];
+  List <UserModel>unConfirmedUsers=[];
+  Future<void>getUsers()async{
+
+    emit(GetUsersLoadingState());
+
+    FirebaseFirestore.instance.collection('users')
+        .get().then((value) {
+
+          for (var element in value.docs) {
+            users.add(UserModel.formJson(element.data()));
+
+            if(element.data()['isConfirmed'] ==false){
+              unConfirmedUsers.add(UserModel.formJson(element.data()));
+            }
+
+          }
+
+          emit(GetUsersSuccessState());
+    }).catchError((error){
+
+      debugPrint('Error is ${error.toString()}');
+      emit(GetUsersErrorState());
+    });
+
+  }
+
+
 }
