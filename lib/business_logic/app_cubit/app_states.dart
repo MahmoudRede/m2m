@@ -38,3 +38,14 @@ class ChangeSkillsDropDownState extends AppStates{}
 class ChangeMonthDropDownState extends AppStates{}
 class ChangeYearDropDownState extends AppStates{}
 class ChangePackageDropDownState extends AppStates{}
+
+
+class GetUsersSuccessState extends AppStates{
+
+}
+class GetUsersLoadingState extends AppStates{
+
+}
+class GetUsersErrorState extends AppStates{
+
+}
