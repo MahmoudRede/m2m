@@ -1,9 +1,6 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
 import 'package:m2m/constants/constants.dart';
@@ -48,10 +45,10 @@ class AppCubit extends Cubit<AppStates>{
         .get().then((value) {
 
           for (var element in value.docs) {
-            users.add(UserModel.formJson(element.data()));
+            users.add(UserModel.fromMap(element.data()));
 
             if(element.data()['isConfirmed'] ==false){
-              unConfirmedUsers.add(UserModel.formJson(element.data()));
+              unConfirmedUsers.add(UserModel.fromMap(element.data()));
             }
 
           }
@@ -64,6 +61,47 @@ class AppCubit extends Cubit<AppStates>{
     });
 
   }
+
+  String governmentDropDown = '';
+
+  void changeGovernmentDropDown(value)
+  {
+    governmentDropDown = value ;
+    emit(ChangeGovernmentDropDownState());
+  }
+
+  String skillsDropDown = '';
+
+  void changeSkillsDropDown(value)
+  {
+    skillsDropDown = value ;
+    emit(ChangeSkillsDropDownState());
+  }
+
+  String monthDropDown = '';
+
+  void changeMonthDropDown(value)
+  {
+    monthDropDown = value ;
+    emit(ChangeMonthDropDownState());
+  }
+
+  String yearDropDown = '';
+
+  void changeYearDropDown(value)
+  {
+    yearDropDown = value ;
+    emit(ChangeYearDropDownState());
+  }
+
+  String packageDropDown = '';
+
+  void changePackageDropDown(value)
+  {
+    packageDropDown = value ;
+    emit(ChangePackageDropDownState());
+  }
+
 
 
 }

@@ -74,7 +74,6 @@ class FollowRegister extends StatelessWidget {
                      Navigator.pop(context);
                 },
               ),
-              backwardsCompatibility: false,
               systemOverlayStyle: const SystemUiOverlayStyle(
                   statusBarIconBrightness: Brightness.dark,
                   statusBarColor: Colors.white

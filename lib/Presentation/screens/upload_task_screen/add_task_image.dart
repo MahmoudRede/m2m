@@ -22,16 +22,16 @@ class AddTaskImageScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text(
-              'Add task image',
-              style: TextStyle(
-                fontSize: SizeConfig.headline2Size,
-                fontWeight: FontWeight.bold,
-                color: ColorManager.black,
-              ),
+          title: Text(
+            'Add task image',
+            style: TextStyle(
+              fontSize: SizeConfig.headline2Size,
+              fontWeight: FontWeight.bold,
+              color: ColorManager.black,
             ),
-            centerTitle: true,
           ),
+          centerTitle: true,
+        ),
           body: Padding(
             padding: EdgeInsets.symmetric(
               vertical :SizeConfig.height*0.02,

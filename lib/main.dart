@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (BuildContext context) => AppCubit()..getUser()..getUsers()),
         BlocProvider(create: (BuildContext context) => LoginCubit()),
         BlocProvider(create: (BuildContext context) => RegisterCubit()),
-        BlocProvider(create: (BuildContext context) => PaymentCubit()),
+        BlocProvider(create: (BuildContext context) => PaymentCubit()..getPaymentData()),
         BlocProvider(create: (BuildContext context) => TasksCubit()..getUser()),
       ],
       child: BlocConsumer<AppCubit,AppStates>(
@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            home:  const UserRequest(),
+            home:  const AdminHome(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
