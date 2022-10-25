@@ -129,6 +129,70 @@ class PaymentCubit extends Cubit<PaymentStates>{
       emit(GetPaymentDataErrorState());
     });
   }
+  
+  
+  Future<void> confirmPayment ({
+    required PaymentModel paymentModel
+  })async{
+    emit(ConfirmPaymentLoadingState());
+    // get user data
+    UserModel? userModel ;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(paymentModel.userUId.toString())
+        .get()
+        .then((value){
+          userModel = UserModel.fromMap(value.data()!);
+          debugPrint('payment user data ==> ${userModel!.username}');
+          emit(GetUserSuccessState());
+    })
+        .catchError((error){
+      debugPrint('Error when payment user data :${error.toString()}');
+      emit(GetUserErrorState());
+    });
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(paymentModel.userUId.toString())
+        .update({
+      "username":userModel!.username.toString(),
+      "uId":userModel!.uId.toString(),
+      "skills":userModel!.skills.toString(),
+      "profileImage":userModel!.profileImage.toString(),
+      "phone":userModel!.phone.toString(),
+      "personalImage":userModel!.personalImage.toString(),
+      "package":{
+        "packageName":userModel!.package.packageName.toString(),
+        "packageId":userModel!.package.packageId.toString(),
+        "isVerified":true,
+      },
+      "nationalImage":userModel!.nationalIdImage.toString(),
+      "isConfirmed":userModel!.isConfirmed,
+      "inviteCode":userModel!.inviteCode.toString(),
+      "government":userModel!.government.toString(),
+      "email":userModel!.email.toString(),
+      "age":userModel!.age.toString(),
+    }).then((value) async{
+      await FirebaseFirestore.instance
+          .collection('paymentImages')
+          .doc(paymentModel.userUId.toString())
+          .update({
+        "packageId": paymentModel.packageId.toString(),
+        "paymentImage": paymentModel.paymentImage.toString(),
+        "userName": paymentModel.userName.toString(),
+        "userImage": paymentModel.userImage.toString(),
+        "userUId": paymentModel.userUId.toString(),
+        "isVerified": true,
+        "packageName": paymentModel.packageName.toString(),
+        "userPhone": paymentModel.userPhone.toString(),
+      });
+      debugPrint('Payment Confirmed successful');
+      emit(ConfirmPaymentSuccessState());
+    }).catchError((error){
+      debugPrint('Error when confirm Payment ==> ${error.toString()}');
+      emit(ConfirmPaymentErrorState());
+    });
+  }
 
 
 

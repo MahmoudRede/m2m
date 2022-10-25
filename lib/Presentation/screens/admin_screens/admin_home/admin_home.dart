@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m2m/Presentation/screens/admin_screens/admin_home/widget/admin_home_item.dart';
-import 'package:m2m/Presentation/screens/admin_screens/payment_screens/payment_requests.dart';
+import 'package:m2m/Presentation/screens/admin_screens/payment_screens/payment_requests_screen.dart';
 import 'package:m2m/Presentation/screens/on_boarding_screen/widget/custom_title.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -20,7 +20,7 @@ class AdminHome extends StatelessWidget {
 
     List onTaps = [
       (){},
-      ()=>navigateTo(context, const PaymentRequests()),
+      ()=>navigateTo(context, const PaymentRequestsScreen()),
       (){},
       (){},
     ];
