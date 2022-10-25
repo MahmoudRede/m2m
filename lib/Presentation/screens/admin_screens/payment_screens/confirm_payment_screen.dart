@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m2m/Data/model/payment_model.dart';
+import 'package:m2m/Presentation/screens/admin_screens/payment_screens/payment_requests_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
+import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_states.dart';
@@ -68,12 +71,17 @@ class ConfirmPaymentScreen extends StatelessWidget {
                 ),
 
                 // upload button
-                state is UploadPaymentImageLoadingState?
+                state is ConfirmPaymentLoadingState?
                 const CircularProgressIndicator(
                   color: ColorManager.primary,
                 ):DefaultButton(
                   text: AppLocalizations.of(context)!.translate('confirm').toString(),
-                  onPressed: (){},
+                  onPressed: (){
+                    cubit.confirmPayment(paymentModel: paymentModel).then((value) {
+                      customToast(title: "Confirm Payment Success" , color: ColorManager.gold);
+                      navigateAndRemove(context, const PaymentRequestsScreen());
+                    });
+                  },
                   color: ColorManager.secondDarkColor,
                 ),
               ],

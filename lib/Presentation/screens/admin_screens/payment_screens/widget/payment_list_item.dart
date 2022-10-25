@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:m2m/Data/model/payment_model.dart';
-import 'package:m2m/Presentation/screens/admin_screens/payment_screens/confirm_payment.dart';
+import 'package:m2m/Presentation/screens/admin_screens/payment_screens/confirm_payment_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
