@@ -14,6 +14,8 @@ import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
 import 'package:m2m/business_logic/app_localization.dart';
+import 'package:m2m/business_logic/localization_cubit/localization_cubit.dart';
+import 'package:m2m/business_logic/localization_cubit/localization_states.dart';
 import 'package:m2m/business_logic/login_cubit/login_cubit.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
@@ -31,6 +33,8 @@ void main() async {
 
   await CashHelper.init();
 
+  // String languageCode = CashHelper.getData(key: CashHelper.languageKey).toString();
+  // debugPrint('language code is : $languageCode');
   uId = CashHelper.getData(key: 'uId');
   runApp(const MyApp());
 }
@@ -48,8 +52,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (BuildContext context) => RegisterCubit()),
         BlocProvider(create: (BuildContext context) => PaymentCubit()..getPaymentData()),
         BlocProvider(create: (BuildContext context) => TasksCubit()..getUser()),
+        BlocProvider(create: (BuildContext context) => LocalizationCubit()..fetchLocalization()),
       ],
-      child: BlocConsumer<AppCubit,AppStates>(
+      child: BlocConsumer<LocalizationCubit,LocalizationStates>(
         listener: (context,state){},
         builder: (context,state){
           return MaterialApp(
@@ -70,7 +75,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            home:  const AdminHome(),
+            home: const AdminHome(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -82,7 +87,7 @@ class MyApp extends StatelessWidget {
               Locale("en",""),
               Locale("ar",""),
             ],
-            locale: const Locale("en"),
+            locale: LocalizationCubit.get(context).appLocal,
             localeResolutionCallback: (currentLang , supportLang){
               if(currentLang != null) {
                 for(Locale locale in supportLang){
