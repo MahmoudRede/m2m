@@ -5,6 +5,7 @@ class CashHelper{
 
 
   static SharedPreferences ?sharedPreferences;
+  static const String languageKey = "language";
 
   static init()async {
 
@@ -25,10 +26,7 @@ class CashHelper{
     return sharedPreferences!.setDouble(key, value);
   }
 
-  static dynamic getData ({
-    required String key,
-  })
-  {
+  static dynamic getData ({required String key,}) {
     return sharedPreferences!.get(key);
   }
 
