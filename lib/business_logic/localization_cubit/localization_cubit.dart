@@ -22,10 +22,12 @@ class LocalizationCubit extends Cubit<LocalizationStates>{
       CashHelper.saveData(key: CashHelper.languageKey,value: "en");
       _appLocale = const Locale("en");
       changeLanguage(code: "en");
+      debugPrint('default language is english');
       emit(FetchLocalizationState());
     }
     else{
       _appLocale = Locale(languageCode);
+      debugPrint('default language is $languageCode');
       emit(FetchLocalizationState());
     }
     emit(FetchLocalizationState());
