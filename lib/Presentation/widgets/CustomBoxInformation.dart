@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -10,14 +9,15 @@ class CustomBoxInformation extends StatelessWidget {
     required this.boxIcon,
     required this.label,
   }) : super(key: key);
+
   final IconData boxIcon;
   final String label;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width * 0.25,
-      height: Get.height * 0.11,
+      width: SizeConfig.width * 0.25,
+      height: SizeConfig.height * 0.11,
       decoration: BoxDecoration(
           border: Border.all(
             width: 1.6,

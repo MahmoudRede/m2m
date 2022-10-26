@@ -21,7 +21,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
       listener: (context,state){},
       builder: (context,state){
         var cubit = PaymentCubit.get(context);
-        print(paymentModel.paymentImage.toString());
+        debugPrint(paymentModel.paymentImage.toString());
         return Scaffold(
           appBar: AppBar(
             title: Text(
