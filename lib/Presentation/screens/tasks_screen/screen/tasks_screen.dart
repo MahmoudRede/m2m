@@ -11,6 +11,7 @@ import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
 
@@ -98,7 +99,7 @@ class TasksScreen extends StatelessWidget {
                       height: SizeConfig.height*0.02,
                     ),
                     Text(
-                      'You have to subscribe in package first, If you already subscribe in one Please wait to verify your payment.',
+                      AppLocalizations.of(context)!.translate('noSubscribeAndWaitingTaskMessage').toString(),
                       style: GoogleFonts.roboto(
                         fontSize: SizeConfig.headline3Size,
                         color: ColorManager.secondDarkColor,
@@ -110,7 +111,7 @@ class TasksScreen extends StatelessWidget {
                       height: SizeConfig.height*0.1,
                     ),
                     DefaultButton(
-                      text: 'Back to home',
+                      text: AppLocalizations.of(context)!.translate('backToHome').toString(),
                       onPressed: ()=>navigateAndRemove(context, const PackageScreen()),
                       color: ColorManager.secondDarkColor,
                     ),

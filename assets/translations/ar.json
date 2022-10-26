@@ -49,6 +49,20 @@
   "payment_screens": "صفحات الدفع",
   "add_tasks": "اضافه مهام",
   "users_request": "طلبات المستخدمين",
+  "payment": "الدفع",
+  "confirmPayment": "تأكيد الدفع",
+  "tasks" : "مهام",
+  "months": "أشهر",
+  "haveNiceDay": "طاب يومك!",
+  "taskScreenMessage": "ابدأ في أداء مهامك الآن.",
+  "noSubscribeAndWaitingTaskMessage": "يجب عليك الاشتراك في الباقة أولاً ، إذا كنت قد اشتركت بالفعل في واحدة ، يرجى الانتظار للتحقق من الدفع.",
+  "backToHome": "العودة للصفحة الرئيسية",
+  "addTaskImage": "أضافة صورة المهمة",
+  "chooseImage": "أختار صورة",
+  "imageIsUploaded": "تم رفع الصورة بنجاح",
+  "pleaseSelectImage": "من فضلك أختر صورة",
+  "uploadTaskImage": "رفع صور المهمة",
+  "taskIsUploaded": "تم رفع المهمة بنجاح",
 
 
 

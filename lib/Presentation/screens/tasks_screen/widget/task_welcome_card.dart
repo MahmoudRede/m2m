@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class TaskWelcomeCard extends StatelessWidget {
@@ -38,7 +39,7 @@ class TaskWelcomeCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Have a nice day!',
+                            AppLocalizations.of(context)!.translate('haveNiceDay').toString(),
                             textAlign: TextAlign.left,
                             style:  TextStyle(
                               fontSize: SizeConfig.headline2Size,
@@ -50,7 +51,7 @@ class TaskWelcomeCard extends StatelessWidget {
                             height: 10,
                           ),
                           Text(
-                            'Start perform out your tasks right now.',
+                            AppLocalizations.of(context)!.translate('taskScreenMessage').toString(),
                             style: TextStyle(
                               fontSize: SizeConfig.headline3Size,
                               color: ColorManager.lightGrey,
