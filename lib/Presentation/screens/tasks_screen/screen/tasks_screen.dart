@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/custom_task_row.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/task_divider.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/tasks_custom_appbar.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/task_welcome_card.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/Presentation/widgets/default_button.dart';
+import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
 
@@ -19,6 +24,7 @@ class TasksScreen extends StatelessWidget {
       child: BlocConsumer<TasksCubit,TasksStates>(
         listener: (context,state){},
         builder: (context,state){
+          var cubit = TasksCubit.get(context);
           return state is GetUserLoadingState? Container(
             color: ColorManager.white,
             child: const Center(
@@ -27,7 +33,7 @@ class TasksScreen extends StatelessWidget {
               ),
             ),
           ): Scaffold(
-            body: Container(
+            body: cubit.userModel!.package.isVerified==true? Container(
               width: SizeConfig.width,
               color: Colors.white,
               child: Column(
@@ -74,6 +80,42 @@ class TasksScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ):
+            Container(
+              height: SizeConfig.height,
+              color: ColorManager.white,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.height*0.03,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Lottie.asset("assets/images/waiting.json"),
+                    SizedBox(
+                      height: SizeConfig.height*0.02,
+                    ),
+                    Text(
+                      'You have to subscribe in package first, If you already subscribe in one Please wait to verify your payment.',
+                      style: GoogleFonts.roboto(
+                        fontSize: SizeConfig.headline3Size,
+                        color: ColorManager.secondDarkColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: SizeConfig.height*0.1,
+                    ),
+                    DefaultButton(
+                      text: 'Back to home',
+                      onPressed: ()=>navigateAndRemove(context, const PackageScreen()),
+                      color: ColorManager.secondDarkColor,
+                    ),
+                  ],
+                ),
               ),
             ),
           );
