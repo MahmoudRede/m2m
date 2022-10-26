@@ -34,8 +34,8 @@ void main() async {
 
   await CashHelper.init();
 
-  // String languageCode = CashHelper.getData(key: CashHelper.languageKey).toString();
-  // debugPrint('language code is : $languageCode');
+  String languageCode = CashHelper.getData(key: CashHelper.languageKey).toString();
+  debugPrint('language code is : $languageCode');
   uId = CashHelper.getData(key: 'uId');
   runApp(const MyApp());
 }
