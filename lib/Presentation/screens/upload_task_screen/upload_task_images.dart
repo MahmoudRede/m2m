@@ -26,7 +26,7 @@ class UploadTaskImagesScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Upload task images',
+              AppLocalizations.of(context)!.translate('uploadTaskImage').toString(),
               style: TextStyle(
                 fontSize: SizeConfig.headline2Size,
                 fontWeight: FontWeight.bold,
@@ -80,11 +80,11 @@ class UploadTaskImagesScreen extends StatelessWidget {
                   onPressed: (){
                     if(taskImages.isNotEmpty){
                       cubit.uploadTask().then((value){
-                        customToast(title: 'Task uploaded successful', color: ColorManager.gold);
+                        customToast(title: AppLocalizations.of(context)!.translate('taskIsUploaded').toString(), color: ColorManager.gold);
                         navigateAndRemove(context, const TasksScreen());
                       });
                     }else{
-                      customToast(title: 'Please add task image', color: ColorManager.red);
+                      customToast(title: AppLocalizations.of(context)!.translate('pleaseSelectImage').toString(), color: ColorManager.red);
                     }
                   },
                   color: ColorManager.secondDarkColor,

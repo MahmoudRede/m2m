@@ -11,6 +11,7 @@ import 'package:m2m/Presentation/widgets/CustomBoxInformation.dart';
 import 'package:m2m/Presentation/widgets/custome_action_button.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_states.dart';
 
@@ -97,35 +98,47 @@ class DetailsScreen extends StatelessWidget {
                         SizedBox(
                           height: SizeConfig.height * 0.035,
                         ),
+
+
+
                         // package properties
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: const [
+                          children: [
                             CustomBoxInformation(
                                 boxIcon: FontAwesomeIcons.calendarCheck,
-                                label: "3 Months"),
+                                label: "3 ${AppLocalizations.of(context)!.translate('months').toString()}",
+                            ),
                             CustomBoxInformation(
                                 boxIcon: FontAwesomeIcons.clock,
-                                label: "5 Tasks"),
-                            CustomBoxInformation(
+                                label: "5 ${AppLocalizations.of(context)!.translate('tasks').toString()}",
+                            ),
+                            const CustomBoxInformation(
                                 boxIcon: FontAwesomeIcons.star,
-                                label: "1.2\$"),
+                                label: "1.2\$",
+                            ),
                           ],
                         ),
                         SizedBox(
                           height: SizeConfig.height *0.03,
                         ),
+
+
+
                         // payment button
                         DefaultButton(
-                          text: 'Payment',
+                          text: AppLocalizations.of(context)!.translate('payment').toString(),
                           onPressed: ()=>PaymentCubit.get(context).urlLunch(paymentLink: 'https://paypal.me/MmdouhMohamed?country.x=EG&locale.x=ar_EG'),
                         ),
                         SizedBox(
                           height: SizeConfig.height *0.02,
                         ),
+
+
+
                         // confirm payment button
                         DefaultButton(
-                            text: 'Confirm payment',
+                            text: AppLocalizations.of(context)!.translate('confirmPayment').toString(),
                             onPressed: ()=>navigateTo( context, const VerifyPaymentScreen())
                         ),
                       ],

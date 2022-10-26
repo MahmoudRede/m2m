@@ -39,22 +39,6 @@
   "bani_Sweif": "Bani Sweif",
   "port_Said": "Port Said",
   "south_of_Sina": "South of Sina",
-  "giza": "Giza",
-  "dakahlia": "Dakahlia",
-  "damietta": "Damietta",
-  "sohag": "Sohag",
-  "suez": "Suez",
-  "northOfSinai": "North Of Sinai",
-  "gharbiya": "Gharbiya",
-  "fayoum": "Fayoum",
-  "cairo": "Cairo",
-  "qalyubia": "Qalyubia",
-  "qana": "Qana",
-  "kafrEl-Sheikh": "Kafr El-Sheikh",
-  "mursiMuttrah": "Mursi Muttrah",
-  "menoufia": "Menoufia",
-  "minya": "Minya",
-  "theNewValley": "the new valley",
 
 
   "send_task": "Send Task",
@@ -63,23 +47,27 @@
   "payment_screens": "Payment Screens",
   "add_tasks": "Add Tasks",
   "users_request": "Users Request",
-  "identityConfirmation": "Identity Confirmation",
-  "accept": "Accept",
-  "refuse": "Refuse",
-  "notFoundAnyRequestsYet": "Not found any requests yet",
+  "payment": "Payment",
+  "confirmPayment": "Confirm Payment",
+  "tasks" : "Tasks",
+  "months": "Months",
+  "haveNiceDay": "Have a nice day!",
+  "taskScreenMessage": "Start to perform out your tasks right now.",
+  "noSubscribeAndWaitingTaskMessage": "You have to subscribe to the package first, If you already subscribe to one Please wait to verify your payment.",
+  "backToHome": "back to home",
+  "addTaskImage": "Add task image",
+  "chooseImage": "Choose Image",
+  "imageIsUploaded": "Image is uploaded successful",
+  "pleaseSelectImage": "Please select image",
+  "uploadTaskImage": "Upload task image",
+  "taskIsUploaded": "Task is uploaded successful",
 
-  "title": "Title",
-  "description": "Description",
-  "type": "Type",
-  "price": "Price",
-  "timer": "Timer",
-  "pleaseEnter": "Please Enter",
-  "enterTaskTitle": "Enter Task Title",
-  "enterTaskDescription": "Enter Task Description",
-  "enterTaskType": "Enter Task Type",
-  "enterTaskTimer": "Enter Task Timer",
-  "enterTaskPrice": "Enter Task Price",
-  "taskAdded": "Task Added",
+
+
+
+
+
+
 
 
   "next":"Next"

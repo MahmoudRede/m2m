@@ -22,8 +22,8 @@ class AddTaskImageScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-          title: Text(
-            'Add task image',
+            title: Text(
+            AppLocalizations.of(context)!.translate('addTaskImage').toString(),
             style: TextStyle(
               fontSize: SizeConfig.headline2Size,
               fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class AddTaskImageScreen extends StatelessWidget {
                           size: SizeConfig.height*0.05,
                         ),
                         Text(
-                          'Choose image',
+                          AppLocalizations.of(context)!.translate('chooseImage').toString(),
                           style: TextStyle(
                             fontSize: SizeConfig.headline4Size,
                             color: ColorManager.lightBlue,
@@ -96,13 +96,13 @@ class AddTaskImageScreen extends StatelessWidget {
                   text: AppLocalizations.of(context)!.translate('add').toString(),
                   onPressed: (){
                     if(cubit.uploadedTaskImage != null){
-                      cubit.uploadTaskImage().then((value) async{
-                        await customToast(title: 'image is uploaded', color: ColorManager.gold);
+                      cubit.uploadTaskImage().then((value) {
+                        customToast(title: AppLocalizations.of(context)!.translate('imageIsUploaded').toString(), color: ColorManager.gold);
                         cubit.uploadedTaskImage = null;
-                        await navigateAndRemove(context, const UploadTaskImagesScreen());
+                        navigateAndRemove(context, const UploadTaskImagesScreen());
                       });
                     }else{
-                      customToast(title: 'please select image', color: ColorManager.red);
+                      customToast(title: AppLocalizations.of(context)!.translate('pleaseSelectImage').toString(), color: ColorManager.red);
                     }
                   },
                   color: ColorManager.secondDarkColor,

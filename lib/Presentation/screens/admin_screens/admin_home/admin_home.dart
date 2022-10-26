@@ -8,12 +8,9 @@ import 'package:m2m/Presentation/screens/admin_screens/payment_screens/payment_r
 import 'package:m2m/Presentation/screens/admin_screens/user_request/user_request.dart';
 import 'package:m2m/Presentation/screens/on_boarding_screen/widget/custom_title.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
-import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
-import 'package:m2m/Presentation/widgets/text_manager.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
-import 'package:m2m/business_logic/app_localization.dart';
 
 class AdminHome extends StatelessWidget {
 
