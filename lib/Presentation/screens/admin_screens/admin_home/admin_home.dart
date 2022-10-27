@@ -20,7 +20,7 @@ class AdminHome extends StatelessWidget {
   Widget build(BuildContext context) {
 
     List onTaps = [
-      ()=>{},
+      ()=>navigateTo(context, const SelectUsers()),
       ()=>navigateTo(context, const PaymentRequestsScreen()),
       ()=>navigateTo(context, const AddTasks()),
       ()=>navigateTo(context, const UserRequest()),
