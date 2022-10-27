@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:m2m/Presentation/screens/admin_screens/add_tasks/add_tasks.dart';
 import 'package:m2m/Presentation/screens/admin_screens/filter_users/widget/filter_user_item.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/styles/icon_broken.dart';
+import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
+import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
 import 'package:m2m/business_logic/app_localization.dart';
 
 class SelectUsers extends StatefulWidget {
-  const SelectUsers({Key? key}) : super(key: key);
+
+  final String taskTitle;
+  final String taskDescription;
+  final String taskType;
+  final String taskTimer;
+  final String taskPrice;
+
+  const SelectUsers({Key? key,
+    required this.taskTitle,
+    required this.taskDescription,
+    required this.taskType,
+    required this.taskTimer,
+    required this.taskPrice,
+  }) : super(key: key);
 
   @override
   State<SelectUsers> createState() => _SelectUsersState();
@@ -59,6 +76,23 @@ class _SelectUsersState extends State<SelectUsers> {
       AppLocalizations.of(context)!.translate('bani_Sweif').toString(),
       AppLocalizations.of(context)!.translate('port_Said').toString(),
       AppLocalizations.of(context)!.translate('south_of_Sina').toString(),
+      AppLocalizations.of(context)!.translate('giza').toString(),
+      AppLocalizations.of(context)!.translate('dakahlia').toString(),
+      AppLocalizations.of(context)!.translate('damietta').toString(),
+      AppLocalizations.of(context)!.translate('sohag').toString(),
+      AppLocalizations.of(context)!.translate('suez').toString(),
+      AppLocalizations.of(context)!.translate('northOfSinai').toString(),
+      AppLocalizations.of(context)!.translate('gharbiya').toString(),
+      AppLocalizations.of(context)!.translate('fayoum').toString(),
+      AppLocalizations.of(context)!.translate('cairo').toString(),
+      AppLocalizations.of(context)!.translate('qalyubia').toString(),
+      AppLocalizations.of(context)!.translate('qana').toString(),
+      AppLocalizations.of(context)!.translate('kafrEl-Sheikh').toString(),
+      AppLocalizations.of(context)!.translate('mursiMuttrah').toString(),
+      AppLocalizations.of(context)!.translate('menoufia').toString(),
+      AppLocalizations.of(context)!.translate('minya').toString(),
+      AppLocalizations.of(context)!.translate('theNewValley').toString(),
+
     ];
 
 
@@ -121,10 +155,24 @@ class _SelectUsersState extends State<SelectUsers> {
                               ),
                               SizedBox(width: SizeConfig.height*.015,),
                               GestureDetector(
-                                onTap: (){},
-                                child: const Icon(
-                                  Icons.circle_outlined
-                                ),
+                                onTap: (){
+                                  setState(() {
+                                    cubit.selectAll = !cubit.selectAll;
+                                    if(cubit.selectAll==true){
+                                      cubit.isUserSelected = List.generate(250, (index) => true);
+                                      for(var element in cubit.filterUsers){
+                                        cubit.usersId.add(element.uId);
+                                      }
+                                    }
+                                    else{
+                                      cubit.isUserSelected = List.generate(250, (index) => false);
+                                      cubit.usersId=[];
+                                    }
+
+                                  });
+                                },
+                                child: cubit.selectAll==false? SvgPicture.asset('assets/images/un_checked_remember_icon.svg',color: ColorManager.primary,height: SizeConfig.height*.023,)
+                                    :SvgPicture.asset('assets/images/checked_remember_me_icon.svg',color: ColorManager.primary,height: SizeConfig.height*.023,)
                               ),
 
                               SizedBox(width: SizeConfig.height*.02,),
@@ -440,6 +488,16 @@ class _SelectUsersState extends State<SelectUsers> {
                     child: DefaultButton(
                         text: AppLocalizations.of(context)!.translate('send_task').toString(),
                         onPressed: (){
+
+                            cubit.addTasks(
+                                taskTitle: widget.taskTitle,
+                                taskDescription: widget.taskDescription,
+                                taskType: widget.taskType,
+                                taskTimer: widget.taskTimer,
+                                taskPrice: widget.taskPrice
+                            );
+                            customToast(title:AppLocalizations.of(context)!.translate('taskAdded').toString() , color: ColorManager.primary);
+                            Navigator.pop(context);
 
                         }
                     ),

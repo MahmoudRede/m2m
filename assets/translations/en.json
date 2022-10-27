@@ -39,6 +39,22 @@
   "bani_Sweif": "Bani Sweif",
   "port_Said": "Port Said",
   "south_of_Sina": "South of Sina",
+  "giza": "Giza",
+  "dakahlia": "Dakahlia",
+  "damietta": "Damietta",
+  "sohag": "Sohag",
+  "suez": "Suez",
+  "northOfSinai": "North Of Sinai",
+  "gharbiya": "Gharbiya",
+  "fayoum": "Fayoum",
+  "cairo": "Cairo",
+  "qalyubia": "Qalyubia",
+  "qana": "Qana",
+  "kafrEl-Sheikh": "Kafr El-Sheikh",
+  "mursiMuttrah": "Mursi Muttrah",
+  "menoufia": "Menoufia",
+  "minya": "Minya",
+  "theNewValley": "the new valley",
 
 
   "send_task": "Send Task",
@@ -63,6 +79,7 @@
   "enterTaskType": "Enter Task Type",
   "enterTaskTimer": "Enter Task Timer",
   "enterTaskPrice": "Enter Task Price",
+  "taskAdded": "Task Added",
 
 
   "next":"Next"
