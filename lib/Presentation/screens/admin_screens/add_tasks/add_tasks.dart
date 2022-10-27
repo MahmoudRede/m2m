@@ -196,12 +196,24 @@ class AddTasks extends StatelessWidget {
                         onPressed: (){
                             if(formKey.currentState!.validate()){
 
-                              navigateTo(context, const SelectUsers());
+                              AppCubit.get(context).isUserSelected = List.generate(250, (index) => false);
+                              AppCubit.get(context).selectAll=false;
+                              AppCubit.get(context).usersId=[];
+                              navigateTo(context,SelectUsers(
+                                taskTitle: taskTitleController.text,
+                                taskDescription: taskDescriptionController.text,
+                                taskType: taskTypeController.text,
+                                taskTimer: taskTimerController.text,
+                                taskPrice: taskPriceController.text,
+                              ));
 
                             }
                         },
 
-                      )
+                      ),
+
+                      SizedBox(height: SizeConfig.height*.01,),
+
 
                     ],
                   ),
