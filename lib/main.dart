@@ -8,6 +8,7 @@ import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/admin_screens/admin_home/admin_home.dart';
 import 'package:m2m/Presentation/screens/admin_screens/filter_users/filter_users.dart';
 import 'package:m2m/Presentation/screens/admin_screens/user_request/user_request.dart';
+import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/splash_screen/screen/splash_screen.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -75,7 +76,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            home: const AdminHome(),
+            home: const LoginScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,

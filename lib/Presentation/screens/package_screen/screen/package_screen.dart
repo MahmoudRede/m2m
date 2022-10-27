@@ -22,15 +22,18 @@ class PackageScreen extends StatelessWidget {
       builder: (context,state){
             var cubit=AppCubit.get(context);
             return cubit.userModel!=null?
-                cubit.userModel!.isConfirmed==false?
+                cubit.userModel!.isConfirmed==true?
                     
                 // Main Widget
                 PackageScreenItem():
                 
                 // Waiting Widget    
-                const WaitingScreenItem()
+                const WaitingScreenItem(
+                  image: 'assets/images/waiting_image.json',
+                  title: 'waiting',
+                )
             
-                :const Center(child: CircularProgressIndicator(),
+                :const Scaffold(body:Center(child: CircularProgressIndicator(),)
             );
         },
     );

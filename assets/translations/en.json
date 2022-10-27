@@ -47,13 +47,22 @@
   "payment_screens": "Payment Screens",
   "add_tasks": "Add Tasks",
   "users_request": "Users Request",
+  "identityConfirmation": "Identity Confirmation",
+  "accept": "Accept",
+  "refuse": "Refuse",
+  "notFoundAnyRequestsYet": "Not found any requests yet",
 
-
-
-
-
-
-
+  "title": "Title",
+  "description": "Description",
+  "type": "Type",
+  "price": "Price",
+  "timer": "Timer",
+  "pleaseEnter": "Please Enter",
+  "enterTaskTitle": "Enter Task Title",
+  "enterTaskDescription": "Enter Task Description",
+  "enterTaskType": "Enter Task Type",
+  "enterTaskTimer": "Enter Task Timer",
+  "enterTaskPrice": "Enter Task Price",
 
 
   "next":"Next"

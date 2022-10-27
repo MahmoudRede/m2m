@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
+import 'package:m2m/Presentation/screens/admin_screens/admin_home/admin_home.dart';
 import 'package:m2m/Presentation/screens/admin_screens/filter_users/filter_users.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/register_screen/screen/register_screen/register_screen.dart';
@@ -184,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                     if( emailController.text == 'M2M2022@gmail.com' && passController.text == '123456789')
                                       {
-                                        navigateTo(context, const SelectUsers());
+                                        navigateTo(context, const AdminHome());
                                         customToast(title: 'Welcome to Dashboard', color: ColorManager.primary);
                                       }
                                     else{
