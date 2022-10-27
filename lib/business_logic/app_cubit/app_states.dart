@@ -89,23 +89,3 @@ class AddAdminTaskLoadingState extends AppStates{
 class AddAdminTaskErrorState extends AppStates{
 
 }
-
-class SaveTokenSuccessState extends AppStates{
-
-}
-class SaveTokenLoadingState extends AppStates{
-
-}
-class SaveTokenErrorState extends AppStates{
-
-}
-
-class GetTokenSuccessState extends AppStates{
-
-}
-class GetTokenLoadingState extends AppStates{
-
-}
-class GetTokenErrorState extends AppStates{
-
-}
