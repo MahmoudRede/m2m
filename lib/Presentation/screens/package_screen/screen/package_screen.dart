@@ -20,20 +20,22 @@ class PackageScreen extends StatelessWidget {
     return BlocConsumer<AppCubit,AppStates>(
       listener: (context,state){},
       builder: (context,state){
-        var cubit=AppCubit.get(context);
-        return cubit.userModel!=null?
-        cubit.userModel!.isConfirmed==false?
-
-        // Main Widget
-        PackageScreenItem():
-
-        // Waiting Widget
-        const WaitingScreenItem():Container(
-          color: ColorManager.white,
-          child: const Center(child: CircularProgressIndicator(),
-          ),
-        );
-      },
+            var cubit=AppCubit.get(context);
+            return cubit.userModel!=null?
+                cubit.userModel!.isConfirmed==true?
+                    
+                // Main Widget
+                PackageScreenItem():
+                
+                // Waiting Widget    
+                const WaitingScreenItem(
+                  image: 'assets/images/waiting_image.json',
+                  title: 'waiting',
+                )
+            
+                :const Scaffold(body:Center(child: CircularProgressIndicator(),)
+            );
+        },
     );
   }
 }

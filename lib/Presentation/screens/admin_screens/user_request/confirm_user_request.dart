@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
-import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/styles/icon_broken.dart';
+import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 
 class ConfirmUserRequest extends StatelessWidget {
 
-
-  const ConfirmUserRequest({Key? key,}) : super(key: key);
+  final String personalImage;
+  final String nationalCard;
+  final String userId;
+  const ConfirmUserRequest({Key? key,required this.personalImage,required this.nationalCard,required this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +30,14 @@ class ConfirmUserRequest extends StatelessWidget {
         var cubit= AppCubit.get(context);
         return Scaffold(
           backgroundColor: ColorManager.white,
+
+          // title
+
           appBar: AppBar(
             backgroundColor: ColorManager.white,
             elevation: 0.0,
-            title: Text('Complete Registration',style: GoogleFonts.aBeeZee(
+            title: Text(AppLocalizations.of(context)!.translate('identityConfirmation').toString(),
+              style: GoogleFonts.aBeeZee(
                 color: ColorManager.black,
                 fontWeight: FontWeight.w500,
                 fontSize: size.height*.03
@@ -49,70 +57,87 @@ class ConfirmUserRequest extends StatelessWidget {
                 statusBarColor: Colors.white
             ),
           ),
+
+
           body: Container(
-            margin: const EdgeInsets.symmetric(
-                horizontal: 25,
-                vertical: 10
-            ),
+            margin: EdgeInsets.symmetric(horizontal: SizeConfig.height*.04, vertical: SizeConfig.height*.01),
             child: Column(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    width: size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(
-                          color: ColorManager.primary,
-                        ),
-                        image: const DecorationImage(
-                            image: AssetImage(AssetsManager.idCard),
-                            fit: BoxFit.cover
-                        )
-                    ),
-                  ),
-                ),
-                SizedBox(height: size.height*.04,),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    width: size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(
-                          color: ColorManager.primary,
-                        ),
-                        image:const DecorationImage(
-                            image: AssetImage(AssetsManager.selife),
-                            fit: BoxFit.cover
 
-                        )
+                // national image
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                          color: ColorManager.primary,
+                        ),
+                    ),
+                    child: CachedNetworkImage(
+                      cacheManager: cubit.manager,
+                      imageUrl: nationalCard,
+                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
+
+                SizedBox(height: size.height*.04,),
+
+                // personal image
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                          color: ColorManager.primary,
+                        ),
+                    ),
+                    child: CachedNetworkImage(
+                      cacheManager: cubit.manager,
+                      imageUrl: personalImage,
+                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+
                 SizedBox(height: size.height*.05,),
 
+                // accept and refuse buttons
                 Row(
                   children: [
 
+                    // accept
                     Expanded(
                       child: DefaultButton(
-                          text: 'Accept',
+                          text: AppLocalizations.of(context)!.translate('accept').toString(),
                           color: ColorManager.primary,
                           onPressed: (){
-
+                              cubit.updateIsConfirmedUser(userId: userId).then((value) {
+                                cubit.getUsers();
+                                customToast(title: 'User is Accept', color: ColorManager.primary);
+                              });
                           }
                       ),
                     ),
 
                     SizedBox(width: SizeConfig.height*.02,),
 
+                    // refuse
                     Expanded(
                       child: DefaultButton(
-                          text: 'Refuse',
-                          color: ColorManager.primary,
+                          text: AppLocalizations.of(context)!.translate('refuse').toString(),
+                          color: ColorManager.red,
                           onPressed: (){
-
+                            cubit.deleteUser(userId: userId).then((value) {
+                              cubit.getUsers();
+                              customToast(title: 'User is Refuse', color: ColorManager.red);
+                            });
                           }
                       ),
                     ),
