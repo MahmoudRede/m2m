@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 Future<void> callFcmApiSendPushNotificationsChat({
   required String title,
   required String imageUrl,
@@ -29,7 +28,7 @@ Future<void> callFcmApiSendPushNotificationsChat({
   final headers = {
     'content-type': 'application/json',
     'Authorization':
-    'key=AAAAIqG6C9s:APA91bHMARfKha7noUEJOzAreVnEVX9kgkH8_TeV2sPiYqERN2IedimCpRNDjO7N9BMiHYYNEu3GolVunt14JtX7LI3nYv2TZ9me2vDtbeOpbCiVA4GXUuK5M22cZVRVV1ad9GQGF0ef' ,// 'key=YOUR_SERVER_KEY'
+    'key=AAAAnnl0NBg:APA91bFwrwG02P9sZ4bmjg6NjLh3aAzOPSUBdtntZs8bOo_CKIxRjdEltUcCwonJDp-Q_ts5Q0sFwukQets_BErNykkqFS6o8LCbnfrH-Y20bk7nQ2tgwpNJiBSIfHssJYRV4W5YTt7E' ,// 'key=YOUR_SERVER_KEY'
 
   };
 

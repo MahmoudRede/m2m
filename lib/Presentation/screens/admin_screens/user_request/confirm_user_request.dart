@@ -5,13 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:m2m/Data/core/remote/notification.dart';
-import 'package:m2m/Presentation/screens/admin_screens/user_request/user_request.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/styles/icon_broken.dart';
 import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
-import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
 import 'package:m2m/business_logic/app_localization.dart';
@@ -172,6 +170,7 @@ class ConfirmUserRequest extends StatelessWidget {
                             }
                         ),
                       ),
+
                     ],
                   )
                 ],
