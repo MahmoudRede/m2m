@@ -125,6 +125,8 @@ class RegisterCubit extends Cubit<RegisterState>{
          required String skills,
          required String nationalIdImage,
          required String personalImage,
+         required String month,
+         required String year,
          String ?inviteCode,
 
       }
@@ -151,6 +153,8 @@ class RegisterCubit extends Cubit<RegisterState>{
         skills: skills,
         age: age,
         inviteCode: inviteCode,
+        month: month,
+        year: year,
       );
       emit(UserRegisterSuccessState());
     }).catchError((error){
@@ -173,6 +177,8 @@ class RegisterCubit extends Cubit<RegisterState>{
         String ?inviteCode,
         required String personalImage,
         required String id,
+        required String month,
+        required String year,
       }
       )async{
 
@@ -187,6 +193,8 @@ class RegisterCubit extends Cubit<RegisterState>{
         package: Package(packageName: "not selected" , packageId: "id", isVerified: false),
         isConfirmed: false,
         age: age,
+        month: month,
+        year: year,
         government: government,
         skills: skills,
         inviteCode: inviteCode??''

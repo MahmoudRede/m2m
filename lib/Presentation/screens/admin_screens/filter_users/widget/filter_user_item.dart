@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';
 
 class FilterUserItem extends StatelessWidget {
-  const FilterUserItem({Key? key}) : super(key: key);
+  final int index;
+  final UserModel userModel;
+  const FilterUserItem({Key? key,required this.index,required this.userModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class FilterUserItem extends StatelessWidget {
 
                     // name
                     Expanded(
-                      child: Text('Mahmoud Reda Abdallah',
+                      child: Text(userModel.username,
                         style: textManager(
                             color: ColorManager.white,
                             fontWeight: FontWeight.w500
@@ -66,7 +69,7 @@ class FilterUserItem extends StatelessWidget {
 
                     // government
                     Expanded(
-                      child: Text('El-Qalyubia',
+                      child: Text(userModel.government,
                         style: textManager(
                             color: ColorManager.white,
                             fontWeight: FontWeight.w400,
@@ -103,7 +106,7 @@ class FilterUserItem extends StatelessWidget {
 
                     SizedBox(width: SizeConfig.height*.03,),
 
-                    Text('200 \$',
+                    Text('${userModel.package.packageName} \$',
                       style: textManager(
                           color: ColorManager.primary,
                           fontWeight: FontWeight.w700,

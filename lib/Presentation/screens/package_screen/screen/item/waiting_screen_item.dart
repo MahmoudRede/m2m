@@ -7,7 +7,9 @@ import 'package:m2m/Presentation/widgets/text_manager.dart';
 import 'package:m2m/business_logic/app_localization.dart';
 
 class WaitingScreenItem extends StatelessWidget {
-  const WaitingScreenItem({Key? key}) : super(key: key);
+  final String image;
+  final String title;
+  const WaitingScreenItem({Key? key,required this.image,required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +27,16 @@ class WaitingScreenItem extends StatelessWidget {
               // title
               const CustomTitle(),
 
+
               // Lottie Image
-              Lottie.asset('assets/images/waiting_image.json',height: SizeConfig.height*.5,width:SizeConfig.height*.5),
+              Lottie.asset(image,height: SizeConfig.height*.5,width:SizeConfig.height*.45),
 
               // Text
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: SizeConfig.height*.02
+                  horizontal: SizeConfig.height*.03
                 ),
-                child: Text(AppLocalizations.of(context)!.translate('waiting').toString(),
+                child: Text(AppLocalizations.of(context)!.translate(title).toString(),
                   style: textManager(
                       color: ColorManager.black,
                       fontWeight: FontWeight.w500

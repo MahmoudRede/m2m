@@ -49,8 +49,22 @@
   "payment_screens": "صفحات الدفع",
   "add_tasks": "اضافه مهام",
   "users_request": "طلبات المستخدمين",
+  "identityConfirmation": "تاكيد الهويه",
+  "accept": "الموافقه",
+  "refuse": "الرفض",
+  "notFoundAnyRequestsYet": "لا يوجد اي طلبات حتي الان",
 
-
+  "title": "العنوان",
+  "description": "الوصف",
+  "type": "النوع",
+  "price": "السعر",
+  "timer": "التوقيق",
+  "pleaseEnter": "فضلا ادخل",
+  "enterTaskTitle": "ادخل عنوان التاسك",
+  "enterTaskDescription": "ادخل وصف التاسك",
+  "enterTaskType": "ادخل نوع التاسك",
+  "enterTaskTimer": "ادخل وقت التاسك",
+  "enterTaskPrice": "ادخل سعر التاسك",
 
 
 
