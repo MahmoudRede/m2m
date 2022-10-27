@@ -191,7 +191,10 @@ class FollowRegister extends StatelessWidget {
                                nationalIdImage:  CashHelper.getData(key: 'nationalId'),
                                personalImage: CashHelper.getData(key: 'personalImage'),
                                inviteCode: code,
-                               skills: skills);
+                               skills: skills,
+                               month: DateTime.now().month.toString(),
+                               year: DateTime.now().year.toString()
+                           );
 
                          }else{
 

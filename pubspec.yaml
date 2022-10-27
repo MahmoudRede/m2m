@@ -30,6 +30,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   image_picker: ^0.8.5+3
   modal_progress_hud_nsn: ^0.3.0
+  cached_network_image: ^3.2.2
 
   #Firebase
   firebase_core:

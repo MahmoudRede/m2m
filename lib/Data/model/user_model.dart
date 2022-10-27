@@ -13,6 +13,8 @@ class UserModel {
     required this.skills,
     required this.inviteCode,
     required this.isConfirmed,
+    required this.month,
+    required this.year,
   });
 
   final String username;
@@ -28,6 +30,8 @@ class UserModel {
   final String skills;
   final String inviteCode;
   final bool isConfirmed;
+  final String month;
+  final String year;
 
   factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
     username: json["username"],
@@ -43,6 +47,8 @@ class UserModel {
     skills: json["skills"],
     inviteCode: json["inviteCode"],
     isConfirmed: json["isConfirmed"],
+    month: json["month"],
+    year: json["year"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -59,6 +65,8 @@ class UserModel {
     "skills": skills,
     "inviteCode": inviteCode,
     "isConfirmed": isConfirmed,
+    "month": month,
+    "year": year,
   };
 }
 

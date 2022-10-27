@@ -11,8 +11,39 @@ import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
 import 'package:m2m/business_logic/app_localization.dart';
 
-class SelectUsers extends StatelessWidget {
+class SelectUsers extends StatefulWidget {
   const SelectUsers({Key? key}) : super(key: key);
+
+  @override
+  State<SelectUsers> createState() => _SelectUsersState();
+}
+
+class _SelectUsersState extends State<SelectUsers> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    AppCubit.get(context).usersFilterion(
+        government: AppCubit.get(context).governmentDropDown,
+        month: AppCubit.get(context).monthDropDown,
+        year: AppCubit.get(context).yearDropDown,
+        package: AppCubit.get(context).packageDropDown
+    );
+  }
+
+  List<String> monthNames=[
+    '1','2','3','4','5','6','7','8','9','10','11','12'
+  ];
+
+  List<String> yearNames=[
+    '2022','2023','2024','2025','2026','2027','2028','2029','2030',
+  ];
+
+  List<String> packageNames=[
+    '250','600','1000','2000',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,20 +61,7 @@ class SelectUsers extends StatelessWidget {
       AppLocalizations.of(context)!.translate('south_of_Sina').toString(),
     ];
 
-    List<String> monthNames=[
-      AppLocalizations.of(context)!.translate('january').toString(),
-      AppLocalizations.of(context)!.translate('february').toString(),
-      AppLocalizations.of(context)!.translate('march').toString(),
-      AppLocalizations.of(context)!.translate('april').toString(),
-      AppLocalizations.of(context)!.translate('may').toString(),
-      AppLocalizations.of(context)!.translate('June').toString(),
-      AppLocalizations.of(context)!.translate('july').toString(),
-      AppLocalizations.of(context)!.translate('august').toString(),
-      AppLocalizations.of(context)!.translate('september').toString(),
-      AppLocalizations.of(context)!.translate('october').toString(),
-      AppLocalizations.of(context)!.translate('November').toString(),
-      AppLocalizations.of(context)!.translate('december').toString(),
-    ];
+
 
     return BlocConsumer<AppCubit,AppStates>(
       listener: (context,state){
@@ -145,7 +163,7 @@ class SelectUsers extends StatelessWidget {
                                       child: DropdownButton(
                                         dropdownColor: ColorManager.primary.withOpacity(1),
                                         elevation: 0,
-                                        hint:cubit.governmentDropDown.isEmpty
+                                        hint:cubit.governmentDropDown =='All'
                                             ?  Text(AppLocalizations.of(context)!.translate('government').toString(), style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022))
                                             : Text(
                                           cubit.governmentDropDown,
@@ -155,7 +173,7 @@ class SelectUsers extends StatelessWidget {
                                         isExpanded: true,
                                         icon: Icon(IconBroken.Arrow___Down_2,color: ColorManager.black,),
                                         iconSize: 20.0,
-                                        style: const TextStyle(color: Colors.black , fontSize: 16.0 , fontWeight: FontWeight.bold),
+                                        style: const TextStyle(color: Colors.white , fontSize: 16.0 , fontWeight: FontWeight.bold),
                                         items: governmentNames.map(
                                               (value) {
                                             return DropdownMenuItem<String>(
@@ -166,6 +184,12 @@ class SelectUsers extends StatelessWidget {
                                         ).toList(),
                                         onChanged: (value) {
                                           cubit.changeGovernmentDropDown(value);
+                                          cubit.usersFilterion(
+                                              government: cubit.governmentDropDown,
+                                              month: cubit.monthDropDown,
+                                              year: cubit.yearDropDown,
+                                              package: cubit.packageDropDown
+                                          );
                                         },
                                       ),
                                     ),
@@ -190,7 +214,7 @@ class SelectUsers extends StatelessWidget {
                                       child: DropdownButton(
                                         dropdownColor: ColorManager.primary.withOpacity(1),
                                         elevation: 0,
-                                        hint:cubit.skillsDropDown.isEmpty
+                                        hint:cubit.skillsDropDown =='All'
                                             ?  Text(AppLocalizations.of(context)!.translate('skills').toString(), style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022))
                                             : Text(
                                           cubit.skillsDropDown,
@@ -200,7 +224,7 @@ class SelectUsers extends StatelessWidget {
                                         isExpanded: true,
                                         icon: Icon(IconBroken.Arrow___Down_2,color: ColorManager.black,),
                                         iconSize: 20.0,
-                                        style: const TextStyle(color: Colors.black , fontSize: 16.0 , fontWeight: FontWeight.bold),
+                                        style: const TextStyle(color: Colors.white , fontSize: 16.0 , fontWeight: FontWeight.bold),
                                         items: governmentNames.map(
                                               (value) {
                                             return DropdownMenuItem<String>(
@@ -245,7 +269,7 @@ class SelectUsers extends StatelessWidget {
                                       child: DropdownButton(
                                         dropdownColor: ColorManager.primary.withOpacity(1),
                                         elevation: 0,
-                                        hint:cubit.monthDropDown.isEmpty
+                                        hint:cubit.monthDropDown =='All'
                                             ?  Text(AppLocalizations.of(context)!.translate('month').toString(), style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022))
                                             : Text(
                                           cubit.monthDropDown,
@@ -255,7 +279,7 @@ class SelectUsers extends StatelessWidget {
                                         isExpanded: true,
                                         icon: Icon(IconBroken.Arrow___Down_2,color: ColorManager.black,),
                                         iconSize: 20.0,
-                                        style: const TextStyle(color: Colors.black , fontSize: 16.0 , fontWeight: FontWeight.bold),
+                                        style: const TextStyle(color: Colors.white , fontSize: 16.0 , fontWeight: FontWeight.bold),
                                         items: monthNames.map(
                                               (value) {
                                             return DropdownMenuItem<String>(
@@ -266,6 +290,12 @@ class SelectUsers extends StatelessWidget {
                                         ).toList(),
                                         onChanged: (value) {
                                           cubit.changeMonthDropDown(value);
+                                          cubit.usersFilterion(
+                                              government: cubit.governmentDropDown,
+                                              month: cubit.monthDropDown,
+                                              year: cubit.yearDropDown,
+                                              package: cubit.packageDropDown
+                                          );
                                         },
                                       ),
                                     ),
@@ -290,7 +320,7 @@ class SelectUsers extends StatelessWidget {
                                       child: DropdownButton(
                                         dropdownColor: ColorManager.primary.withOpacity(1),
                                         elevation: 0,
-                                        hint:cubit.yearDropDown.isEmpty
+                                        hint:cubit.yearDropDown =='All'
                                             ?  Text(AppLocalizations.of(context)!.translate('year').toString(), style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022))
                                             : Text(
                                           cubit.yearDropDown,
@@ -300,8 +330,8 @@ class SelectUsers extends StatelessWidget {
                                         isExpanded: true,
                                         icon: Icon(IconBroken.Arrow___Down_2,color: ColorManager.black,),
                                         iconSize: 20.0,
-                                        style: const TextStyle(color: Colors.black , fontSize: 16.0 , fontWeight: FontWeight.bold),
-                                        items: monthNames.map(
+                                        style: const TextStyle(color: Colors.white , fontSize: 16.0 , fontWeight: FontWeight.bold),
+                                        items: yearNames.map(
                                               (value) {
                                             return DropdownMenuItem<String>(
                                               value: value,
@@ -311,6 +341,12 @@ class SelectUsers extends StatelessWidget {
                                         ).toList(),
                                         onChanged: (value) {
                                           cubit.changeYearDropDown(value);
+                                          cubit.usersFilterion(
+                                              government: cubit.governmentDropDown,
+                                              month: cubit.monthDropDown,
+                                              year: cubit.yearDropDown,
+                                              package: cubit.packageDropDown
+                                          );
                                         },
                                       ),
                                     ),
@@ -340,7 +376,7 @@ class SelectUsers extends StatelessWidget {
                                   child: DropdownButton(
                                     dropdownColor: ColorManager.primary.withOpacity(1),
                                     elevation: 0,
-                                    hint:cubit.packageDropDown.isEmpty
+                                    hint:cubit.packageDropDown =='All'
                                         ?  Text(AppLocalizations.of(context)!.translate('package').toString(), style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022))
                                         : Text(
                                       cubit.packageDropDown,
@@ -350,8 +386,8 @@ class SelectUsers extends StatelessWidget {
                                     isExpanded: true,
                                     icon: Icon(IconBroken.Arrow___Down_2,color: ColorManager.black,),
                                     iconSize: 20.0,
-                                    style: const TextStyle(color: Colors.black , fontSize: 16.0 , fontWeight: FontWeight.bold),
-                                    items: monthNames.map(
+                                    style: const TextStyle(color: Colors.white , fontSize: 16.0 , fontWeight: FontWeight.bold),
+                                    items: packageNames.map(
                                           (value) {
                                         return DropdownMenuItem<String>(
                                           value: value,
@@ -361,6 +397,12 @@ class SelectUsers extends StatelessWidget {
                                     ).toList(),
                                     onChanged: (value) {
                                       cubit.changePackageDropDown(value);
+                                      cubit.usersFilterion(
+                                          government: cubit.governmentDropDown,
+                                          month: cubit.monthDropDown,
+                                          year: cubit.yearDropDown,
+                                          package: cubit.packageDropDown
+                                      );
                                     },
                                   ),
                                 ),
@@ -376,12 +418,12 @@ class SelectUsers extends StatelessWidget {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (context,index){
-                                return const FilterUserItem();
+                                return FilterUserItem(index: index,userModel: cubit.filterUsers[index],);
                               },
                               separatorBuilder: (context,index){
                                 return SizedBox(height: SizeConfig.height*.02,);
                               },
-                              itemCount: 20
+                              itemCount: cubit.filterUsers.length
                           ),
 
                         ],
@@ -402,6 +444,8 @@ class SelectUsers extends StatelessWidget {
                         }
                     ),
                   ),
+                  SizedBox(height:SizeConfig.height*.01 ,),
+
                 ],
               ),
             ),

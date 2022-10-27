@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:m2m/Presentation/screens/admin_screens/add_tasks/add_tasks.dart';
 import 'package:m2m/Presentation/screens/admin_screens/admin_home/widget/admin_home_item.dart';
+import 'package:m2m/Presentation/screens/admin_screens/filter_users/filter_users.dart';
+import 'package:m2m/Presentation/screens/admin_screens/filter_users/widget/filter_user_item.dart';
 import 'package:m2m/Presentation/screens/admin_screens/payment_screens/payment_requests_screen.dart';
+import 'package:m2m/Presentation/screens/admin_screens/user_request/user_request.dart';
 import 'package:m2m/Presentation/screens/on_boarding_screen/widget/custom_title.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
@@ -16,10 +20,10 @@ class AdminHome extends StatelessWidget {
   Widget build(BuildContext context) {
 
     List onTaps = [
-      (){},
+      ()=>navigateTo(context, const SelectUsers()),
       ()=>navigateTo(context, const PaymentRequestsScreen()),
-      (){},
-      (){},
+      ()=>navigateTo(context, const AddTasks()),
+      ()=>navigateTo(context, const UserRequest()),
     ];
 
     return BlocConsumer<AppCubit,AppStates>(
