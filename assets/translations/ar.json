@@ -41,6 +41,22 @@
   "bani_Sweif": "بني سويف",
   "port_Said": "بورسعيد",
   "south_of_Sina": "جنوب سينا",
+  "giza": "الجيزه",
+  "dakahlia": "الدقهليه",
+  "damietta": "دمياط",
+  "sohag": "سوهاج",
+  "suez": "السويس",
+  "northOfSinai": "شمال سينا",
+  "gharbiya": "الغربيه",
+  "fayoum": "الفيوم",
+  "cairo": "القاهره",
+  "qalyubia": "القليوبيه",
+  "qana": "قنا",
+  "kafrEl-Sheikh": "كفر الشيخ",
+  "mursiMuttrah": "مرسي مطروح",
+  "menoufia": "المنوفيه",
+  "minya": "المنيا",
+  "theNewValley": "الوادي الجديد",
 
   "send_task": "ارسل المهام",
   "select_all": "تحديد الكل",
@@ -65,6 +81,7 @@
   "enterTaskType": "ادخل نوع التاسك",
   "enterTaskTimer": "ادخل وقت التاسك",
   "enterTaskPrice": "ادخل سعر التاسك",
+  "taskAdded": "تم اضافه التاسك",
 
 
 

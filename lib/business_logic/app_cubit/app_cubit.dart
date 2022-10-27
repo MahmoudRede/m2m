@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m2m/Data/model/user_model.dart';
@@ -112,6 +113,50 @@ class AppCubit extends Cubit<AppStates>{
     emit(ChangePackageDropDownState());
   }
 
+  // push notification
+
+  void saveToken(String token){
+
+    emit(SaveTokenLoadingState());
+    FirebaseFirestore.instance
+        .collection('tokens')
+        .doc('$uId')
+        .set(
+        {
+          "token":token
+        }
+    ).then((value){
+
+      debugPrint('Save Token Success');
+      emit(SaveTokenSuccessState());
+    }).catchError((error){
+
+      debugPrint('Error in save token is ${error.toString()}');
+      emit(SaveTokenErrorState());
+    });
+
+  }
+
+  void getToken(){
+
+    emit(GetTokenLoadingState());
+    FirebaseMessaging.instance
+        .getToken()
+        .then((token){
+
+          saveToken(token!);
+          debugPrint(token);
+
+          emit(GetTokenSuccessState());
+    }).catchError((error){
+
+      debugPrint('Error in save token is ${error.toString()}');
+      emit(GetTokenErrorState());
+    });
+
+  }
+
+
   /// update confirmed user
 
   Future<void> updateIsConfirmedUser({
@@ -184,6 +229,20 @@ class AppCubit extends Cubit<AppStates>{
           if (government != 'All' && month == 'All' && year == 'All' &&
               package == 'All') {
             if (element.data()['government'] == government) {
+              filterUsers.add(UserModel.fromMap(element.data()));
+            }
+          }
+
+          if (government != 'All' && month == 'All' && year != 'All' &&
+              package == 'All') {
+            if (element.data()['government'] == government && element.data()['year'] == year) {
+              filterUsers.add(UserModel.fromMap(element.data()));
+            }
+          }
+
+          if (government == 'All' && month != 'All' && year == 'All' &&
+              package != 'All') {
+            if (element.data()['month'] == month && element.data()['package']['packageName'] == package) {
               filterUsers.add(UserModel.fromMap(element.data()));
             }
           }
@@ -305,6 +364,8 @@ class AppCubit extends Cubit<AppStates>{
 
 // =============== Add Task =================
 
+  List <bool> isUserSelected = List.generate(250, (index) => false);
+  bool selectAll = false;
   List <String> usersId=[];
 
     Future<void> addTasks({
@@ -314,7 +375,6 @@ class AppCubit extends Cubit<AppStates>{
       required String taskTimer,
       required String taskPrice,
     })async{
-
       emit(AddAdminTaskLoadingState());
       UserTaskModel userTaskModel=UserTaskModel(
           taskTitle: taskTitle,
