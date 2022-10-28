@@ -79,3 +79,69 @@ class AddAdminTaskLoadingState extends AppStates{
 class AddAdminTaskErrorState extends AppStates{
 
 }
+
+class SaveTokenSuccessState extends AppStates{
+
+}
+class SaveTokenLoadingState extends AppStates{
+
+}
+class SaveTokenErrorState extends AppStates{
+
+}
+
+class GetTokenSuccessState extends AppStates{
+
+}
+class GetTokenLoadingState extends AppStates{
+
+}
+class GetTokenErrorState extends AppStates{
+
+}
+
+class PickProfileImageErrorState extends AppStates{
+
+}
+
+class PickProfileImageSuccessState extends AppStates{
+
+}
+
+class UploadProfileImageSuccessState extends AppStates{
+
+}
+class UploadProfileImageLoadingState extends AppStates{
+
+}
+class UploadProfileImageErrorState extends AppStates{
+
+}
+
+class PickCourseImageErrorState extends AppStates{
+
+}
+
+class PickCourseImageSuccessState extends AppStates{
+
+}
+
+class UploadCourseImageSuccessState extends AppStates{
+
+}
+class UploadCourseImageLoadingState extends AppStates{
+
+}
+class UploadCourseImageErrorState extends AppStates{
+
+}
+
+class AddCourseSuccessState extends AppStates{
+
+}
+class AddCourseLoadingState extends AppStates{
+
+}
+class AddCourseErrorState extends AppStates{
+
+}

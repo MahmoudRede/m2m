@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +21,10 @@ class OpenProfileImage extends StatelessWidget {
       listener: (context,state){
 
          if(state is UploadProfileImageSuccessState){
+
            customToast(title: AppLocalizations.of(context)!.translate('profileImageSave').toString(), color: ColorManager.primary);
-           navigateAndRemove(context, const ProfileScreen());
+           Navigator.pop(context);
+
          }
 
       },

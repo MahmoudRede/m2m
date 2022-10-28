@@ -26,8 +26,11 @@ class AddCourses extends StatelessWidget {
     return BlocConsumer<AppCubit,AppStates>(
       listener: (context,state){
 
+
         if(state is AddCourseSuccessState){
           customToast(title: 'Course Added Successfully', color: ColorManager.primary);
+          AppCubit.get(context).courseImage=null;
+          Navigator.pop(context);
         }
 
       },
