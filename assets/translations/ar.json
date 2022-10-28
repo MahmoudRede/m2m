@@ -74,7 +74,7 @@
   "description": "الوصف",
   "type": "النوع",
   "price": "السعر",
-  "timer": "التوقيق",
+  "timer": "التوقيت",
   "pleaseEnter": "فضلا ادخل",
   "enterTaskTitle": "ادخل عنوان التاسك",
   "enterTaskDescription": "ادخل وصف التاسك",
@@ -82,6 +82,23 @@
   "enterTaskTimer": "ادخل وقت التاسك",
   "enterTaskPrice": "ادخل سعر التاسك",
   "taskAdded": "تم اضافه التاسك",
+
+  "payment": "الدفع",
+  "confirmPayment": "تأكيد الدفع",
+  "tasks" : "مهام",
+  "months": "أشهر",
+  "haveNiceDay": "طاب يومك!",
+  "taskScreenMessage": "ابدأ في أداء مهامك الآن.",
+  "noSubscribeAndWaitingTaskMessage": "يجب عليك الاشتراك في الباقة أولاً ، إذا كنت قد اشتركت بالفعل في واحدة ، يرجى الانتظار للتحقق من الدفع.",
+  "backToHome": "العودة للصفحة الرئيسية",
+  "addTaskImage": "أضافة صورة المهمة",
+  "chooseImage": "أختار صورة",
+  "imageIsUploaded": "تم رفع الصورة بنجاح",
+  "pleaseSelectImage": "من فضلك أختر صورة",
+  "viewUserTasks" : "عرض مهام المستخدمين",
+  "paymentRequests" : "طلبات الدفع",
+  "confirmPaymentSuccess" : "تم تأكيد الدفع بنجاح",
+  "userTasks": "مهمام المستخدم",
 
 
 

@@ -25,7 +25,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Confirm Payment',
+              AppLocalizations.of(context)!.translate('confirmPayment').toString(),
               style: TextStyle(
                 fontSize: SizeConfig.headline2Size,
                 fontWeight: FontWeight.bold,
@@ -78,7 +78,7 @@ class ConfirmPaymentScreen extends StatelessWidget {
                   text: AppLocalizations.of(context)!.translate('confirm').toString(),
                   onPressed: (){
                     cubit.confirmPayment(paymentModel: paymentModel).then((value) {
-                      customToast(title: "Confirm Payment Success" , color: ColorManager.gold);
+                      customToast(title: AppLocalizations.of(context)!.translate('confirmPaymentSuccess').toString() , color: ColorManager.gold);
                       navigateAndRemove(context, const PaymentRequestsScreen());
                     });
                   },

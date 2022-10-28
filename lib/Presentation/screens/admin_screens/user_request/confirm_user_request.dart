@@ -25,9 +25,7 @@ class ConfirmUserRequest extends StatelessWidget {
   Widget build(BuildContext context) {
     var size=MediaQuery.of(context).size;
     return BlocConsumer<AppCubit,AppStates>(
-      listener: (context,state){
-
-      },
+      listener: (context,state){},
       builder: (context,state){
         var cubit= AppCubit.get(context);
         return Scaffold(
