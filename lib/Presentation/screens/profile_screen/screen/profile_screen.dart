@@ -257,8 +257,6 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
 
-                   cubit.profileImage!=null?
-
                    // profile image
                    Positioned(
                     top: SizeConfig.height*.04,
@@ -270,7 +268,7 @@ class ProfileScreen extends StatelessWidget {
                           radius: SizeConfig.height*.08,
                           child: CircleAvatar(
                             radius:SizeConfig.height*.078,
-                            backgroundImage:FileImage(cubit.profileImage!),
+                            backgroundImage:NetworkImage(cubit.userModel!.profileImage),
                           ),
                         ),
                         Positioned(
@@ -288,38 +286,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ):
-
-                   // default image
-                   Positioned(
-                     top: SizeConfig.height*.04,
-                     left: SizeConfig.height*.02,
-                     child: Stack(
-                       children: [
-                         CircleAvatar(
-                           backgroundColor: Colors.white,
-                           radius: SizeConfig.height*.08,
-                           child: CircleAvatar(
-                             radius:SizeConfig.height*.078,
-                             backgroundImage: const AssetImage('assets/images/imagProfile.jpg'),
-                           ),
-                         ),
-                         Positioned(
-                           right: SizeConfig.height*.00,
-                           bottom: SizeConfig.height*.00,
-                           child: CircleAvatar(
-                             backgroundColor: Colors.white,
-                             child: IconButton(
-                                 onPressed: (){
-                                   cubit.getProfileImage();
-                                 },
-                                 icon: const Icon(Icons.camera_alt)
-                             ),
-                           ),
-                         ),
-                       ],
-                     ),
-                   )
+                  )
                 ],
               ),
 

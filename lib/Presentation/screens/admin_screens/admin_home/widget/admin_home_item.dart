@@ -11,6 +11,7 @@ class AdminHomeItem extends StatelessWidget {
     'add_tasks',
     'viewUserTasks',
     'users_request',
+    'addCourse',
   ];
 
   static List imageName=[
@@ -19,6 +20,7 @@ class AdminHomeItem extends StatelessWidget {
     'add_task',
     'add_task',
     'request_users',
+    'courseImage',
   ];
 
   final int index;
