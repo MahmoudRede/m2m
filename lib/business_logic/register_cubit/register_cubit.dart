@@ -206,11 +206,11 @@ class RegisterCubit extends Cubit<RegisterState>{
         .then((value) {
 
          debugPrint('Create User Success');
-         emit(UserRegisterSuccessState());
+         emit(SaveInfoSuccessState());
     }).catchError((error){
 
-      debugPrint('Error in Crete User is ${error.toString()}');
-      emit(UserRegisterErrorState());
+      debugPrint('Error in Create User is ${error.toString()}');
+      emit(SaveInfoErrorState());
     });
 
   }

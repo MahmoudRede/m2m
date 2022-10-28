@@ -84,6 +84,26 @@
   "userTasks": "User Tasks",
 
 
+  "personalInformation": "Personal Information",
+  "profileScreen": "Profile Screen",
+  "name": "Name",
+  "phone": "Phone",
+  "technicalSupport": "Technical Support",
+  "callCenter": "Call Center",
+  "email": "Email",
+  "profileImage": "Profile Image",
+  "profileImageSave": "Profile Image Save",
+
+  "link": "Link",
+  "addCourse": "Add Course",
+  "courseImage": "Course Image",
+  "enterCourseTitle": "Enter Course Title",
+  "enterCourseLink": "Enter Course Link",
+
+
+
+
+
   "next":"Next"
 
 }
