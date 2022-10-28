@@ -102,12 +102,18 @@ class TasksCubit extends Cubit<TasksStates>{
       userImage: userModel!.personalImage.toString(),
       userUId: userModel!.uId.toString(),
       taskConfirmed: false,
-      packageName: userModel!.package.toString(),
+      packageName: userModel!.package.packageName.toString(),
       phone: userModel!.phone.toString(),
     );
 
-    FirebaseFirestore.instance.collection('uploadedTasks').doc().set(uploadTaskModel.toMap())
+    FirebaseFirestore.instance.collection('uploadedTasks')
+        .doc(userModel!.uId.toString())
+        .collection('tasks')
+        .add(uploadTaskModel.toMap())
         .then((value){
+          value.update({
+            "taskId":value.id.toString(),
+          });
           debugPrint('task Added Successfully');
           emit(UploadTaskSuccessState());
     }).catchError((error){
@@ -132,7 +138,8 @@ class TasksCubit extends Cubit<TasksStates>{
     FirebaseFirestore.instance.collection('users')
         .doc(userModel!.uId.toString())
         .collection('tasks')
-        .get().then((value){
+        .get()
+        .then((value){
           for (var element in value.docs) {
             todayTasks.add(TaskModel.fromMap(element.data()));
           }
@@ -149,6 +156,68 @@ class TasksCubit extends Cubit<TasksStates>{
     });
 
   }
+  
+  
+  List<UserModel> userWhoUploadedTasks = [];
+  
+  Future<void> getUsersWhoUploadedTasks()async{
+    userWhoUploadedTasks = [];
+    emit(GetUsersWhoUploadedTaskLoadingState());
+    
+    FirebaseFirestore.instance.collection('users')
+        .get()
+        .then((value) {
+          for (var element in value.docs) {
+            userWhoUploadedTasks.add(UserModel.fromMap(element.data()));
+          }
+          debugPrint('user who uploaded tasks ${userWhoUploadedTasks.length}');
+          emit(GetUsersWhoUploadedTaskSuccessState());
+    }).catchError((error){
+      debugPrint('Error when get user who uploaded tasks ==> ${error.toString()}');
+      emit(GetUsersWhoUploadedTaskErrorState());
+    });
+  }
 
+
+  List<UploadTaskModel> userUploadedTasks = [];
+  Future<void> getUsersUploadedTasks({required userId})async{
+    emit(GetUserUploadedTaskLoadingState());
+
+    FirebaseFirestore.instance.collection('uploadedTasks')
+        .doc(userId)
+        .collection('tasks')
+        .get()
+        .then((value) {
+      for (var element in value.docs) {
+        userUploadedTasks.add(UploadTaskModel.fromMap(element.data()));
+      }
+      debugPrint("all user tasks is : ${userUploadedTasks.length}");
+      emit(GetUserUploadedTaskSuccessState());
+    }).catchError((error){
+      debugPrint("Error when get all user uploaded tasks is : ${error.toString()}");
+      emit(GetUserUploadedTaskErrorState());
+    });
+
+  }
+  
+  
+  Future<void> confirmTask({required UploadTaskModel taskModel})async{
+    emit(ConfirmTaskLoadingState());
+    
+    FirebaseFirestore.instance.collection('uploadedTasks')
+        .doc(taskModel.userUId.toString())
+        .collection('tasks')
+        .doc(taskModel.taskId.toString())
+        .update({"taskConfirmed" : true,})
+        .then((value) {
+          debugPrint("Task confirmed success");
+          emit(ConfirmTaskSuccessState());
+    }).catchError((error){
+      debugPrint("Error when task confirm");
+      emit(ConfirmTaskErrorState());
+    });
+
+  }
+ 
 
 }

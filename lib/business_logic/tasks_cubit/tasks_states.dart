@@ -27,3 +27,15 @@ class UploadTaskErrorState extends TasksStates{}
 class GetTodayTaskLoadingState extends TasksStates{}
 class GetTodayTaskSuccessState extends TasksStates{}
 class GetTodayTaskErrorState extends TasksStates{}
+
+class GetUsersWhoUploadedTaskLoadingState extends TasksStates{}
+class GetUsersWhoUploadedTaskSuccessState extends TasksStates{}
+class GetUsersWhoUploadedTaskErrorState extends TasksStates{}
+
+class GetUserUploadedTaskLoadingState extends TasksStates{}
+class GetUserUploadedTaskSuccessState extends TasksStates{}
+class GetUserUploadedTaskErrorState extends TasksStates{}
+
+class ConfirmTaskLoadingState extends TasksStates{}
+class ConfirmTaskSuccessState extends TasksStates{}
+class ConfirmTaskErrorState extends TasksStates{}
