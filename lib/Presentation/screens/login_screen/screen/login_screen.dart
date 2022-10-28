@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/admin_screens/admin_home/admin_home.dart';
-import 'package:m2m/Presentation/screens/admin_screens/filter_users/filter_users.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/register_screen/screen/register_screen/register_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
@@ -46,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
              customToast(title: 'Welcome Back',color:ColorManager.primary );
              CashHelper.saveData(key: 'uId',value: state.uid);
              AppCubit.get(context).getUser();
-             navigateAndRemove(context,const PackageScreen());
+             navigateTo(context,const PackageScreen());
 
            }
 

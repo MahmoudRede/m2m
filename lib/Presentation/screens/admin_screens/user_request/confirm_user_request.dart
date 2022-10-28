@@ -126,7 +126,7 @@ class ConfirmUserRequest extends StatelessWidget {
                                       token: value.data()!['token'],
                                       title: 'Attention please!',
                                       description:'Congratulations, you are accept to join to M2M Team',
-                                      imageUrl: 'assets/images/dollar.png',
+                                      imageUrl: 'https://firebasestorage.googleapis.com/v0/b/m2mapp-91014.appspot.com/o/360_F_422494067_rcFHj2JydsX9ylVWAyJC5bFRZesda1OI.jpg?alt=media&token=34e1d97d-9bef-4691-9067-b32857e9b45c',
                                     );
 
                                   });
@@ -155,7 +155,7 @@ class ConfirmUserRequest extends StatelessWidget {
                                     token: value.data()!['token'],
                                     title: 'Attention please!',
                                     description:'Unfortunately, you are refuse to join to M2M Team,check your information that you are enter it',
-                                    imageUrl: 'assets/images/dollar.png',
+                                    imageUrl: 'https://firebasestorage.googleapis.com/v0/b/m2mapp-91014.appspot.com/o/download.jpg?alt=media&token=0a919e0b-f4ca-4864-9b2e-861d98f1bc31',
                                   );
 
                                 });

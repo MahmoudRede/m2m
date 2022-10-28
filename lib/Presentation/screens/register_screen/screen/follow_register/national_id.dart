@@ -98,7 +98,6 @@ class NationalId extends StatelessWidget {
                       ):const DecorationImage(
                           image: AssetImage(AssetsManager.idCard),
                           fit: BoxFit.cover
-
                       )
                   ),
                 ),
