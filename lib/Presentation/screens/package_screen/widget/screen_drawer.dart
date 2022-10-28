@@ -64,11 +64,11 @@ class HomeDrawer extends StatelessWidget {
                                 radius: 42,
                               ),
                             ),
-                            cubit.userModel!.personalImage != null? CircleAvatar(
-                              backgroundImage: NetworkImage(cubit.userModel!.personalImage.toString()),
-                              radius: 40,
-                            ) :const CircleAvatar(
+                            cubit.userModel!.profileImage =="null"? const CircleAvatar(
                               backgroundImage: AssetImage(AssetsManager.userImage),
+                              radius: 40,
+                            ) : CircleAvatar(
+                              backgroundImage: NetworkImage(cubit.userModel!.profileImage.toString()),
                               radius: 40,
                             ),
                           ],

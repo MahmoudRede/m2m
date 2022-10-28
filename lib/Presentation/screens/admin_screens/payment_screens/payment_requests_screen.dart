@@ -4,6 +4,7 @@ import 'package:m2m/Data/model/payment_model.dart';
 import 'package:m2m/Presentation/screens/admin_screens/payment_screens/widget/payment_list_item.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_states.dart';
 
@@ -22,7 +23,7 @@ class PaymentRequestsScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                'Payment Requests',
+                AppLocalizations.of(context)!.translate('paymentRequests').toString(),
                 style: TextStyle(
                   fontSize: SizeConfig.headline2Size,
                   fontWeight: FontWeight.bold,

@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:m2m/Data/model/payment_model.dart';
+import 'package:m2m/Data/model/task_model.dart';
+import 'package:m2m/Data/model/upload_task_model.dart';
+import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/Presentation/screens/admin_screens/payment_screens/confirm_payment_screen.dart';
+import 'package:m2m/Presentation/screens/admin_screens/view_user_tasks/view_tasks_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';
 
-class PaymentListItem extends StatelessWidget {
-  final PaymentModel paymentModel;
-  const PaymentListItem({Key? key, required this.paymentModel}) : super(key: key);
+class ViewTasksListItem extends StatelessWidget {
+  final UserModel userModel;
+  const ViewTasksListItem({Key? key, required this.userModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=>navigateTo(context, ConfirmPaymentScreen(paymentModel: paymentModel)),
+      onTap: ()=>navigateTo(context, ViewTasksScreen(uId: userModel.uId)),
       child: Padding(
         padding: EdgeInsets.all(
             SizeConfig.height*.02
@@ -35,17 +39,17 @@ class PaymentListItem extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    paymentModel.userImage =="null"? const CircleAvatar(
+                    userModel.profileImage =="null"? const CircleAvatar(
                       backgroundImage: AssetImage(AssetsManager.userImage),
                       radius: 35,
                     ) : CircleAvatar(
-                      backgroundImage: NetworkImage(paymentModel.userImage.toString()),
+                      backgroundImage: NetworkImage(userModel.profileImage.toString()),
                       radius: 35,
                     ),
                     SizedBox(width: SizeConfig.height*.01,),
                     Expanded(
                       child: Text(
-                        paymentModel.userName.toString(),
+                        userModel.username.toString(),
                         style: textManager(color: Colors.white),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -54,13 +58,13 @@ class PaymentListItem extends StatelessWidget {
                 ),
 
                 SizedBox(height: SizeConfig.height*.02,),
-                rowData(title: 'Phone', data:  paymentModel.userPhone.toString()),
+                rowData(title: 'Phone', data:  userModel.phone.toString()),
 
                 SizedBox(height: SizeConfig.height*.02,),
-                rowData(title: 'Package Name', data: paymentModel.packageName.toString()),
+                rowData(title: 'Package Name', data: userModel.package.packageName.toString()),
 
                 SizedBox(height: SizeConfig.height*.02,),
-                rowData(title: 'Package Id', data: paymentModel.packageId.toString()),
+                rowData(title: 'Package Id', data: userModel.package.packageId.toString()),
               ],
             ),
           ),

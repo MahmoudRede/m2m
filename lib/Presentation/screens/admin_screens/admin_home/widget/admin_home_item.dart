@@ -9,12 +9,14 @@ class AdminHomeItem extends StatelessWidget {
     'all_users',
     'payment_screens',
     'add_tasks',
+    'viewUserTasks',
     'users_request',
   ];
 
   static List imageName=[
     'all_users',
     'payment_screens',
+    'add_task',
     'add_task',
     'request_users',
   ];
