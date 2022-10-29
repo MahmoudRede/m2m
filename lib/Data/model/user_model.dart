@@ -8,6 +8,7 @@ class UserModel {
     required this.nationalIdImage,
     required this.personalImage,
     required this.package,
+    required this.wallet,
     required this.government,
     required this.age,
     required this.skills,
@@ -25,6 +26,7 @@ class UserModel {
   final String nationalIdImage;
   final String personalImage;
   final Package package;
+  final Wallet wallet;
   final String government;
   final String age;
   final String skills;
@@ -42,6 +44,7 @@ class UserModel {
     nationalIdImage: json["nationalIdImage"],
     personalImage: json["personalImage"],
     package: Package.fromMap(json["package"]),
+    wallet: Wallet.fromMap(json["wallet"]),
     government: json["government"],
     age: json["age"],
     skills: json["skills"],
@@ -60,6 +63,7 @@ class UserModel {
     "nationalIdImage": nationalIdImage,
     "personalImage": personalImage,
     "package": package.toMap(),
+    "wallet": wallet.toMap(),
     "government": government,
     "age": age,
     "skills": skills,
@@ -91,5 +95,26 @@ class Package {
     "packageName": packageName,
     "packageId": packageId,
     "isVerified": isVerified,
+  };
+}
+
+
+class Wallet {
+  Wallet({
+    required this.money,
+    required this.point,
+  });
+
+  final dynamic money;
+  final dynamic point;
+
+  factory Wallet.fromMap(Map<String, dynamic> json) => Wallet(
+    money: json["money"],
+    point: json["point"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "money": money,
+    "point": point,
   };
 }

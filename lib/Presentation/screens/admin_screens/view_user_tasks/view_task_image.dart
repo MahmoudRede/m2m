@@ -66,10 +66,7 @@ class ViewTaskImagesScreen extends StatelessWidget {
                   text: AppLocalizations.of(context)!.translate('accept').toString(),
                   color: ColorManager.secondDarkColor,
                   onPressed: (){
-                    cubit.confirmTask(taskModel: taskModel).then((value) {
-                      customToast(title: 'Task confirmed Success', color: ColorManager.gold);
-                      navigateAndRemove(context, ViewTasksScreen(uId: taskModel.userUId.toString()));
-                    });
+                    cubit.confirmTask(taskModel: taskModel, context: context);
                   },
                 ),
               ],

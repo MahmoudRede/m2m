@@ -39,3 +39,6 @@ class GetUserUploadedTaskErrorState extends TasksStates{}
 class ConfirmTaskLoadingState extends TasksStates{}
 class ConfirmTaskSuccessState extends TasksStates{}
 class ConfirmTaskErrorState extends TasksStates{}
+
+class ChangeWalletSuccessState extends TasksStates{}
+class ChangeWalletErrorState extends TasksStates{}

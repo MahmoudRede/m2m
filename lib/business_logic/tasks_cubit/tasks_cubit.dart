@@ -8,8 +8,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:m2m/Data/model/task_model.dart';
 import 'package:m2m/Data/model/upload_task_model.dart';
 import 'package:m2m/Data/model/user_model.dart';
+import 'package:m2m/Presentation/screens/admin_screens/view_user_tasks/view_tasks_screen.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/custom_toast.dart';
+import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
 import 'package:m2m/constants/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -201,21 +203,61 @@ class TasksCubit extends Cubit<TasksStates>{
   }
   
   
-  Future<void> confirmTask({required UploadTaskModel taskModel})async{
+  Future<void> confirmTask({required UploadTaskModel taskModel , required BuildContext context})async{
     emit(ConfirmTaskLoadingState());
     
-    FirebaseFirestore.instance.collection('uploadedTasks')
-        .doc(taskModel.userUId.toString())
-        .collection('tasks')
-        .doc(taskModel.taskId.toString())
-        .update({"taskConfirmed" : true,})
-        .then((value) {
-          debugPrint("Task confirmed success");
-          emit(ConfirmTaskSuccessState());
-    }).catchError((error){
-      debugPrint("Error when task confirm");
-      emit(ConfirmTaskErrorState());
-    });
+    if(taskModel.taskConfirmed == false){
+      await FirebaseFirestore.instance.collection('uploadedTasks')
+          .doc(taskModel.userUId.toString())
+          .collection('tasks')
+          .doc(taskModel.taskId.toString())
+          .update({"taskConfirmed" : true,})
+          .then((value) {
+        debugPrint("Task confirmed success");
+        emit(ConfirmTaskSuccessState());
+      }).catchError((error){
+        debugPrint("Error when task confirm");
+        emit(ConfirmTaskErrorState());
+      });
+
+      await FirebaseFirestore.instance.collection('users')
+          .doc(taskModel.userUId.toString())
+          .get()
+          .then((value2){
+        UserModel userData = UserModel.fromMap(value2.data()!);
+        switch(userData.package.packageId){
+
+          // first package
+          case "300":{
+            dynamic taskMoney = userData.wallet.money + 1.2;
+            dynamic taskPoint = userData.wallet.point + 1;
+
+            FirebaseFirestore.instance.collection('users')
+                .doc(taskModel.userUId.toString())
+                .update({
+              "wallet":{
+                "money": taskMoney,
+                "point": taskPoint,
+              },
+            }).then((value) {
+              debugPrint("Task money added to user wallet");
+              customToast(title: 'Task confirmed Success', color: ColorManager.gold);
+              navigateAndRemove(context, ViewTasksScreen(uId: taskModel.userUId.toString()));
+              emit(ChangeWalletSuccessState());
+            }).catchError((error){
+              debugPrint("Error when add task money  to user wallet");
+              emit(ChangeWalletErrorState());
+            });
+          }
+          break;
+
+
+        }
+      });
+
+    }else{
+      customToast(title: 'task already confirmed', color: ColorManager.gold);
+    }
 
   }
  
