@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Data/model/course_imgae.dart';
+import 'package:m2m/Data/model/public_chat_model.dart';
 import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/Data/model/user_task.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
@@ -577,6 +578,68 @@ class AppCubit extends Cubit<AppStates>{
       emit(UploadCourseImageErrorState());
     });
   }
+
+ // ================== Public Chat ============
+
+  Future<void> sendPublicChat({
+    required String dateTime,
+    required String text,
+
+  })async{
+
+    PublicChatModel publicChatModel =PublicChatModel(
+        senderId: uId,
+        dateTime: dateTime,
+        text: text,
+        senderName:userModel!.username,
+        senderImage: userModel!.profileImage
+    );
+
+    emit(SendPublicChatLoadingState());
+
+    FirebaseFirestore.instance
+        .collection('publicChat')
+        .add(publicChatModel.toMap())
+        .then((value){
+
+      debugPrint('Send Message Success');
+      emit(SendPublicChatSuccessState());
+    }).catchError((error){
+
+      debugPrint('Error in public chat is ${error.toString()}');
+      emit(SendPublicChatErrorState());
+
+    });
+
+  }
+
+
+  List<PublicChatModel> publicChat=[];
+
+  void getPublicChat(){
+
+    emit(GetPublicChatLoadingState());
+    FirebaseFirestore.instance
+        .collection('publicChat')
+        .orderBy('dateTime',descending: true)
+        .snapshots()
+        .listen((event) {
+      publicChat = [];
+      for (var element in event.docs) {
+        publicChat.add((PublicChatModel.fromJson(element.data())));
+      }
+      emit(GetPublicChatSuccessState());
+    });
+  }
+
+
+  bool isWritingPublicChat=false;
+  void changeIconPublicChat(){
+    isWritingPublicChat!=isWritingPublicChat;
+    emit(ChangeIconPublicChatSuccessState());
+  }
+
+
 
 
 

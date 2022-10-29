@@ -5,6 +5,7 @@ import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/drawer_row_item.dart';
 import 'package:m2m/Presentation/screens/profile_screen/screen/profile_screen.dart';
+import 'package:m2m/Presentation/screens/public_chat/public_chat_screen.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
@@ -123,6 +124,15 @@ class HomeDrawer extends StatelessWidget {
                   title: 'Logout',
                   icon: Icons.logout,
                   onTap: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginScreen())),
+                ),
+
+                SizedBox(
+                  height: SizeConfig.height*0.05,
+                ),
+                DrawerRowItem(
+                  title: 'Public Chat',
+                  icon: Icons.logout,
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> PublicChatScreen())),
                 ),
               ],
             ),

@@ -155,3 +155,16 @@ class AddCourseLoadingState extends AppStates{
 class AddCourseErrorState extends AppStates{
 
 }
+
+
+class SendPublicChatSuccessState extends AppStates{}
+class SendPublicChatLoadingState extends AppStates{}
+class SendPublicChatErrorState extends AppStates{}
+
+class GetPublicChatSuccessState extends AppStates {}
+class GetPublicChatErrorState extends AppStates {}
+class GetPublicChatLoadingState extends AppStates {}
+
+
+class ChangeIconPublicChatSuccessState extends AppStates {}
+
