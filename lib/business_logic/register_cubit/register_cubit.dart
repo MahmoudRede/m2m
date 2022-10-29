@@ -192,6 +192,7 @@ class RegisterCubit extends Cubit<RegisterState>{
         uId: id,
         profileImage: profileImage??'https://firebasestorage.googleapis.com/v0/b/m2mapp-91014.appspot.com/o/user-svgrepo-com.png?alt=media&token=2a3faefa-613f-4d0e-a3b6-5b6556530ed7',
         package: Package(packageName: "not selected" , packageId: "id", isVerified: false),
+        wallet: Wallet(money: 0.0 , point: 0.0),
         isConfirmed: false,
         age: age,
         month: month,
