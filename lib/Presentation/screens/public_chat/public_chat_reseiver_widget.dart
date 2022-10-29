@@ -52,7 +52,7 @@ class ResieverPublicChatWidget extends StatelessWidget {
                       vertical: 5
                     ),
                     decoration:  BoxDecoration(
-                      color: const Color(0xffb1b2ff).withOpacity(.10),
+                      color:  Colors.black.withOpacity(.7),
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(SizeConfig.height*.02),
                         topLeft: Radius.circular(SizeConfig.height*.02),
