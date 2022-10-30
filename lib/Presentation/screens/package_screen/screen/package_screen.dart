@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/item/package_screen_item.dart';
+import 'package:m2m/Presentation/screens/package_screen/screen/item/subscribe_package_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/item/waiting_screen_item.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
+import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
 
 
 class PackageScreen extends StatefulWidget {
@@ -16,11 +18,10 @@ class PackageScreen extends StatefulWidget {
 class _PackageScreenState extends State<PackageScreen> {
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     debugPrint("==================================token================================");
     AppCubit.get(context).getToken();
-
   }
 
   @override
@@ -30,11 +31,12 @@ class _PackageScreenState extends State<PackageScreen> {
       listener: (context,state){},
       builder: (context,state){
         var cubit=AppCubit.get(context);
+
         return cubit.userModel!=null?
         cubit.userModel!.isConfirmed==true?
 
         // Main Widget
-        PackageScreenItem():
+        SubscribePackageScreen():
 
         // Waiting Widget
         const WaitingScreenItem(

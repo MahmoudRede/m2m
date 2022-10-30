@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/drawer_row_item.dart';
@@ -33,9 +34,9 @@ class HomeDrawer extends StatelessWidget {
                 Container(
                   height: SizeConfig.height*0.3,
                   width: SizeConfig.width *0.7,
-                  decoration: const BoxDecoration(
-                    color: ColorManager.lightBlue,
-                    borderRadius: BorderRadius.only(
+                  decoration:  BoxDecoration(
+                    color: ColorManager.lightBlue2,
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(50.0),
                       bottomRight: Radius.circular(50.0),
                     ),
@@ -84,10 +85,10 @@ class HomeDrawer extends StatelessWidget {
                       // user name
                       Text(
                         cubit.userModel!.username.toString(),
-                        style: TextStyle(
-                          color: ColorManager.black,
+                        style: GoogleFonts.roboto(
+                          color: ColorManager.secondDarkColor,
                           fontSize: SizeConfig.headline2Size,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
@@ -98,41 +99,40 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 DrawerRowItem(
                   title: 'Profile',
-                  icon: FontAwesomeIcons.user,
+                  image: "assets/images/user_profile.png",
                   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const ProfileScreen())),
                 ),
                 SizedBox(
-                  height: SizeConfig.height*0.05,
+                  height: SizeConfig.height*0.02,
                 ),
                 DrawerRowItem(
                   title: 'Today Tasks',
-                  icon: FontAwesomeIcons.tasks,
+                  image: "assets/images/task.png",
                   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const TasksScreen())),
                 ),
                 SizedBox(
-                  height: SizeConfig.height*0.05,
+                  height: SizeConfig.height*0.02,
                 ),
                 DrawerRowItem(
                   title: 'Packages',
-                  icon: FontAwesomeIcons.moneyBill,
+                  image: "assets/images/packages.png",
                   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const PackageScreen())),
                 ),
                 SizedBox(
-                  height: SizeConfig.height*0.05,
-                ),
-                DrawerRowItem(
-                  title: 'Logout',
-                  icon: Icons.logout,
-                  onTap: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginScreen())),
-                ),
-
-                SizedBox(
-                  height: SizeConfig.height*0.05,
+                  height: SizeConfig.height*0.02,
                 ),
                 DrawerRowItem(
                   title: 'Public Chat',
-                  icon: Icons.logout,
-                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> PublicChatScreen())),
+                  image: 'assets/images/public_chat.png',
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const PublicChatScreen())),
+                ),
+                SizedBox(
+                  height: SizeConfig.height*0.02,
+                ),
+                DrawerRowItem(
+                  title: 'Logout',
+                  image: "assets/images/logout.png",
+                  onTap: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const LoginScreen())),
                 ),
               ],
             ),

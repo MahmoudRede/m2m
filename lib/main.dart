@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/admin_screens/admin_home/admin_home.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
@@ -34,14 +35,20 @@ void main() async {
 
   String languageCode = CashHelper.getData(key: CashHelper.languageKey).toString();
   debugPrint('language code is : $languageCode');
+
   uId = CashHelper.getData(key: 'uId');
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
 
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -74,7 +81,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            home: const LoginScreen(),
+            home: const PackageScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,

@@ -35,22 +35,25 @@ class AppCubit extends Cubit<AppStates>{
 
     FirebaseFirestore.instance.collection('users')
         .doc(uId)
-        .get().then((value) {
+        .get()
+        .then((value) {
       debugPrint('Get User Success');
       userModel=UserModel.fromMap(value.data()!);
       debugPrint(userModel!.email);
+
       CashHelper.saveData(key: 'userName',value: userModel!.username);
       CashHelper.saveData(key: 'userGovernment',value: userModel!.government);
       CashHelper.saveData(key: 'userPackage',value: userModel!.package.packageName);
       CashHelper.saveData(key: 'userPhone',value: userModel!.phone);
       CashHelper.saveData(key: 'userEmail',value: userModel!.email);
+      DateTime today = DateTime.now();
+      DateTime yasterday = today.subtract(const Duration(days: 1));
+      debugPrint('today date : $today   yasterday date : $yasterday');
       emit(GetUserSuccessState());
     }).catchError((error){
-
-         debugPrint('Error is ${error.toString()}');
-         emit(GetUserErrorState());
+      debugPrint('Error When get user data ${error.toString()}');
+      emit(GetUserErrorState());
     });
-
   }
 
 
@@ -148,7 +151,7 @@ class AppCubit extends Cubit<AppStates>{
 
   }
 
-  void getToken(){
+  Future<void> getToken()async{
 
     emit(GetTokenLoadingState());
     FirebaseMessaging.instance
@@ -640,6 +643,34 @@ class AppCubit extends Cubit<AppStates>{
   }
 
 
+  var myWallet = 0;
+  var dayProfit = 0;
+
+  Future<void> getLastProfitState()async{
+    if(CashHelper.getData(key: CashHelper.lastWalletAmountKey).toString() == "null"){
+      CashHelper.saveData(key: CashHelper.lastWalletDateUpdateKey, value: DateTime.now().day.toString());
+      debugPrint('add wallet initial value');
+    }
+
+    myWallet = CashHelper.getData(key: CashHelper.lastWalletAmountKey);
+    dayProfit = userModel!.wallet.money - myWallet;
+    emit(GetLastProfitState());
+  }
+
+
+  Future<void> getCurrentWalletState()async{
+    if(CashHelper.getData(key: CashHelper.lastWalletAmountKey).toString() == "null"){
+      CashHelper.saveData(key: CashHelper.lastWalletDateUpdateKey, value: DateTime.now().day.toString());
+      debugPrint('add wallet initial value');
+      emit(ChangeLastWalletState());
+    }
+    else if(CashHelper.getData(key: CashHelper.lastWalletDateUpdateKey) != DateTime.now().day.toString())
+    {
+      CashHelper.saveData(key: CashHelper.lastWalletAmountKey, value: userModel!.wallet.money);
+      emit(ChangeLastWalletState());
+    }
+
+  }
 
 
 
