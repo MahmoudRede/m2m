@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:m2m/Data/model/task_model.dart';
+import 'package:m2m/Data/model/admin_task_model.dart';
 import 'package:m2m/Data/model/upload_task_model.dart';
 import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/Presentation/screens/admin_screens/view_user_tasks/view_tasks_screen.dart';
@@ -131,19 +131,19 @@ class TasksCubit extends Cubit<TasksStates>{
 
 
 
-  List<TaskModel> todayTasks = [];
+  List<AdminTaskModel> todayTasks = [];
 
   // get user today tasks
   Future<void> getTodayTasks()async{
     await getUser();
     emit(GetTodayTaskLoadingState());
-    FirebaseFirestore.instance.collection('users')
+    FirebaseFirestore.instance.collection('adminTasks')
         .doc(userModel!.uId.toString())
-        .collection('tasks')
+        .collection('userTasks')
         .get()
         .then((value){
           for (var element in value.docs) {
-            todayTasks.add(TaskModel.fromMap(element.data()));
+            todayTasks.add(AdminTaskModel.fromMap(element.data()));
           }
           if (kDebugMode) {
             print('Get tasks is success : ${todayTasks[0].toString()}');

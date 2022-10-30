@@ -6,11 +6,13 @@ class CashHelper{
 
   static SharedPreferences ?sharedPreferences;
   static const String languageKey = "language";
+  static const String lastWalletAmountKey = "lastWalletAmount";
+  static const String lastWalletDateUpdateKey = "lastWalletDateUpdate";
+  static const String dayProfitAmountKey = "dayProfitAmount";
+
 
   static init()async {
-
     sharedPreferences= await SharedPreferences.getInstance();
-
   }
 
 
@@ -30,10 +32,7 @@ class CashHelper{
     return sharedPreferences!.get(key);
   }
 
-  static Future<bool> removeData({
-    required String key,
-  }) async
-  {
+  static Future<bool> removeData({required String key}) async {
     return await sharedPreferences!.remove(key);
   }
 

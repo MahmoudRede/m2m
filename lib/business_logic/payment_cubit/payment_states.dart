@@ -24,3 +24,6 @@ class GetPaymentDataErrorState extends PaymentStates{}
 class ConfirmPaymentLoadingState extends PaymentStates{}
 class ConfirmPaymentSuccessState extends PaymentStates{}
 class ConfirmPaymentErrorState extends PaymentStates{}
+
+class ChangeLastWalletState extends PaymentStates{}
+class GetLastProfitState extends PaymentStates{}

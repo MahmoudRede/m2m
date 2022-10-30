@@ -15,12 +15,10 @@ class LoginCubit extends Cubit<LoginState>{
   static LoginCubit get(context) => BlocProvider.of(context);
 
   UserModel ?userModel;
-  Future<void> userLogin (
-       {
+  Future<void> userLogin ({
           required String email,
           required String password,
-       }
-      )async{
+       })async{
 
     emit(UserLoginLoadingState());
     await FirebaseAuth.instance.signInWithEmailAndPassword(

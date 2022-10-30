@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Data/model/payment_model.dart';
 import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -19,7 +21,8 @@ class PaymentCubit extends Cubit<PaymentStates>{
 
   static PaymentCubit get(context) => BlocProvider.of(context);
 
-  UserModel ?userModel;
+  UserModel? userModel;
+  static dynamic walletMoney = 0;
 
   Future<void>getUser()async{
 
@@ -29,7 +32,10 @@ class PaymentCubit extends Cubit<PaymentStates>{
         .get().then((value) {
       debugPrint('Get User Success');
       userModel=UserModel.fromMap(value.data()!);
-      debugPrint(userModel!.email);
+      walletMoney = userModel!.wallet.money;
+      debugPrint("user email ==> ${userModel!.email}   user wallet ==> $walletMoney");
+      updateWalletState(walletMoney);
+      getLastProfitState();
       emit(GetUserSuccessState());
     }).catchError((error){
       debugPrint('Error is ${error.toString()}');
@@ -174,6 +180,54 @@ class PaymentCubit extends Cubit<PaymentStates>{
       emit(ConfirmPaymentErrorState());
     });
   }
+
+
+  late String todayDate;
+  late String yesterdayDate;
+  final now = DateTime.now();
+
+  Future<void> updateWalletState(wallet)async{
+    _setupDateDisplay().then((todayDate){
+      _checkDate(todayDate, wallet);
+    });
+    emit(ChangeLastWalletState());
+  }
+
+  Future<String> _setupDateDisplay() async {
+
+    todayDate = DateFormat.yMMMMd().format(now);
+    return todayDate;
+  }
+
+  _checkDate(String todayDate , wallet) async{
+    String yesterdayDate = CashHelper.getData(key: CashHelper.lastWalletDateUpdateKey) ?? '';
+
+    if (todayDate != yesterdayDate){
+      //SHOW NEW CONTENT
+      CashHelper.saveData(key: CashHelper.lastWalletDateUpdateKey, value: todayDate);
+      CashHelper.saveData(key: CashHelper.lastWalletAmountKey, value: wallet);
+      debugPrint('wallet is updated ${CashHelper.getData(key: CashHelper.lastWalletAmountKey)}');
+    }else{
+      //SHOW SAME CONTENT
+      String currentWallet = CashHelper.getData(key: CashHelper.lastWalletAmountKey).toString();
+      debugPrint('my Current wallet is : $currentWallet');
+    }
+
+  }
+
+
+
+  dynamic myWallet = 0;
+  dynamic dayProfit = 0;
+
+  Future<void> getLastProfitState()async{
+    myWallet = CashHelper.getData(key: CashHelper.lastWalletAmountKey);
+    dayProfit = walletMoney - myWallet;
+    debugPrint("my current profit : $dayProfit");
+    emit(GetLastProfitState());
+  }
+
+
 
 
 
