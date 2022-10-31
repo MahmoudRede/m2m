@@ -18,7 +18,7 @@ class ViewTasksListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=>navigateTo(context, ViewTasksScreen(uId: userModel.uId)),
+      onTap: ()=>navigateAndRemove(context, ViewTasksScreen(uId: userModel.uId)),
       child: Padding(
         padding: EdgeInsets.all(
             SizeConfig.height*.02

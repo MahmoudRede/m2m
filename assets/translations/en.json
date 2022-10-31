@@ -46,6 +46,7 @@
 
   "taskAdded": "Task Added",
   "publicChat": "Public Chat",
+  "userTasksIsEmpty": "The user has not uploaded any task yet...",
 
 
 

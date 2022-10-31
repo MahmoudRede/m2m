@@ -129,7 +129,46 @@ class SubscribePackageScreen extends StatelessWidget {
 
                         // graph widget
 
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.height*0.02,
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: ColorManager.whiteDark,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(
+                                  SizeConfig.height*0.02,
+                              ),
+                              child: LineGraph(
+                                features: [
+                                  Feature(
+                                    title: "profit",
+                                    color: ColorManager.lightBlue,
+                                    data: [0.0, 0.2, 0.4, 0.5, PaymentCubit.get(context).dayProfit/10],
+                                  ),
+                                ],
+                                size: Size(SizeConfig.height*0.4, SizeConfig.height*0.4),
+                                labelX: const ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+                                labelY: const ['20%', '40%', '60%', '80%', '100%'],
+                                showDescription: true,
+                                graphColor: Colors.black,
+                                graphOpacity: 0.2,
+                                verticalFeatureDirection: true,
+                                descriptionHeight: SizeConfig.height*0.1,
+                              ),
+                            ),
+                          ),
+                        ),
 
+
+
+                        SizedBox(
+                          height: SizeConfig.height*0.03,
+                        ),
                         /// View tasks Button
                         Padding(
                           padding: EdgeInsets.symmetric(

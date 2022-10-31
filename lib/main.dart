@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            home: const PackageScreen(),
+            home: const AdminHome(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
