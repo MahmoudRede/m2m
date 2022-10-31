@@ -27,6 +27,7 @@ class SubscribePackageScreen extends StatelessWidget {
     'https://img.freepik.com/free-vector/hand-drawn-colorful-space-background_52683-12648.jpg',
   ];
 
+
   SubscribePackageScreen({Key? key}) : super(key: key);
 
   @override
