@@ -122,6 +122,11 @@
   "taskAdded": "Task Added",
   "publicChat": "Public Chat",
   "userTasksIsEmpty": "The user has not uploaded any task yet...",
+  "state": "State",
+  "done": "Done",
+  "notDone": "not Done",
+  "time": "Time",
+  "task": "Task",
 
 
 

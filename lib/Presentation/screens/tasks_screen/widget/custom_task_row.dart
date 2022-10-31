@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:m2m/Data/model/user_task.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/widget/task_item_button.dart';
 import 'package:m2m/Presentation/screens/upload_task_screen/add_task_image.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
-import 'package:m2m/Presentation/widgets/default_button.dart';
+import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
@@ -13,11 +14,11 @@ import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
 class CustomTaskRow extends StatelessWidget {
   const CustomTaskRow({
     Key? key,
-    required this.title,
+    required this.userTaskModel,
     required this.index,
   }) : super(key: key);
 
-  final String title;
+  final UserTaskModel userTaskModel;
   final String index;
 
   @override
@@ -26,8 +27,8 @@ class CustomTaskRow extends StatelessWidget {
       listener: (context,state){},
       builder: (context,state){
         return Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.height*0.025,
           ),
           child: SizedBox(
             width: SizeConfig.width,
@@ -37,8 +38,8 @@ class CustomTaskRow extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      width: 50,
-                      height: 50,
+                      width: SizeConfig.height*0.06,
+                      height: SizeConfig.height*0.06,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: ColorManager.whiteDark,
@@ -60,7 +61,7 @@ class CustomTaskRow extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            title,
+                            userTaskModel.taskDescription.toString(),
                             style: TextStyle(
                               fontSize: SizeConfig.headline3Size,
                               fontWeight: FontWeight.bold,
@@ -68,36 +69,24 @@ class CustomTaskRow extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          // SizedBox(
-                          //   height:SizeConfig.height*0.005,
-                          // ),
-                          // Text(
-                          //   description,
-                          //   style: const TextStyle(
-                          //     fontSize: 14,
-                          //     color: Color.fromARGB(136, 110, 103, 103),
-                          //     fontWeight: FontWeight.w600,
-                          //   ),
-                          //   overflow: TextOverflow.ellipsis,
-                          // ),
                         ],
                       ),
                     ),
                     Container(
                       alignment: Alignment.center,
-                      width: 45,
-                      height: 45,
+                      width: SizeConfig.height*0.04,
+                      height: SizeConfig.height*0.04,
                       decoration: BoxDecoration(
                         color: ColorManager.secondDarkColor,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Text(
                         index,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900,
+                        style: TextStyle(
+                          color: ColorManager.white,
+                          fontWeight: FontWeight.bold,
                           fontFamily: "Roboto",
-                          fontSize: 16,
+                          fontSize: SizeConfig.headline3Size,
                         ),
                       ),
                     )
@@ -113,38 +102,16 @@ class CustomTaskRow extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Type : ',
+                          '${AppLocalizations.of(context)!.translate('type').toString()} : ',
                           style: TextStyle(
                             fontSize: SizeConfig.headline3Size,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          'Like',
+                          userTaskModel.taskType.toString(),
                           style: TextStyle(
-                            fontSize: SizeConfig.headline3Size,
-                            fontWeight: FontWeight.bold,
-                            color: ColorManager.lightBlue,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: SizeConfig.height*0.02,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Time : ',
-                          style: TextStyle(
-                            fontSize: SizeConfig.headline3Size,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          '01:30:59',
-                          style: TextStyle(
-                            fontSize: SizeConfig.headline3Size,
+                            fontSize: SizeConfig.headline4Size,
                             fontWeight: FontWeight.bold,
                             color: ColorManager.lightBlue,
                           ),
@@ -157,16 +124,38 @@ class CustomTaskRow extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'State : ',
+                          '${AppLocalizations.of(context)!.translate('time').toString()} : ',
                           style: TextStyle(
                             fontSize: SizeConfig.headline3Size,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          'Done',
+                          userTaskModel.taskTimer.toString(),
+                          style: TextStyle(
+                            fontSize: SizeConfig.headline4Size,
+                            fontWeight: FontWeight.bold,
+                            color: ColorManager.lightBlue,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: SizeConfig.height*0.02,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '${AppLocalizations.of(context)!.translate('state').toString()} : ',
                           style: TextStyle(
                             fontSize: SizeConfig.headline3Size,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          userTaskModel.taskIsConfirmed==true?AppLocalizations.of(context)!.translate('done').toString():AppLocalizations.of(context)!.translate('notDone').toString(),
+                          style: TextStyle(
+                            fontSize: SizeConfig.headline4Size,
                             fontWeight: FontWeight.bold,
                             color: ColorManager.lightBlue,
                           ),
@@ -191,7 +180,7 @@ class CustomTaskRow extends StatelessWidget {
                     // upload task button
                     TaskItemButton(
                       text: AppLocalizations.of(context)!.translate('upload').toString(),
-                      onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>const AddTaskImageScreen())),
+                      onPressed: ()=>navigateAndRemove(context, AddTaskImageScreen(userTaskModel: userTaskModel,)),
                       // color: ColorManager.lightBlue,
                     ),
                   ],

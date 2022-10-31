@@ -1,32 +1,43 @@
 class UserTaskModel {
   UserTaskModel({
-    required this.taskTitle,
+    required this.taskId,
     required this.taskDescription,
+    required this.taskUrl,
+    required this.taskPrice,
     required this.taskType,
     required this.taskTimer,
-    required this.taskPrice,
-
+    required this.taskIsConfirmed,
+    required this.taskIsUploaded,
   });
 
-  final String taskTitle;
+  final String taskId;
   final String taskDescription;
+  final String taskUrl;
+  final String taskPrice;
   final String taskType;
   final String taskTimer;
-  final String taskPrice;
+  final bool taskIsConfirmed;
+  final bool taskIsUploaded;
 
   factory UserTaskModel.fromMap(Map<String, dynamic> json) => UserTaskModel(
-    taskTitle: json["taskTitle"],
+    taskId: json["taskId"],
     taskDescription: json["taskDescription"],
-    taskType: json["taskType"],
-    taskTimer: json["taskTimer"],
+    taskUrl: json["taskUrl"],
     taskPrice: json["taskPrice"],
+    taskType: json["taskType"],
+    taskTimer: json["taskTime"],
+    taskIsConfirmed: json["taskIsConfirmed"],
+    taskIsUploaded: json["taskIsUploaded"],
   );
 
   Map<String, dynamic> toMap() => {
-    "taskTitle": taskTitle,
+    "taskId": taskId,
     "taskDescription": taskDescription,
-    "taskType": taskType,
-    "taskTimer": taskTimer,
+    "taskUrl": taskUrl,
     "taskPrice": taskPrice,
+    "taskType": taskType,
+    "taskTime": taskTimer,
+    "taskIsConfirmed": taskIsConfirmed,
+    "taskIsUploaded": taskIsUploaded,
   };
 }

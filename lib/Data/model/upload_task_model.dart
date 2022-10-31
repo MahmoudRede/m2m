@@ -8,6 +8,7 @@ class UploadTaskModel {
     required this.taskConfirmed,
     required this.packageName,
     required this.phone,
+    required this.price,
   });
 
   final String taskId;
@@ -18,16 +19,18 @@ class UploadTaskModel {
   final bool taskConfirmed;
   final String packageName;
   final String phone;
+  final String price;
 
   factory UploadTaskModel.fromMap(Map<String, dynamic> json) => UploadTaskModel(
-    taskId: json["taskId"],
+    taskId: json["taskId"]??"",
     taskImages: List<String>.from(json["taskImages"].map((x) => x)),
-    userName: json["userName"],
-    userImage: json["userImage"],
-    userUId: json["userUId"],
-    taskConfirmed: json["taskConfirmed"],
-    packageName: json["packageName"],
-    phone: json["phone"],
+    userName: json["userName"]??"",
+    userImage: json["userImage"]??"",
+    userUId: json["userUId"]??"",
+    taskConfirmed: json["taskConfirmed"]??false,
+    packageName: json["packageName"]??"",
+    phone: json["phone"]??"",
+    price: json["price"]??"",
   );
 
   Map<String, dynamic> toMap() => {
@@ -39,5 +42,7 @@ class UploadTaskModel {
     "taskConfirmed": taskConfirmed,
     "packageName": packageName,
     "phone": phone,
+    "price": price,
   };
+
 }

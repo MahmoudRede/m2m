@@ -390,12 +390,16 @@ class AppCubit extends Cubit<AppStates>{
       required String taskPrice,
     })async{
       emit(AddAdminTaskLoadingState());
+
       UserTaskModel userTaskModel=UserTaskModel(
-          taskTitle: taskTitle,
-          taskDescription: taskDescription,
-          taskType: taskType,
-          taskTimer: taskTimer,
-          taskPrice: taskPrice
+        taskId: "id",
+        taskDescription: taskDescription,
+        taskType: taskType,
+        taskTimer: taskTimer,
+        taskPrice: taskPrice,
+        taskIsConfirmed: false,
+        taskIsUploaded: false,
+        taskUrl: 'url',
       );
 
        for (var element in usersId) {
@@ -406,12 +410,12 @@ class AppCubit extends Cubit<AppStates>{
          collection('userTasks').
          add(userTaskModel.toMap()).
          then((value) {
-
+           value.update({
+             "taskId":value.id.toString(),
+           });
            debugPrint('Task add to user id is $element');
            emit(AddAdminTaskSuccessState());
-
          }).catchError((error){
-
            debugPrint('Error in add admin task is ${error.toString()}');
            emit(AddAdminTaskErrorState());
 

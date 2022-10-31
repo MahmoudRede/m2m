@@ -59,7 +59,7 @@ class TasksScreen extends StatelessWidget {
                           ListView.separated(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context , index)=>  CustomTaskRow(title: 'Your first Task Like this page in facebook', index: '${index+1}'),
+                            itemBuilder: (context , index)=>  CustomTaskRow(userTaskModel: cubit.todayTasks[index], index: '${index+1}'),
                             separatorBuilder: (context , index)=> SizedBox(
                               height: SizeConfig.height *0.05,
                               child: Padding(
@@ -71,7 +71,7 @@ class TasksScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            itemCount: 5,
+                            itemCount: cubit.todayTasks.length,
                           ),
                           SizedBox(
                             height: SizeConfig.height *0.05,

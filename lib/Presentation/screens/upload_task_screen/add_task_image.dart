@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:m2m/Data/model/user_task.dart';
 import 'package:m2m/Presentation/screens/upload_task_screen/upload_task_images.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -11,7 +12,8 @@ import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
 
 class AddTaskImageScreen extends StatelessWidget {
-  const AddTaskImageScreen({Key? key}) : super(key: key);
+  final UserTaskModel userTaskModel;
+  const AddTaskImageScreen({Key? key, required this.userTaskModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +101,7 @@ class AddTaskImageScreen extends StatelessWidget {
                       cubit.uploadTaskImage().then((value) {
                         customToast(title: AppLocalizations.of(context)!.translate('imageIsUploaded').toString(), color: ColorManager.gold);
                         cubit.uploadedTaskImage = null;
-                        navigateAndRemove(context, const UploadTaskImagesScreen());
+                        navigateAndRemove(context, UploadTaskImagesScreen(userTaskModel: userTaskModel,));
                       });
                     }else{
                       customToast(title: AppLocalizations.of(context)!.translate('pleaseSelectImage').toString(), color: ColorManager.red);
