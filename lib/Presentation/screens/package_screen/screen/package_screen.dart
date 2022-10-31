@@ -36,7 +36,7 @@ class _PackageScreenState extends State<PackageScreen> {
         cubit.userModel!.isConfirmed==true?
 
         // Main Widget
-        SubscribePackageScreen():
+        cubit.userModel!.package.isVerified==true?SubscribePackageScreen():PackageScreenItem() :
 
         // Waiting Widget
         const WaitingScreenItem(
