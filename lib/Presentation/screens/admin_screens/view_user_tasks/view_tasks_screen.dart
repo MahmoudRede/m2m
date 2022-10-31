@@ -40,7 +40,8 @@ class ViewTasksScreen extends StatelessWidget {
               ),
               centerTitle: true,
             ),
-            body: cubit.userUploadedTasks.length >0 ?Column(
+            body: cubit.userUploadedTasks.isNotEmpty ?
+            Column(
               children: [
                 Expanded(
                   child: state is GetUserUploadedTaskSuccessState? ListView.separated(

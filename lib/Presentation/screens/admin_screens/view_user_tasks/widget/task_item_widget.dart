@@ -5,6 +5,7 @@ import 'package:m2m/Presentation/screens/admin_screens/view_user_tasks/view_task
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 
 class TaskViewWidget extends StatelessWidget {
   final int index;
@@ -14,7 +15,7 @@ class TaskViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  InkWell(
-      onTap: ()=>navigateTo(context, ViewTaskImagesScreen(taskModel: taskModel)),
+      onTap: ()=>navigateAndRemove(context, ViewTaskImagesScreen(taskModel: taskModel)),
       child: Padding(
         padding: EdgeInsets.all(
           SizeConfig.height*0.02,
@@ -28,7 +29,7 @@ class TaskViewWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
-            "Task ${index+1}",
+            "${AppLocalizations.of(context)!.translate('task').toString()} ${index+1}",
             style: GoogleFonts.roboto(
               fontSize: SizeConfig.headline3Size,
               color: ColorManager.white,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:m2m/Data/model/user_task.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/screens/upload_task_screen/add_task_image.dart';
 import 'package:m2m/Presentation/screens/upload_task_screen/widget/grid_image_widget.dart';
@@ -13,7 +14,8 @@ import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
 import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
 
 class UploadTaskImagesScreen extends StatelessWidget {
-  const UploadTaskImagesScreen({Key? key}) : super(key: key);
+  final UserTaskModel userTaskModel;
+  const UploadTaskImagesScreen({Key? key, required this.userTaskModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +49,10 @@ class UploadTaskImagesScreen extends StatelessWidget {
                 // image grid view
                 Expanded(
                   child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                       ),
-                      itemBuilder: (context,index){
+                    itemBuilder: (context,index){
                         return GridImageWidget(image: taskImages[index],);
                       },
                     itemCount: taskImages.length,
@@ -62,7 +64,7 @@ class UploadTaskImagesScreen extends StatelessWidget {
                 DefaultButton(
                   text: AppLocalizations.of(context)!.translate('add').toString(),
                   onPressed: (){
-                    navigateTo(context, const AddTaskImageScreen());
+                    navigateTo(context, AddTaskImageScreen(userTaskModel: userTaskModel,));
                   },
                   color: ColorManager.secondDarkColor,
                 ),
@@ -79,7 +81,7 @@ class UploadTaskImagesScreen extends StatelessWidget {
                   text: AppLocalizations.of(context)!.translate('upload').toString(),
                   onPressed: (){
                     if(taskImages.isNotEmpty){
-                      cubit.uploadTask().then((value){
+                      cubit.uploadTask(userTaskModel: userTaskModel,).then((value){
                         customToast(title: AppLocalizations.of(context)!.translate('taskIsUploaded').toString(), color: ColorManager.gold);
                         navigateAndRemove(context, const TasksScreen());
                       });

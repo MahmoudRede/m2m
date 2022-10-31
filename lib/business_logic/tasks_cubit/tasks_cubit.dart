@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -8,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:m2m/Data/model/admin_task_model.dart';
 import 'package:m2m/Data/model/upload_task_model.dart';
 import 'package:m2m/Data/model/user_model.dart';
+import 'package:m2m/Data/model/user_task.dart';
 import 'package:m2m/Presentation/screens/admin_screens/view_user_tasks/view_tasks_screen.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/custom_toast.dart';
@@ -22,7 +24,7 @@ class TasksCubit extends Cubit<TasksStates>{
 
   static TasksCubit get(context) => BlocProvider.of(context);
 
-  UserModel ?userModel;
+  UserModel?userModel;
 
   Future<void>getUser()async{
 
@@ -33,6 +35,7 @@ class TasksCubit extends Cubit<TasksStates>{
       debugPrint('Get User Success');
       userModel=UserModel.fromMap(value.data()!);
       debugPrint(userModel!.email);
+      getTodayTasks();
       emit(GetUserSuccessState());
     }).catchError((error){
       debugPrint('Error is ${error.toString()}');
@@ -93,12 +96,11 @@ class TasksCubit extends Cubit<TasksStates>{
 
 
 
-  Future<void> uploadTask ()async {
-    await getUser();
+  Future<void> uploadTask ({required UserTaskModel userTaskModel})async {
     emit(UploadTaskLoadingState());
 
-    final UploadTaskModel uploadTaskModel = UploadTaskModel(
-      taskId: "id",
+    late UploadTaskModel uploadTaskModel = UploadTaskModel(
+      taskId: userTaskModel.taskId.toString(),
       taskImages: userTaskImages,
       userName: userModel!.username.toString(),
       userImage: userModel!.personalImage.toString(),
@@ -106,17 +108,22 @@ class TasksCubit extends Cubit<TasksStates>{
       taskConfirmed: false,
       packageName: userModel!.package.packageName.toString(),
       phone: userModel!.phone.toString(),
+      price: userTaskModel.taskPrice.toString(),
     );
 
     FirebaseFirestore.instance.collection('uploadedTasks')
         .doc(userModel!.uId.toString())
-        .collection('tasks')
-        .add(uploadTaskModel.toMap())
+        .collection('tasks').doc(userTaskModel.taskId)
+        .set(uploadTaskModel.toMap())
         .then((value){
-          value.update({
-            "taskId":value.id.toString(),
-          });
           debugPrint('task Added Successfully');
+          FirebaseFirestore.instance.collection('adminTasks')
+              .doc(userModel!.uId.toString())
+              .collection('userTasks')
+              .doc(userTaskModel.taskId)
+              .update({
+            "taskIsUploaded": true,
+          });
           emit(UploadTaskSuccessState());
     }).catchError((error){
       debugPrint('Error When upload task screen : ${error.toString()}');
@@ -131,11 +138,10 @@ class TasksCubit extends Cubit<TasksStates>{
 
 
 
-  List<AdminTaskModel> todayTasks = [];
+  List<UserTaskModel> todayTasks =[];
 
   // get user today tasks
   Future<void> getTodayTasks()async{
-    await getUser();
     emit(GetTodayTaskLoadingState());
     FirebaseFirestore.instance.collection('adminTasks')
         .doc(userModel!.uId.toString())
@@ -143,10 +149,10 @@ class TasksCubit extends Cubit<TasksStates>{
         .get()
         .then((value){
           for (var element in value.docs) {
-            todayTasks.add(AdminTaskModel.fromMap(element.data()));
+            todayTasks.add(UserTaskModel.fromMap(element.data()));
           }
           if (kDebugMode) {
-            print('Get tasks is success : ${todayTasks[0].toString()}');
+            print('Get tasks is success : ${todayTasks[0].toMap().toString()}');
           }
           emit(GetTodayTaskSuccessState());
     }).catchError((error){
@@ -225,11 +231,8 @@ class TasksCubit extends Cubit<TasksStates>{
           .get()
           .then((value2){
         UserModel userData = UserModel.fromMap(value2.data()!);
-        switch(userData.package.packageId){
 
-          // first package
-          case "300":{
-            dynamic taskMoney = userData.wallet.money + 1.2;
+            dynamic taskMoney = userData.wallet.money + double.parse(taskModel.price);
             dynamic taskPoint = userData.wallet.point + 1;
 
             FirebaseFirestore.instance.collection('users')
@@ -248,15 +251,12 @@ class TasksCubit extends Cubit<TasksStates>{
               debugPrint("Error when add task money  to user wallet");
               emit(ChangeWalletErrorState());
             });
-          }
-          break;
 
-
-        }
       });
 
     }else{
       customToast(title: 'task already confirmed', color: ColorManager.gold);
+      navigateAndRemove(context, ViewTasksScreen(uId: taskModel.userUId.toString()));
     }
 
   }
