@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/admin_screens/admin_home/admin_home.dart';
+import 'package:m2m/Presentation/screens/admin_screens/all_users/all_users.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/splash_screen/screen/splash_screen.dart';
@@ -53,7 +54,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => AppCubit()..getUser()..getUsers()),
+        BlocProvider(create: (BuildContext context) => AppCubit()..getUser()..getUsers()..getCourse()),
         BlocProvider(create: (BuildContext context) => LoginCubit()),
         BlocProvider(create: (BuildContext context) => RegisterCubit()),
         BlocProvider(create: (BuildContext context) => PaymentCubit()..getPaymentData()),

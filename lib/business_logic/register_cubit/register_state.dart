@@ -34,3 +34,8 @@ class UploadNationalIdErrorState extends RegisterState{}
 class UploadPersonalImageLoadingState extends RegisterState{}
 class UploadPersonalImageSuccessState extends RegisterState{}
 class UploadPersonalImageErrorState extends RegisterState{}
+
+
+class ChangeGovernmentDropDownState extends RegisterState{}
+
+class SelectSkillSuccessState extends RegisterState{}

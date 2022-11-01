@@ -14,6 +14,11 @@
   "skills": "Skills",
   "month": "Month",
   "year": "Year",
+  "age": "Age",
+  "code": "Code",
+  "money": "Money",
+  "points": "Points",
+  "blockUser": "Block User",
 
 
   "january": "January",
@@ -66,13 +71,13 @@
   "refuse": "Refuse",
   "notFoundAnyRequestsYet": "Not found any requests yet",
 
-  "title": "Title",
+  "url": "Url",
   "description": "Description",
   "type": "Type",
   "price": "Price",
   "timer": "Timer",
   "pleaseEnter": "Please Enter",
-  "enterTaskTitle": "Enter Task Title",
+  "enterTaskUrl": "Enter Task Url",
   "enterTaskDescription": "Enter Task Description",
   "enterTaskType": "Enter Task Type",
   "enterTaskTimer": "Enter Task Timer",
@@ -82,6 +87,7 @@
   "confirmPaymentSuccess" : "Confirm Payment Success",
   "add": "Add",
   "userTasks": "User Tasks",
+  "singleUser": "User Information",
 
 
   "personalInformation": "Personal Information",
@@ -127,6 +133,11 @@
   "notDone": "not Done",
   "time": "Time",
   "task": "Task",
+  "allUser": "All User",
+  "notUserEnterYet": "There 's no user enter application yet",
+
+
+  "recommendedCourses": "Recommended Courses",
 
 
 

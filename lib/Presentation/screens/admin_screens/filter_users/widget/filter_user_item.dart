@@ -126,7 +126,7 @@ class _FilterUserItemState extends State<FilterUserItem> {
 
                         SizedBox(width: SizeConfig.height*.03,),
 
-                        Text('${widget.userModel.package.packageName} \$',
+                        Text('${widget.userModel.package.packageId} \$',
                           style: textManager(
                               color: ColorManager.primary,
                               fontWeight: FontWeight.w700,
@@ -143,14 +143,85 @@ class _FilterUserItemState extends State<FilterUserItem> {
                     // skills
                     Align(
                       alignment: AlignmentDirectional.topStart,
-                      child: Text('Photoshop , Microsoft office , Translation',
-                        style: textManager(
-                            color: ColorManager.white,
-                            fontWeight: FontWeight.w400,
-                            fontSize: SizeConfig.height*.02
-                        ),
+                      child:Row(
+                        children: [
+
+                          //user skill 1
+                          if(widget.userModel.userSkill1!='')
+                            Text('${widget.userModel.userSkill1} -',
+                            style: textManager(
+                                color: ColorManager.white,
+                                fontWeight: FontWeight.w400,
+                                fontSize: SizeConfig.height*.02
+                            )),
+
+                          //user skill 2
+                          if(widget.userModel.userSkill2!='')
+                            Text('${widget.userModel.userSkill2} -',
+                                style: textManager(
+                                    color: ColorManager.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: SizeConfig.height*.02
+                                )),
+
+                          //user skill 3
+                          if(widget.userModel.userSkill3!='')
+                            Text('${widget.userModel.userSkill3} -',
+                                style: textManager(
+                                    color: ColorManager.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: SizeConfig.height*.02
+                                )),
+
+                          //user skill 4
+                          if(widget.userModel.userSkill4!='')
+                            Text('${widget.userModel.userSkill4} -',
+                                style: textManager(
+                                    color: ColorManager.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: SizeConfig.height*.02
+                                )),
+
+                          //user skill 5
+                          if(widget.userModel.userSkill5!='')
+                            Text('${widget.userModel.userSkill5} -',
+                                style: textManager(
+                                    color: ColorManager.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: SizeConfig.height*.02
+                                )),
+
+                          //user skill 6
+                          if(widget.userModel.userSkill6!='')
+                            Text('${widget.userModel.userSkill6} -',
+                                style: textManager(
+                                    color: ColorManager.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: SizeConfig.height*.02
+                                )),
+
+                          //user skill 7
+                          if(widget.userModel.userSkill7!='')
+                            Text('${widget.userModel.userSkill7} -',
+                                style: textManager(
+                                    color: ColorManager.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: SizeConfig.height*.02
+                                )),
+
+                          //user skill 8
+                          if(widget.userModel.userSkill8!='')
+                            Text('${widget.userModel.userSkill8} -',
+                                style: textManager(
+                                    color: ColorManager.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: SizeConfig.height*.02
+                                )),
+
+                        ],
+                      )
                       ),
-                    ),
+
 
 
                   ],

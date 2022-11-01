@@ -8,6 +8,7 @@ import 'package:m2m/Presentation/screens/package_screen/widget/drawer_row_item.d
 import 'package:m2m/Presentation/screens/profile_screen/screen/profile_screen.dart';
 import 'package:m2m/Presentation/screens/public_chat/public_chat_screen.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
+import 'package:m2m/Presentation/screens/view_courses/view_courses.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -117,6 +118,14 @@ class HomeDrawer extends StatelessWidget {
                   title: 'Packages',
                   image: "assets/images/packages.png",
                   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const PackageScreen())),
+                ),
+                SizedBox(
+                  height: SizeConfig.height*0.02,
+                ),
+                DrawerRowItem(
+                  title: 'Courses',
+                  image: 'assets/images/courseImage.jpg',
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const ViewCourses())),
                 ),
                 SizedBox(
                   height: SizeConfig.height*0.02,

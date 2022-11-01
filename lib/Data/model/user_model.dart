@@ -16,6 +16,14 @@ class UserModel {
     required this.isConfirmed,
     required this.month,
     required this.year,
+    required this.userSkill1,
+    required this.userSkill2,
+    required this.userSkill3,
+    required this.userSkill4,
+    required this.userSkill5,
+    required this.userSkill6,
+    required this.userSkill7,
+    required this.userSkill8,
   });
 
   final String username;
@@ -34,6 +42,14 @@ class UserModel {
   final bool isConfirmed;
   final String month;
   final String year;
+  final String userSkill1;
+  final String userSkill2;
+  final String userSkill3;
+  final String userSkill4;
+  final String userSkill5;
+  final String userSkill6;
+  final String userSkill7;
+  final String userSkill8;
 
   factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
     username: json["username"],
@@ -52,6 +68,14 @@ class UserModel {
     isConfirmed: json["isConfirmed"],
     month: json["month"],
     year: json["year"],
+    userSkill1: json["userSkill1"],
+    userSkill2: json["userSkill2"],
+    userSkill3: json["userSkill3"],
+    userSkill4: json["userSkill4"],
+    userSkill5: json["userSkill5"],
+    userSkill6: json["userSkill6"],
+    userSkill7: json["userSkill7"],
+    userSkill8: json["userSkill8"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -71,6 +95,14 @@ class UserModel {
     "isConfirmed": isConfirmed,
     "month": month,
     "year": year,
+    "userSkill1": userSkill1,
+    "userSkill2": userSkill2,
+    "userSkill3": userSkill3,
+    "userSkill4": userSkill4,
+    "userSkill5": userSkill5,
+    "userSkill6": userSkill6,
+    "userSkill7": userSkill7,
+    "userSkill8": userSkill8,
   };
 }
 

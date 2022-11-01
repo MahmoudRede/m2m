@@ -17,7 +17,7 @@ class AddTasks extends StatelessWidget {
 
   const AddTasks({Key? key}) : super(key: key);
 
-  static TextEditingController taskTitleController=TextEditingController();
+  static TextEditingController taskUrlController=TextEditingController();
   static TextEditingController taskDescriptionController=TextEditingController();
   static TextEditingController taskTypeController=TextEditingController();
   static TextEditingController taskTimerController=TextEditingController();
@@ -77,7 +77,7 @@ class AddTasks extends StatelessWidget {
 
                       // title
                       Text(
-                        '${AppLocalizations.of(context)!.translate('title').toString()} :',
+                        '${AppLocalizations.of(context)!.translate('url').toString()} :',
                         style: GoogleFonts.roboto(
                           color: ColorManager.black,
                           fontSize: SizeConfig.height*.025,
@@ -87,12 +87,12 @@ class AddTasks extends StatelessWidget {
 
                       SizedBox(height: SizeConfig.height*.01,),
 
-                      // enter task title
+                      // enter task url
                       DefaultFormField(
                         textInputType: TextInputType.text,
-                        controller: taskTitleController,
-                        hint: AppLocalizations.of(context)!.translate('enterTaskTitle').toString(),
-                        validText: '${AppLocalizations.of(context)!.translate('pleaseEnter').toString()} ${AppLocalizations.of(context)!.translate('title').toString()}',
+                        controller: taskUrlController,
+                        hint: AppLocalizations.of(context)!.translate('enterTaskUrl').toString(),
+                        validText: '${AppLocalizations.of(context)!.translate('pleaseEnter').toString()} ${AppLocalizations.of(context)!.translate('url').toString()}',
                       ),
 
                       SizedBox(height: SizeConfig.height*.02,),
@@ -200,7 +200,7 @@ class AddTasks extends StatelessWidget {
                               AppCubit.get(context).selectAll=false;
                               AppCubit.get(context).usersId=[];
                               navigateTo(context,SelectUsers(
-                                taskTitle: taskTitleController.text,
+                                taskUrl: taskUrlController.text,
                                 taskDescription: taskDescriptionController.text,
                                 taskType: taskTypeController.text,
                                 taskTimer: taskTimerController.text,

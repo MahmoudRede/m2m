@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m2m/Presentation/screens/admin_screens/add_courses/add_courses.dart';
 import 'package:m2m/Presentation/screens/admin_screens/add_tasks/add_tasks.dart';
 import 'package:m2m/Presentation/screens/admin_screens/admin_home/widget/admin_home_item.dart';
+import 'package:m2m/Presentation/screens/admin_screens/all_users/all_users.dart';
 import 'package:m2m/Presentation/screens/admin_screens/filter_users/filter_users.dart';
 import 'package:m2m/Presentation/screens/admin_screens/filter_users/widget/filter_user_item.dart';
 import 'package:m2m/Presentation/screens/admin_screens/payment_screens/payment_requests_screen.dart';
@@ -22,7 +23,7 @@ class AdminHome extends StatelessWidget {
   Widget build(BuildContext context) {
 
     List onTaps = [
-      ()=>{},
+      ()=>navigateTo(context, const AllUser()),
       ()=>navigateTo(context, const PaymentRequestsScreen()),
       ()=>navigateTo(context, const AddTasks()),
       ()=>navigateTo(context, const ViewUserTasksScreen()),
