@@ -187,13 +187,21 @@ class FollowRegister extends StatelessWidget {
                                name: name,
                                phone: phone,
                                age: age,
-                               government: government,
+                               government: cubit.governmentDropDown,
                                nationalIdImage:  CashHelper.getData(key: 'nationalId'),
                                personalImage: CashHelper.getData(key: 'personalImage'),
                                inviteCode: code,
                                skills: skills,
                                month: DateTime.now().month.toString(),
-                               year: DateTime.now().year.toString()
+                               year: DateTime.now().year.toString(),
+                               userSkill1: cubit.userSills1,
+                               userSkill2: cubit.userSills2,
+                               userSkill3: cubit.userSills3,
+                               userSkill4: cubit.userSills4,
+                               userSkill5: cubit.userSills5,
+                               userSkill6: cubit.userSills6,
+                               userSkill7: cubit.userSills7,
+                               userSkill8: cubit.userSills8,
                            );
 
                          }else{

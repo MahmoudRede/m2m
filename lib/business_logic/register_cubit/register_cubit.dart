@@ -127,6 +127,14 @@ class RegisterCubit extends Cubit<RegisterState>{
          required String personalImage,
          required String month,
          required String year,
+         required String userSkill1,
+         required String userSkill2,
+         required String userSkill3,
+         required String userSkill4,
+         required String userSkill5,
+         required String userSkill6,
+         required String userSkill7,
+         required String userSkill8,
          String ?inviteCode,
 
       }
@@ -155,6 +163,14 @@ class RegisterCubit extends Cubit<RegisterState>{
         inviteCode: inviteCode,
         month: month,
         year: year,
+        userSkill1: userSills1,
+        userSkill2: userSills2,
+        userSkill3: userSills3,
+        userSkill4: userSills4,
+        userSkill5: userSills5,
+        userSkill6: userSills6,
+        userSkill7: userSills7,
+        userSkill8: userSills8,
       );
       emit(UserRegisterSuccessState());
     }).catchError((error){
@@ -180,6 +196,14 @@ class RegisterCubit extends Cubit<RegisterState>{
         required String id,
         required String month,
         required String year,
+        required String userSkill1,
+        required String userSkill2,
+        required String userSkill3,
+        required String userSkill4,
+        required String userSkill5,
+        required String userSkill6,
+        required String userSkill7,
+        required String userSkill8,
       }
       )async{
 
@@ -199,6 +223,14 @@ class RegisterCubit extends Cubit<RegisterState>{
         year: year,
         government: government,
         skills: skills,
+        userSkill1: userSills1,
+        userSkill2: userSills2,
+        userSkill3: userSills3,
+        userSkill4: userSills4,
+        userSkill5: userSills5,
+        userSkill6: userSills6,
+        userSkill7: userSills7,
+        userSkill8: userSills8,
         inviteCode: inviteCode??''
       );
 
@@ -216,5 +248,18 @@ class RegisterCubit extends Cubit<RegisterState>{
     });
 
   }
+
+  String governmentDropDown='' ;
+
+  void changeGovernmentDropDown(value)
+  {
+    governmentDropDown = value ;
+    emit(ChangeGovernmentDropDownState());
+  }
+
+  String userSills1='',userSills2='',userSills3='',userSills4='',userSills5='',userSills6='',userSills7='',userSills8='';
+
+  bool selectSills1=false,selectSills2=false,selectSills3=false,selectSills4=false,selectSills5=false,selectSills6=false,selectSills7=false,selectSills8=false;
+
 
 }

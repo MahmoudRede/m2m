@@ -158,6 +158,19 @@ class GetPublicChatLoadingState extends AppStates {}
 
 class ChangeIconPublicChatSuccessState extends AppStates {}
 
+class GetCourseSuccessState extends AppStates{
+
+}
+class GetCourseLoadingState extends AppStates{
+
+}
+class GetCourseErrorState extends AppStates{
+
+}
+
+class NavigateToCourseLinkSuccessState extends AppStates{
+
+}
 class ChangeLastWalletState extends AppStates{}
 class GetLastProfitState extends AppStates{}
 

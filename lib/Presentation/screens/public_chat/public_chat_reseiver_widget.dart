@@ -56,7 +56,7 @@ class ResieverPublicChatWidget extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(SizeConfig.height*.02),
                         topLeft: Radius.circular(SizeConfig.height*.02),
-                        bottomLeft: Radius.circular(SizeConfig.height*.02),
+                        bottomRight: Radius.circular(SizeConfig.height*.02),
                       ),
                     ),
                     child: Column(

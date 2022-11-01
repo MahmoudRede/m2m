@@ -17,14 +17,14 @@ import 'package:m2m/business_logic/app_localization.dart';
 
 class SelectUsers extends StatefulWidget {
 
-  final String taskTitle;
+  final String taskUrl;
   final String taskDescription;
   final String taskType;
   final String taskTimer;
   final String taskPrice;
 
   const SelectUsers({Key? key,
-    required this.taskTitle,
+    required this.taskUrl,
     required this.taskDescription,
     required this.taskType,
     required this.taskTimer,
@@ -46,7 +46,8 @@ class _SelectUsersState extends State<SelectUsers> {
         government: AppCubit.get(context).governmentDropDown,
         month: AppCubit.get(context).monthDropDown,
         year: AppCubit.get(context).yearDropDown,
-        package: AppCubit.get(context).packageDropDown
+        package: AppCubit.get(context).packageDropDown,
+        skill: AppCubit.get(context).skillsDropDown
     );
   }
 
@@ -60,6 +61,10 @@ class _SelectUsersState extends State<SelectUsers> {
 
   List<String> packageNames=[
     '250','600','1000','2000',
+  ];
+
+  List<String> skillsNames=[
+    'Excel','PhotoShop','Microsoft office','Marketing','Illustrator','Adobe Premiere','Translation','Voice over',
   ];
 
   @override
@@ -236,7 +241,9 @@ class _SelectUsersState extends State<SelectUsers> {
                                             government: cubit.governmentDropDown,
                                             month: cubit.monthDropDown,
                                             year: cubit.yearDropDown,
-                                            package: cubit.packageDropDown
+                                            package: cubit.packageDropDown,
+                                            skill: AppCubit.get(context).skillsDropDown
+
                                         );
                                       },
                                     ),
@@ -273,7 +280,7 @@ class _SelectUsersState extends State<SelectUsers> {
                                       icon: Icon(IconBroken.Arrow___Down_2,color: ColorManager.black,),
                                       iconSize: 20.0,
                                       style: const TextStyle(color: Colors.white , fontSize: 16.0 , fontWeight: FontWeight.bold),
-                                      items: governmentNames.map(
+                                      items: skillsNames.map(
                                             (value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
@@ -283,6 +290,14 @@ class _SelectUsersState extends State<SelectUsers> {
                                       ).toList(),
                                       onChanged: (value) {
                                         cubit.changeSkillsDropDown(value);
+                                        cubit.usersFilterion(
+                                            government: cubit.governmentDropDown,
+                                            month: cubit.monthDropDown,
+                                            year: cubit.yearDropDown,
+                                            package: cubit.packageDropDown,
+                                            skill: AppCubit.get(context).skillsDropDown
+
+                                        );
                                       },
                                     ),
                                   ),
@@ -342,7 +357,9 @@ class _SelectUsersState extends State<SelectUsers> {
                                             government: cubit.governmentDropDown,
                                             month: cubit.monthDropDown,
                                             year: cubit.yearDropDown,
-                                            package: cubit.packageDropDown
+                                            package: cubit.packageDropDown,
+                                            skill: AppCubit.get(context).skillsDropDown
+
                                         );
                                       },
                                     ),
@@ -393,7 +410,9 @@ class _SelectUsersState extends State<SelectUsers> {
                                             government: cubit.governmentDropDown,
                                             month: cubit.monthDropDown,
                                             year: cubit.yearDropDown,
-                                            package: cubit.packageDropDown
+                                            package: cubit.packageDropDown,
+                                            skill: AppCubit.get(context).skillsDropDown
+
                                         );
                                       },
                                     ),
@@ -449,7 +468,9 @@ class _SelectUsersState extends State<SelectUsers> {
                                         government: cubit.governmentDropDown,
                                         month: cubit.monthDropDown,
                                         year: cubit.yearDropDown,
-                                        package: cubit.packageDropDown
+                                        package: cubit.packageDropDown,
+                                        skill: AppCubit.get(context).skillsDropDown
+
                                     );
                                   },
                                 ),
@@ -490,7 +511,7 @@ class _SelectUsersState extends State<SelectUsers> {
                       onPressed: (){
 
                         cubit.addTasks(
-                            taskTitle: widget.taskTitle,
+                            taskUrl: widget.taskUrl,
                             taskDescription: widget.taskDescription,
                             taskType: widget.taskType,
                             taskTimer: widget.taskTimer,
