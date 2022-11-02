@@ -6,6 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Data/model/admin_task_model.dart';
 import 'package:m2m/Data/model/upload_task_model.dart';
 import 'package:m2m/Data/model/user_model.dart';
@@ -159,7 +161,6 @@ class TasksCubit extends Cubit<TasksStates>{
       if (kDebugMode) {
         print('Error when get Tasks ===> ${error.toString()}');
       }
-      customToast(title: 'Sorry time is out try again', color: ColorManager.red);
       emit(GetTodayTaskErrorState());
     });
 
@@ -260,6 +261,5 @@ class TasksCubit extends Cubit<TasksStates>{
     }
 
   }
- 
 
 }

@@ -1,13 +1,11 @@
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Data/model/course_imgae.dart';
 import 'package:m2m/Data/model/public_chat_model.dart';
@@ -50,9 +48,7 @@ class AppCubit extends Cubit<AppStates>{
       CashHelper.saveData(key: 'userPackage',value: userModel!.package.packageName);
       CashHelper.saveData(key: 'userPhone',value: userModel!.phone);
       CashHelper.saveData(key: 'userEmail',value: userModel!.email);
-      DateTime today = DateTime.now();
-      DateTime yasterday = today.subtract(const Duration(days: 1));
-      debugPrint('today date : $today   yasterday date : $yasterday');
+      updateWalletAndTasksState(userModel!.wallet.money);
       emit(GetUserSuccessState());
     }).catchError((error){
       debugPrint('Error When get user data ${error.toString()}');
@@ -799,11 +795,9 @@ class AppCubit extends Cubit<AppStates>{
   // upload course image
 
   void addCourse({
-
     required String courseTitle,
     required String courseLink,
     required String courseImage,
-
   }){
 
     emit(AddCourseLoadingState());
@@ -910,6 +904,7 @@ class AppCubit extends Cubit<AppStates>{
         coursesList.add(CourseModel.fromMap(element.data()));
 
       }
+      debugPrint('Course getting ');
       emit(GetCourseSuccessState());
 
     }).catchError((error){
@@ -1023,7 +1018,42 @@ class AppCubit extends Cubit<AppStates>{
   }
 
 
+  late String todayDate;
+  late String yesterdayDate;
+  final now = DateTime.now();
 
+  Future<void> updateWalletAndTasksState(wallet)async{
+    _setupDateDisplay().then((todayDate){
+      _checkDate(todayDate, wallet);
+    });
+    emit(ChangeLastWalletState());
+  }
+
+  Future<String> _setupDateDisplay() async {
+
+    todayDate = DateFormat.yMMMMd().format(now);
+    return todayDate;
+  }
+
+  _checkDate(String todayDate , wallet) async{
+    String yesterdayDate = CashHelper.getData(key: CashHelper.lastWalletDateUpdateKey) ?? '';
+
+    if (todayDate != yesterdayDate){
+      //SHOW NEW CONTENT
+      CashHelper.saveData(key: CashHelper.lastWalletDateUpdateKey, value: todayDate);
+      CashHelper.saveData(key: CashHelper.lastWalletAmountKey, value: wallet);
+      debugPrint('wallet is updated ${CashHelper.getData(key: CashHelper.lastWalletAmountKey)}');
+      CashHelper.saveData(key: CashHelper.lastWalletDateUpdateKey, value: todayDate);
+      FirebaseFirestore.instance.collection('adminTasks').doc(userModel!.uId).delete().then((value) {
+        debugPrint('user tasks are deleted success');
+      });
+    }else{
+      //SHOW SAME CONTENT
+      String currentWallet = CashHelper.getData(key: CashHelper.lastWalletAmountKey).toString();
+      debugPrint('my Current wallet is : $currentWallet');
+    }
+
+  }
 
 
 
