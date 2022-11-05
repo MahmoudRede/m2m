@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
+import 'package:m2m/Presentation/screens/more_screen/more_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/drawer_row_item.dart';
 import 'package:m2m/Presentation/screens/profile_screen/screen/profile_screen.dart';
@@ -137,6 +138,14 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 SizedBox(
                   height: SizeConfig.height*0.02,
+                ),
+                SizedBox(
+                  height: SizeConfig.height*0.02,
+                ),
+                DrawerRowItem(
+                  title: 'Setting Screen',
+                  image: 'assets/images/public_chat.png',
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>  const MoreScreen())),
                 ),
                 DrawerRowItem(
                   title: 'Logout',
