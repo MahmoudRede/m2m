@@ -109,7 +109,7 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 DrawerRowItem(
                   title: 'Today Tasks',
-                  image: "assets/images/task.png",
+                  image: "assets/images/add_task.jpg",
                   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> const TasksScreen())),
                 ),
                 SizedBox(
@@ -139,13 +139,13 @@ class HomeDrawer extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.height*0.02,
                 ),
-                SizedBox(
-                  height: SizeConfig.height*0.02,
-                ),
                 DrawerRowItem(
                   title: 'Setting Screen',
-                  image: 'assets/images/public_chat.png',
+                  image: 'assets/images/task.png',
                   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>  const MoreScreen())),
+                ),
+                SizedBox(
+                  height: SizeConfig.height*0.02,
                 ),
                 DrawerRowItem(
                   title: 'Logout',
