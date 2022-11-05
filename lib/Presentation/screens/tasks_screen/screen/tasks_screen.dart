@@ -56,7 +56,7 @@ class TasksScreen extends StatelessWidget {
                           /// Tasks Title
                           const TaskDivider(),
                           /// Tasks List
-                          ListView.separated(
+                          cubit.todayTasks.isNotEmpty?ListView.separated(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context , index)=>  CustomTaskRow(userTaskModel: cubit.todayTasks[index], index: '${index+1}'),
@@ -72,6 +72,36 @@ class TasksScreen extends StatelessWidget {
                               ),
                             ),
                             itemCount: cubit.todayTasks.length,
+                          ):Container(
+                            height: SizeConfig.height *0.4,
+                            color: ColorManager.white,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: SizeConfig.height*0.03,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: SizeConfig.height*0.3,
+                                    child: Lottie.asset("assets/images/waiting.json"),
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.height*0.02,
+                                  ),
+                                  Text(
+                                    AppLocalizations.of(context)!.translate('taskWaitMessage').toString(),
+                                    style: GoogleFonts.roboto(
+                                      fontSize: SizeConfig.headline3Size,
+                                      color: ColorManager.secondDarkColor,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                           SizedBox(
                             height: SizeConfig.height *0.05,

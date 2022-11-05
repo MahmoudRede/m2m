@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (BuildContext context) => AppCubit()..getUser()..getUsers()..getCourse()),
         BlocProvider(create: (BuildContext context) => LoginCubit()),
         BlocProvider(create: (BuildContext context) => RegisterCubit()),
-        BlocProvider(create: (BuildContext context) => PaymentCubit()..getPaymentData()),
+        BlocProvider(create: (BuildContext context) => PaymentCubit()..getUser()..getPaymentData()),
         BlocProvider(create: (BuildContext context) => TasksCubit()..getUser()),
         BlocProvider(create: (BuildContext context) => LocalizationCubit()..fetchLocalization()),
       ],
@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
-            home: const LoginScreen(),
+            home: const PackageScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,

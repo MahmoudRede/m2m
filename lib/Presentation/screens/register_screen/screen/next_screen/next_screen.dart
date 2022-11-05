@@ -269,7 +269,7 @@ class _NextScreenState extends State<NextScreen> {
                                                )
                                            ),
 
-                                           Text('Excel',style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022),),
+                                           Text('Excel',style: textManager(color: Colors.black,fontSize: SizeConfig.headline3Size),),
 
                                          ],
                                        ),
@@ -298,7 +298,7 @@ class _NextScreenState extends State<NextScreen> {
                                                )
                                            ),
 
-                                           Text('Microsoft office',style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022),),
+                                           Text('Microsoft office',style: textManager(color: Colors.black,fontSize: SizeConfig.headline3Size),),
 
                                          ],
                                        ),
@@ -338,7 +338,7 @@ class _NextScreenState extends State<NextScreen> {
                                                 )
                                             ),
 
-                                            Text('Translation',style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022),),
+                                            Text('Translation',style: textManager(color: Colors.black,fontSize: SizeConfig.headline3Size),),
 
                                           ],
                                         ),
@@ -367,7 +367,7 @@ class _NextScreenState extends State<NextScreen> {
                                                 )
                                             ),
 
-                                            Text('Voice over',style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022),),
+                                            Text('Voice over',style: textManager(color: Colors.black,fontSize: SizeConfig.headline3Size),),
 
                                           ],
                                         ),
@@ -406,7 +406,7 @@ class _NextScreenState extends State<NextScreen> {
                                                 )
                                             ),
 
-                                            Text('Adobe Premiere',style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022),),
+                                            Text('Adobe Premiere',style: textManager(color: Colors.black,fontSize: SizeConfig.headline3Size),),
 
                                           ],
                                         ),
@@ -435,7 +435,7 @@ class _NextScreenState extends State<NextScreen> {
                                                 )
                                             ),
 
-                                            Text('Photoshop',style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022),),
+                                            Text('Photoshop',style: textManager(color: Colors.black,fontSize: SizeConfig.headline3Size),),
 
                                           ],
                                         ),
@@ -474,7 +474,7 @@ class _NextScreenState extends State<NextScreen> {
                                                 )
                                             ),
 
-                                            Text('Illustrator',style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022),),
+                                            Text('Illustrator',style: textManager(color: Colors.black,fontSize: SizeConfig.headline3Size),),
 
                                           ],
                                         ),
@@ -503,7 +503,7 @@ class _NextScreenState extends State<NextScreen> {
                                                 )
                                             ),
 
-                                            Text('Marketing',style: textManager(color: Colors.black,fontSize: SizeConfig.height*.022),),
+                                            Text('Marketing',style: textManager(color: Colors.black,fontSize: SizeConfig.headline3Size),),
 
                                           ],
                                         ),
