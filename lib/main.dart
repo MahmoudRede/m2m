@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-            home: const AdminHome(),
+            home: const LoginScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
