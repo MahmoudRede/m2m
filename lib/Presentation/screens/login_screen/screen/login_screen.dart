@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
              customToast(title: 'Welcome Back',color:ColorManager.primary );
              CashHelper.saveData(key: 'uId',value: state.uid);
              AppCubit.get(context).getUser();
-             navigateTo(context,const PackageScreen());
+             navigateAndRemove(context,const PackageScreen());
 
            }
 

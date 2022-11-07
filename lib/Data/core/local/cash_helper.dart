@@ -6,6 +6,7 @@ class CashHelper{
 
   static SharedPreferences ?sharedPreferences;
   static const String languageKey = "language";
+  static const String languageNameKey = "languageName";
   static const String lastWalletAmountKey = "lastWalletAmount";
   static const String lastWalletDateUpdateKey = "lastWalletDateUpdate";
   static const String dayProfitAmountKey = "dayProfitAmount";
