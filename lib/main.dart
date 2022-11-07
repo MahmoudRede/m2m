@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/admin_screens/admin_home/admin_home.dart';
 import 'package:m2m/Presentation/screens/admin_screens/all_users/all_users.dart';
+import 'package:m2m/Presentation/screens/change_language_screen/change_language_screen.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
 import 'package:m2m/Presentation/screens/splash_screen/screen/splash_screen.dart';
@@ -77,8 +78,8 @@ class _MyAppState extends State<MyApp> {
                   color: ColorManager.black,
                 ),
                 systemOverlayStyle: const SystemUiOverlayStyle(
-                  statusBarColor: Colors.transparent,
-                  statusBarBrightness: Brightness.dark,
+                  statusBarIconBrightness: Brightness.dark,
+                  statusBarColor: Colors.white,
                 ),
               ),
             ),

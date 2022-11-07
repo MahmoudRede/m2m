@@ -1,6 +1,6 @@
 {
   "appTitle": "اسم التطبيق",
-  "langEnglish": "الانجليزيه",
+  "langEnglish": "English",
   "langArabic": "العربية",
 
   "viewTasks": "عرض المهام",
@@ -113,6 +113,10 @@
 
   "recommendedCourses": "الدورات الموصى بها",
   "taskWaitMessage": "انتظر مهامك الجديدة اليوم ..",
+  "changeLanguage" : "تغيير اللغة",
+  "unsubscribeWarningMessage": "هل أنت متأكد من إلغاء الاشتراك الخاص بك.؟",
+  "cancel": "إلغاء",
+  "unsubscribeTitleMessage": "تنبيه..!",
 
 
 

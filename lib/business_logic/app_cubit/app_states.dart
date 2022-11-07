@@ -184,3 +184,6 @@ class NavigateToCourseLinkSuccessState extends AppStates{
 class ChangeLastWalletState extends AppStates{}
 class GetLastProfitState extends AppStates{}
 
+class UnsubscribeUserSuccessState extends AppStates {}
+class UnsubscribeUserErrorState extends AppStates {}
+class UnsubscribeUserLoadingState extends AppStates {}

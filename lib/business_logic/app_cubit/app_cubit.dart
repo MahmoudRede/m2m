@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -203,15 +204,22 @@ class AppCubit extends Cubit<AppStates>{
 
     emit(DeleteUserLoadingState());
 
-    FirebaseFirestore.instance.collection('users')
-        .doc(userId)
-        .delete().then((value) {
+    FirebaseAuth.instance.currentUser!.delete().then((value) {
+      debugPrint("user deleted from fire auth");
 
-      debugPrint('User Delete Success');
+      FirebaseFirestore.instance.collection('users')
+          .doc(userId)
+          .delete().then((value) {
+        debugPrint('User Delete Success');
+      }).catchError((error){
+        debugPrint('Error in delete user is ${error.toString()}');
+        emit(DeleteUserErrorState());
+      });
+
       emit(DeleteUserSuccessState());
-    }).catchError((error){
 
-      debugPrint('Error in delete user is ${error.toString()}');
+    }).catchError((error){
+      debugPrint('Error when delete user from fire auth : ${error.toString()}');
       emit(DeleteUserErrorState());
     });
 
@@ -1052,6 +1060,29 @@ class AppCubit extends Cubit<AppStates>{
       String currentWallet = CashHelper.getData(key: CashHelper.lastWalletAmountKey).toString();
       debugPrint('my Current wallet is : $currentWallet');
     }
+
+  }
+
+
+  Future userUnsubscribe({required String id})async{
+    emit(UnsubscribeUserLoadingState());
+
+    FirebaseFirestore.instance.collection('users')
+        .doc(id)
+        .update({
+      "package" : {
+        "isVerified" : false,
+        "packageId":"id",
+        "packageName":"not selected",
+      },
+    }).then((value){
+      debugPrint('User unsubscribe success');
+      emit(UnsubscribeUserSuccessState());
+    }).catchError((error){
+      debugPrint('Error When unsubscribe user : ${error.toString()}');
+      emit(UnsubscribeUserErrorState());
+    });
+
 
   }
 

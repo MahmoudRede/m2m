@@ -24,7 +24,7 @@
   "language": "Language",
   "about": "About",
   "privacyAndTerms": "Privacy and terms",
-  "notSubscribe": "Not Subscribe",
+  "notSubscribe": "Unsubscribe",
   "deleteAccount": "Delete Account",
 
 
@@ -146,6 +146,10 @@
 
 
   "recommendedCourses": "Recommended Courses",
+  "changeLanguage" : "Change Language",
+  "unsubscribeWarningMessage": "Are you sure to cancel your subscribe.?",
+  "cancel": "Cancel",
+  "unsubscribeTitleMessage": "Warning..!",
 
 
 

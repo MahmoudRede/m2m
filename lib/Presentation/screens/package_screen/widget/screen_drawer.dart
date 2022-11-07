@@ -140,7 +140,7 @@ class HomeDrawer extends StatelessWidget {
                   height: SizeConfig.height*0.02,
                 ),
                 DrawerRowItem(
-                  title: 'Setting Screen',
+                  title: 'Settings',
                   image: 'assets/images/task.png',
                   onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>  const MoreScreen())),
                 ),

@@ -1,9 +1,11 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/about_app/about_app.dart';
+import 'package:m2m/Presentation/screens/change_language_screen/change_language_screen.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/more_screen/widget/setting_item_widget.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
@@ -97,8 +99,8 @@ class MoreScreen extends StatelessWidget {
                   // language
                   SettingItemWidget(
                     title: 'language',
-                    onTap: (){},
-                    icon: Icons.privacy_tip_outlined,
+                    onTap: ()=>navigateTo(context, const ChangeLanguageScreen()),
+                    icon: Icons.language,
                   ),
 
                   SizedBox(height: SizeConfig.height*.02,),
@@ -115,7 +117,24 @@ class MoreScreen extends StatelessWidget {
                   // notSubscribe
                   SettingItemWidget(
                     title: 'notSubscribe',
-                    onTap: (){},
+                    onTap: (){
+                      CoolAlert.show(
+                        context: context,
+                        type: CoolAlertType.warning,
+                        title: AppLocalizations.of(context)!.translate('unsubscribeTitleMessage').toString(),
+                        text: AppLocalizations.of(context)!.translate('unsubscribeWarningMessage').toString(),
+                        cancelBtnText: AppLocalizations.of(context)!.translate('cancel').toString(),
+                        confirmBtnText: AppLocalizations.of(context)!.translate('notSubscribe').toString(),
+                        showCancelBtn: true,
+                        onCancelBtnTap: ()=>Navigator.pop(context),
+                        backgroundColor: ColorManager.secondDarkColor,
+                        onConfirmBtnTap: (){
+                          cubit.userUnsubscribe(id: cubit.userModel!.uId).then((value){
+                            Navigator.pop(context);
+                          });
+                        },
+                      );
+                    },
                     icon: Icons.subscriptions_outlined,
                   ),
 

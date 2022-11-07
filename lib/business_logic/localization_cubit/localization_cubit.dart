@@ -1,12 +1,8 @@
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
-import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/business_logic/localization_cubit/localization_states.dart';
-import 'package:m2m/constants/constants.dart';
 
 class LocalizationCubit extends Cubit<LocalizationStates>{
 
@@ -23,6 +19,7 @@ class LocalizationCubit extends Cubit<LocalizationStates>{
 
     if(languageCode == 'null'){
       CashHelper.saveData(key: CashHelper.languageKey,value: "en");
+      CashHelper.saveData(key: CashHelper.languageNameKey,value: "langArabic");
       _appLocale = const Locale("en");
       changeLanguage(code: "en");
       debugPrint('default language is english');
@@ -44,6 +41,7 @@ class LocalizationCubit extends Cubit<LocalizationStates>{
       case "ar":{
         _appLocale = const Locale("ar");
         CashHelper.saveData(key: CashHelper.languageKey,value: "ar");
+        CashHelper.saveData(key: CashHelper.languageNameKey,value: "langEnglish");
         debugPrint('App language is Arabic');
         emit(ChangeToArabicState());
       }
@@ -51,6 +49,7 @@ class LocalizationCubit extends Cubit<LocalizationStates>{
       case "en":{
         _appLocale = const Locale("en");
         CashHelper.saveData(key: CashHelper.languageKey,value: "en");
+        CashHelper.saveData(key: CashHelper.languageNameKey,value: "langArabic");
         debugPrint('App language is English');
         emit(ChangeToEnglishState());
       }

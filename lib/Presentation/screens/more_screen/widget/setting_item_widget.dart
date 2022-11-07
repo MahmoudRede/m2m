@@ -21,27 +21,27 @@ class SettingItemWidget extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(SizeConfig.height*.015),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.grey[300]
+            borderRadius: BorderRadius.circular(SizeConfig.height*.015),
+            color: ColorManager.whiteDark,
         ),
         child: Row(
           children: [
 
             Icon(icon,),
 
-            SizedBox(width: SizeConfig.height*.01,),
+            SizedBox(width: SizeConfig.height*.015,),
 
             Expanded(
               child: Text(AppLocalizations.of(context)!.translate(title).toString(),
-                style: GoogleFonts.aBeeZee(
+                style: GoogleFonts.roboto(
                     color: ColorManager.black,
-                    fontWeight: FontWeight.w300,
-                    fontSize: SizeConfig.height*.022
+                    fontWeight: FontWeight.w500,
+                    fontSize: SizeConfig.height*.02,
                 ),),
             ),
 
 
-            const Icon(IconBroken.Arrow___Right_2)
+            const Icon(IconBroken.Arrow___Right_2),
 
           ],
         ),
