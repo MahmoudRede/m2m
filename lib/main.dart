@@ -92,6 +92,7 @@ class _MyAppState extends State<MyApp> {
               DefaultCupertinoLocalizations.delegate,
             ],
             supportedLocales: const [
+              
               Locale("en",""),
               Locale("ar",""),
             ],
