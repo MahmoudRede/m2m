@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
-            home: const PackageScreen(),
+            home: const SplashScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
