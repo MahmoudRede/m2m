@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:680642491416:android:24931db1a59adda6807f6d",
+        "mobilesdk_app_id": "1:680642491416:android:f4573cf881396232807f6d",
         "android_client_info": {
-          "package_name": "com.example.m2m"
+          "package_name": "com.m2m.m2m"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "680642491416-6h4mj7u8d8tniterlq4hhem6rse8i7ru.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.m2m.m2m",
+            "certificate_hash": "1e79707aca17d026a4c60c68b9ae9c50fc8b258a"
+          }
+        },
         {
           "client_id": "680642491416-8jccne3b5r5b8kgm9tdgqjjorsacftvb.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +37,13 @@
             {
               "client_id": "680642491416-8jccne3b5r5b8kgm9tdgqjjorsacftvb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "680642491416-si1vv15uh5k5jcurhlj2jevncmbumm0f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.m2m.m2m"
+              }
             }
           ]
         }

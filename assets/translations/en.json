@@ -107,9 +107,16 @@
   "profileImage": "Profile Image",
   "profileImageSave": "Profile Image Save",
 
+
+  "profile": "Profile",
+  "todayTasks": "Today Tasks",
+
+
+
   "link": "Link",
   "addCourse": "Add Course",
   "courseImage": "Course Image",
+  "courses": "Courses",
   "enterCourseTitle": "Enter Course Title",
   "enterCourseLink": "Enter Course Link",
 
@@ -141,6 +148,7 @@
   "time": "Time",
   "task": "Task",
   "allUser": "All User",
+  "logout": "Logout",
   "notUserEnterYet": "There 's no user enter application yet",
   "taskWaitMessage": "Wait for your Newer today tasks..",
 

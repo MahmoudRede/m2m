@@ -36,7 +36,7 @@ class AppCubit extends Cubit<AppStates>{
 
     emit(GetUserLoadingState());
 
-    FirebaseFirestore.instance.collection('users')
+    await FirebaseFirestore.instance.collection('users')
         .doc(uId)
         .get()
         .then((value) {
@@ -206,20 +206,21 @@ class AppCubit extends Cubit<AppStates>{
 
     FirebaseAuth.instance.currentUser!.delete().then((value) {
       debugPrint("user deleted from fire auth");
-
-      FirebaseFirestore.instance.collection('users')
-          .doc(userId)
-          .delete().then((value) {
-        debugPrint('User Delete Success');
-      }).catchError((error){
-        debugPrint('Error in delete user is ${error.toString()}');
-        emit(DeleteUserErrorState());
-      });
-
       emit(DeleteUserSuccessState());
 
     }).catchError((error){
       debugPrint('Error when delete user from fire auth : ${error.toString()}');
+      emit(DeleteUserErrorState());
+    });
+
+    FirebaseFirestore.instance.collection('users')
+        .doc(userId)
+        .delete().then((value) {
+
+      emit(DeleteUserSuccessState());
+      debugPrint('User Delete Success');
+    }).catchError((error){
+      debugPrint('Error in delete user is ${error.toString()}');
       emit(DeleteUserErrorState());
     });
 

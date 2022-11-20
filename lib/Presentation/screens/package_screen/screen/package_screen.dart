@@ -5,7 +5,6 @@ import 'package:m2m/Presentation/screens/package_screen/screen/item/subscribe_pa
 import 'package:m2m/Presentation/screens/package_screen/screen/item/waiting_screen_item.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_cubit/app_states.dart';
-import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
 
 
 class PackageScreen extends StatefulWidget {
