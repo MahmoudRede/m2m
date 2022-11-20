@@ -22,7 +22,7 @@ class SettingItemWidget extends StatelessWidget {
         padding: EdgeInsets.all(SizeConfig.height*.015),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(SizeConfig.height*.015),
-            color: ColorManager.whiteDark,
+            color: Colors.grey[300],
         ),
         child: Row(
           children: [

@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.m2m">
+    package="com.m2m.m2m">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="m2m"
+        android:label="M2M"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

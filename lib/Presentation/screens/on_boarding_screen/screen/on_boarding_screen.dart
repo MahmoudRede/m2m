@@ -45,7 +45,7 @@ class _OnBoardingState extends State<OnBoarding> {
     timer = Timer.periodic(const Duration(seconds: 10), (timer) {
       Future.delayed(const Duration(seconds: 7),(){
         if(currentIndex==3){
-          navigateAndRemove(context,LoginScreen());
+          navigateAndRemove(context,const LoginScreen());
         }
         else{
           currentIndex++;
@@ -60,6 +60,7 @@ class _OnBoardingState extends State<OnBoarding> {
   void dispose() {
     // TODO: implement dispose
     timer.cancel();
+    pageController.dispose();
     super.dispose();
   }
 
