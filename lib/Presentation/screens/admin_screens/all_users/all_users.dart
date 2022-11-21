@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/admin_screens/all_users/single_user.dart';
 import 'package:m2m/Presentation/screens/admin_screens/all_users/widget/not_users_yet.dart';
 import 'package:m2m/Presentation/screens/admin_screens/all_users/widget/user_item.dart';
@@ -108,8 +109,11 @@ class _AllUserState extends State<AllUser> {
               ),),
             titleSpacing: 0,
             leading: IconButton(
-              icon: Icon(
+              icon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
                 IconBroken.Arrow___Left_2,
+                color: ColorManager.black,
+              ):Icon(
+                IconBroken.Arrow___Right_2,
                 color: ColorManager.black,
               ),
               onPressed: (){

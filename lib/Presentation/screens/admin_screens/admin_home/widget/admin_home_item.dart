@@ -24,46 +24,46 @@ class AdminHomeItem extends StatelessWidget {
   ];
 
   final int index;
-  const AdminHomeItem({Key? key,required this.index}) : super(key: key);
+  final VoidCallback onTap;
+  const AdminHomeItem({Key? key,required this.index, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: AlignmentDirectional.centerStart,
-      height: SizeConfig.height*.14,
-      padding: EdgeInsets.only(
-        left: SizeConfig.height*.02,
-        right: SizeConfig.height*.02,
-        top: SizeConfig.height*.02,
-        bottom: SizeConfig.height*.02,
-      ),
-      margin: EdgeInsets.only(
-        left: SizeConfig.height*.02,
-        right: SizeConfig.height*.02,
-      ),
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: ColorManager.primary
-          ),
-          borderRadius: BorderRadius.circular(SizeConfig.height*.02),
-
-          // image
-          image: DecorationImage(
-              image: AssetImage('assets/images/${imageName[index]}.jpg'),
-              opacity: .5,
-              fit: BoxFit.cover
-          )
-      ),
-      // test
-      child: Text(AppLocalizations.of(context)!.translate(titleName[index]).toString(),
-        style: textManager(
-            color: ColorManager.black,
-            fontWeight: FontWeight.w500,
-            fontSize: SizeConfig.height*.03
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        alignment: AlignmentDirectional.centerStart,
+        height: SizeConfig.height*.14,
+        padding: EdgeInsets.all(
+          SizeConfig.height*.02,
         ),
+        margin: EdgeInsets.symmetric(
+          horizontal: SizeConfig.height*.02,
+        ),
+        decoration: BoxDecoration(
+            border: Border.all(
+                color: ColorManager.primary
+            ),
+            borderRadius: BorderRadius.circular(SizeConfig.height*.02),
+
+            // image
+            image: DecorationImage(
+                image: AssetImage('assets/images/${imageName[index]}.jpg'),
+                opacity: .5,
+                fit: BoxFit.cover
+            )
+        ),
+        // test
+        child: Text(AppLocalizations.of(context)!.translate(titleName[index]).toString(),
+          style: textManager(
+              color: ColorManager.black,
+              fontWeight: FontWeight.w500,
+              fontSize: SizeConfig.height*.03
+          ),
+        ),
+
+
       ),
-
-
     );
   }
 }

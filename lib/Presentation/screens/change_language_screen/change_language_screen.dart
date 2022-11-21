@@ -29,6 +29,16 @@ class ChangeLanguageScreen extends StatelessWidget {
                   fontSize: SizeConfig.headline3Size,
               ),),
             titleSpacing: 0,
+            leading: IconButton(
+              onPressed: ()=>Navigator.pop(context),
+              icon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
+                IconBroken.Arrow___Left_2,
+                color: ColorManager.black,
+              ):Icon(
+                IconBroken.Arrow___Right_2,
+                color: ColorManager.black,
+              ),
+            ),
             systemOverlayStyle: const SystemUiOverlayStyle(
                 statusBarIconBrightness: Brightness.dark,
                 statusBarColor: Colors.white

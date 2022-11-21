@@ -186,7 +186,6 @@ class SubscribePackageScreen extends StatelessWidget {
               ),
             ],
           ),
-          drawer: const HomeDrawer(),
         );
       },
     );

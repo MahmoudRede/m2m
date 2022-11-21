@@ -12,6 +12,7 @@ import 'package:m2m/Presentation/styles/icon_broken.dart';
 import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_state.dart';
 
@@ -48,7 +49,7 @@ class FollowRegister extends StatelessWidget {
             navigateTo(context,const VerifiedRegister());
           }
           if(state is UserRegisterErrorState){
-            customToast(title: 'Invalid data , please try again', color: ColorManager.red);
+            customToast(title: AppLocalizations.of(context)!.translate('registerErrorMsg').toString(), color: ColorManager.red);
           }
 
         },
@@ -59,15 +60,20 @@ class FollowRegister extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: ColorManager.white,
               elevation: 0.0,
-              title: Text('Complete Registration',style: GoogleFonts.aBeeZee(
+              title: Text(
+                AppLocalizations.of(context)!.translate('completeRegistration').toString(),
+                style: GoogleFonts.aBeeZee(
                   color: ColorManager.black,
                   fontWeight: FontWeight.w500,
                   fontSize: size.height*.03
               ),),
               titleSpacing: 0,
               leading: IconButton(
-                icon: Icon(
+                icon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
                   IconBroken.Arrow___Left_2,
+                  color: ColorManager.black,
+                ):Icon(
+                  IconBroken.Arrow___Right_2,
                   color: ColorManager.black,
                 ),
                 onPressed: (){
@@ -115,11 +121,11 @@ class FollowRegister extends StatelessWidget {
                               vertical: 10
                           ),
                           child: Text(
-                              'Id National Card',style: GoogleFonts.aBeeZee(
+                              AppLocalizations.of(context)!.translate('idNationalCard').toString(),
+                              style: GoogleFonts.aBeeZee(
                               fontWeight: FontWeight.w600,
                               color: ColorManager.primary,
                               fontSize: size.height*.025,
-                              decoration: TextDecoration.underline,
                               decorationThickness: 2
                           )
                           ),
@@ -158,11 +164,11 @@ class FollowRegister extends StatelessWidget {
                               vertical: 10
                           ),
                           child: Text(
-                              'Personal Image',style: GoogleFonts.aBeeZee(
+                              AppLocalizations.of(context)!.translate('personalImage').toString(),
+                              style: GoogleFonts.aBeeZee(
                               fontWeight: FontWeight.w600,
                               color: ColorManager.primary,
                               fontSize: size.height*.025,
-                              decoration: TextDecoration.underline,
                               decorationThickness: 2
                           )
                           ),
@@ -175,7 +181,7 @@ class FollowRegister extends StatelessWidget {
                     color: ColorManager.primary,
                   ):
                   DefaultButton(
-                      text: 'Sign Up',
+                      text: AppLocalizations.of(context)!.translate('signUp').toString(),
                       color: ColorManager.primary,
                       onPressed: (){
 
@@ -206,7 +212,7 @@ class FollowRegister extends StatelessWidget {
 
                          }else{
 
-                           customToast(title: 'Please upload required image', color: Colors.red);
+                           customToast(title: AppLocalizations.of(context)!.translate('pleaseSelectRequireImage').toString(), color: Colors.red);
                          }
                       }
                   )

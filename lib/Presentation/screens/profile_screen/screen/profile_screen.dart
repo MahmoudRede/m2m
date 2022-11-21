@@ -49,8 +49,11 @@ class ProfileScreen extends StatelessWidget {
               ),),
             titleSpacing: 0,
             leading: IconButton(
-              icon: Icon(
+              icon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
                 IconBroken.Arrow___Left_2,
+                color: ColorManager.black,
+              ):Icon(
+                IconBroken.Arrow___Right_2,
                 color: ColorManager.black,
               ),
               onPressed: (){
@@ -150,7 +153,7 @@ class ProfileScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
 
-                            Text('${AppLocalizations.of(context)!.translate('phone').toString()} :',
+                            Text('${AppLocalizations.of(context)!.translate('phoneNumber').toString()} :',
                                 style: textManager(color: ColorManager.white,fontSize: SizeConfig.height*.025,fontWeight: FontWeight.w500)
                             ),
 

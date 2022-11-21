@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Data/model/payment_model.dart';
 import 'package:m2m/Presentation/screens/admin_screens/payment_screens/widget/payment_list_item.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/Presentation/styles/icon_broken.dart';
 import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_states.dart';
@@ -31,6 +33,18 @@ class PaymentRequestsScreen extends StatelessWidget {
                 ),
               ),
               centerTitle: true,
+              leading: IconButton(
+                icon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
+                  IconBroken.Arrow___Left_2,
+                  color: ColorManager.black,
+                ):Icon(
+                  IconBroken.Arrow___Right_2,
+                  color: ColorManager.black,
+                ),
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+              ),
             ),
             body: Column(
               children: [

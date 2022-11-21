@@ -46,8 +46,11 @@ class MoreScreen extends StatelessWidget {
                 ),),
               titleSpacing: 0,
               leading: IconButton(
-                icon: Icon(
+                icon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
                   IconBroken.Arrow___Left_2,
+                  color: ColorManager.black,
+                ):Icon(
+                  IconBroken.Arrow___Right_2,
                   color: ColorManager.black,
                 ),
                 onPressed: (){
@@ -226,6 +229,8 @@ class MoreScreen extends StatelessWidget {
                       },
                       icon: IconBroken.Logout,
                     ),
+
+                    SizedBox(height: SizeConfig.height*.02,),
 
                   ],
                 ),

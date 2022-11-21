@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:m2m/Data/model/user_task.dart';
+import 'package:m2m/Presentation/screens/upload_task_screen/upload_task_images.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
-import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
-import 'package:m2m/business_logic/app_cubit/app_states.dart';
+import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/business_logic/app_localization.dart';
+import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
+import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
 
-class UploadTaskScreen extends StatelessWidget {
-  const UploadTaskScreen({Key? key}) : super(key: key);
+class AddTaskImageScreen extends StatelessWidget {
+  final UserTaskModel userTaskModel;
+  const AddTaskImageScreen({Key? key, required this.userTaskModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit,AppStates>(
+    return BlocConsumer<TasksCubit,TasksStates>(
       listener: (context,state){},
       builder: (context,state){
-        var cubit = AppCubit.get(context);
+        var cubit = TasksCubit.get(context);
+
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Upload Task',
-              style: TextStyle(
-                fontSize: SizeConfig.headline2Size,
-                fontWeight: FontWeight.bold,
-                color: ColorManager.black,
-              ),
+            AppLocalizations.of(context)!.translate('addTaskImage').toString(),
+            style: TextStyle(
+              fontSize: SizeConfig.headline2Size,
+              fontWeight: FontWeight.bold,
+              color: ColorManager.black,
             ),
-            centerTitle: true,
           ),
+          centerTitle: true,
+        ),
           body: Padding(
             padding: EdgeInsets.symmetric(
               vertical :SizeConfig.height*0.02,
@@ -37,11 +43,11 @@ class UploadTaskScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
 
-                // uploaded image widget
+                // add task from gallery
                 InkWell(
                   onTap: ()=>cubit.getTaskImage(),
                   child: Container(
-                    height: SizeConfig.height*0.7,
+                    height: SizeConfig.height*0.4,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -60,7 +66,7 @@ class UploadTaskScreen extends StatelessWidget {
                           size: SizeConfig.height*0.05,
                         ),
                         Text(
-                          'Upload your task screen',
+                          AppLocalizations.of(context)!.translate('chooseImage').toString(),
                           style: TextStyle(
                             fontSize: SizeConfig.headline4Size,
                             color: ColorManager.lightBlue,
@@ -85,15 +91,27 @@ class UploadTaskScreen extends StatelessWidget {
                 ),
 
                 // upload button
-                DefaultButton(
-                  text: AppLocalizations.of(context)!.translate('upload').toString(),
-                  onPressed: (){},
+                state is UploadTaskImageLoadingState?
+                const CircularProgressIndicator(
+                  color: ColorManager.primary,
+                ):DefaultButton(
+                  text: AppLocalizations.of(context)!.translate('add').toString(),
+                  onPressed: (){
+                    if(cubit.uploadedTaskImage != null){
+                      cubit.uploadTaskImage().then((value) {
+                        customToast(title: AppLocalizations.of(context)!.translate('imageIsUploaded').toString(), color: ColorManager.gold);
+                        cubit.uploadedTaskImage = null;
+                        navigateAndRemove(context, UploadTaskImagesScreen(userTaskModel: userTaskModel,));
+                      });
+                    }else{
+                      customToast(title: AppLocalizations.of(context)!.translate('pleaseSelectImage').toString(), color: ColorManager.red);
+                    }
+                  },
                   color: ColorManager.secondDarkColor,
                 ),
               ],
             ),
           ),
-
         );
       },
     );

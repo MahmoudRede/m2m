@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/view_courses/widget/course_item_widget.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -33,8 +34,11 @@ class ViewCourses extends StatelessWidget {
                   ),),
                 titleSpacing: 0,
                 leading: IconButton(
-                  icon: Icon(
+                  icon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
                     IconBroken.Arrow___Left_2,
+                    color: ColorManager.black,
+                  ):Icon(
+                    IconBroken.Arrow___Right_2,
                     color: ColorManager.black,
                   ),
                   onPressed: (){
