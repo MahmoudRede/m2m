@@ -31,11 +31,11 @@ class PackageScreenItem extends StatelessWidget {
   ];
 
   final List<String> packageTasks = [
-    '5 Tasks',
-    '7 Tasks',
-    '10 Tasks',
-    '20 Tasks',
-    '40 Tasks',
+    '5',
+    '7',
+    '10',
+    '20',
+    '40',
   ];
 
   final List<String> packageImage = [
@@ -215,7 +215,6 @@ class PackageScreenItem extends StatelessWidget {
               ),
             ],
           ),
-          drawer: const HomeDrawer(),
         );
 
 

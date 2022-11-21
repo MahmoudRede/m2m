@@ -38,8 +38,11 @@ class AboutApp extends StatelessWidget {
               ),),
             titleSpacing: 0,
             leading: IconButton(
-              icon: Icon(
+              icon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
                 IconBroken.Arrow___Left_2,
+                color: ColorManager.black,
+              ):Icon(
+                IconBroken.Arrow___Right_2,
                 color: ColorManager.black,
               ),
               onPressed: (){
@@ -60,7 +63,6 @@ class AboutApp extends StatelessWidget {
               right: SizeConfig.height*.02,
               bottom: SizeConfig.height*.02,
             ),
-
             child: ListView(
               children: [
 

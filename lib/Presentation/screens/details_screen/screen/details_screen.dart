@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/verify_payment_screen/verify_payment_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/Presentation/styles/icon_broken.dart';
 import 'package:m2m/Presentation/widgets/CustomBoxInformation.dart';
 import 'package:m2m/Presentation/widgets/custome_action_button.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
@@ -43,7 +45,7 @@ class DetailsScreen extends StatelessWidget {
                     SizeConfig.height*0.025,
                   ),
                   child: CustomActionButton(
-                    boxIcon: FontAwesomeIcons.chevronLeft,
+                    boxIcon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?IconBroken.Arrow___Left_2:IconBroken.Arrow___Right_2,
                     iconColor: ColorManager.white,
                     backgroundColor: ColorManager.secondDarkColor,
                     onTap: ()=>  Navigator.pop(context),

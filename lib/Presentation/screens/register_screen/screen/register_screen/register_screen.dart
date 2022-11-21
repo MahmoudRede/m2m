@@ -11,6 +11,7 @@ import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/default_form_field.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_state.dart';
 
@@ -82,16 +83,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   children: [
                                     SizedBox(height: size.height *.03,),
                                     Text(
-                                      'Register',
+                                      AppLocalizations.of(context)!.translate('signUp').toString(),
                                       style: GoogleFonts.aBeeZee(
                                           color: ColorManager.black,
                                           fontSize: size.height*.041,
                                           fontWeight: FontWeight.w600
                                       ),
                                     ),
-                                    SizedBox(height: size.height *.01,),
                                     Text(
-                                      'Create your new account',
+                                      AppLocalizations.of(context)!.translate('singUpMsg').toString(),
                                       style: textManager(
                                           color: Colors.grey.shade500,
                                           fontSize: size.height*.021,
@@ -108,10 +108,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         prefixWidget: const Icon(
                                             IconBroken.User1,
                                         ),
-                                        hint: 'User Name',
+                                        hint: AppLocalizations.of(context)!.translate('userName').toString(),
                                         controller: nameController,
                                         textInputType: TextInputType.name,
-                                        validText: 'Please enter your userName',
+                                        validText: AppLocalizations.of(context)!.translate('userNameValidateMsg').toString(),
                                       ),
                                     ),
                                     Container(
@@ -123,10 +123,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         prefixWidget: const Icon(
                                             IconBroken.User
                                         ),
-                                        hint: 'Email',
+                                        hint: AppLocalizations.of(context)!.translate('email').toString(),
                                         controller: emailController,
                                         textInputType: TextInputType.emailAddress,
-                                        validText: 'Please enter your email',
+                                        validText: AppLocalizations.of(context)!.translate('emailValidateMsg').toString(),
                                       ),
                                     ),
                                     Container(
@@ -145,11 +145,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                                           });
                                         },
-                                        hint: 'Password',
+                                        hint: AppLocalizations.of(context)!.translate('password').toString(),
                                         isPassword: isPassword,
                                         controller: passController,
                                         textInputType: TextInputType.visiblePassword,
-                                        validText: 'Please enter your password',
+                                        validText: AppLocalizations.of(context)!.translate('passwordValidateMsg').toString(),
                                       ),
                                     ),
                                     Container(
@@ -161,10 +161,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         prefixWidget: const Icon(
                                             IconBroken.Call
                                         ),
-                                        hint: 'Phone Number',
+                                        hint: AppLocalizations.of(context)!.translate('phoneNumber').toString(),
                                         controller: phoneController,
                                         textInputType: TextInputType.phone,
-                                        validText: 'Please enter your phoneNumber',
+                                        validText: AppLocalizations.of(context)!.translate('phoneValidateMsg').toString(),
                                       ),
                                     ),
                                     SizedBox(height: size.height *.015,),
@@ -190,7 +190,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           }
 
                                         },
-                                        text: 'Next',
+                                        text: AppLocalizations.of(context)!.translate('next').toString(),
                                         color: ColorManager.primary,
                                       ),
                                     ),
@@ -199,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Already have an account?',
+                                          AppLocalizations.of(context)!.translate('alreadyHaveAccount').toString(),
                                           style: textManager(
                                               color: Colors.grey.shade700,
                                               fontSize: size.height*.02,
@@ -212,7 +212,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             navigateAndRemove( context, LoginScreen(),);
                                           },
                                           child: Text(
-                                            ' Sign in',
+                                            ' ${AppLocalizations.of(context)!.translate('signIn').toString()}',
                                             style: textManager(
                                                 color: ColorManager.primary,
                                                 fontSize: size.height*.023,

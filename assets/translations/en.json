@@ -58,6 +58,7 @@
   "all_users": "All Users",
   "payment_screens": "Payment Screens",
   "add_tasks": "Add Tasks",
+  "showTasks": "Show Tasks",
   "users_request": "Users Request",
   "payment": "Payment",
   "confirmPayment": "Confirm Payment",
@@ -158,9 +159,31 @@
   "unsubscribeWarningMessage": "Are you sure to cancel your subscribe.?",
   "cancel": "Cancel",
   "unsubscribeTitleMessage": "Warning..!",
-
-
-
-  "next":"Next"
+  "loginScreenWelcomeMsg" : "Welcome Back",
+  "loginScreenWelcomeMsg2" : "Login to your account",
+  "loginScreenErrorMsg" : "Email or Password isn\\'t correct",
+  "password" : "Password",
+  "emailValidateMsg" : "Please enter your email",
+  "passwordValidateMsg" : "Please enter your password",
+  "forgetPassword" : "Forget Password",
+  "doNotHaveAccount" : "Don\\'t have an account?",
+  "signUp" : "Sign Up",
+  "signIn" : "Sign In",
+  "userName" : "userName",
+  "phoneNumber" : "Phone number",
+  "alreadyHaveAccount" : "Already have an account",
+  "singUpMsg" : "Create your new account",
+  "userNameValidateMsg" : "Please enter your username",
+  "phoneValidateMsg" : "Please enter your phone number",
+  "inviteCode" : "Invite code",
+  "selectYourSkills" : "Select your skills : ",
+  "ageValidateMsg" : "Please enter your age",
+  "completeRegistration" : "Complete Registration",
+  "idNationalCard" : "Id National Card",
+  "personalImage" : "Personal Image",
+  "pleaseSelectRequireImage" : "Please upload required image",
+  "registerErrorMsg" : "Invalid data , please try again",
+  "next":"Next",
+  "more":"More"
 
 }

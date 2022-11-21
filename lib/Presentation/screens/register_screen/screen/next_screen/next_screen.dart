@@ -124,21 +124,19 @@ class _NextScreenState extends State<NextScreen> {
                               children: [
                                 SizedBox(height: size.height *.03,),
                                 Text(
-                                  'Register',
+                                  AppLocalizations.of(context)!.translate('signUp').toString(),
                                   style: GoogleFonts.aBeeZee(
                                       color: ColorManager.black,
                                       fontSize: size.height*.041,
                                       fontWeight: FontWeight.w600
                                   ),
                                 ),
-                                SizedBox(height: size.height *.01,),
                                 Text(
-                                  'Create your new account',
+                                  AppLocalizations.of(context)!.translate('singUpMsg').toString(),
                                   style: textManager(
-                                    color: Colors.grey.shade500,
-                                    fontSize: size.height*.021,
-                                    fontWeight: FontWeight.w400
-
+                                      color: Colors.grey.shade500,
+                                      fontSize: size.height*.021,
+                                      fontWeight: FontWeight.w400
                                   ),
                                 ),
                                 SizedBox(height: size.height *.02,),
@@ -199,10 +197,10 @@ class _NextScreenState extends State<NextScreen> {
                                     prefixWidget: const Icon(
                                         Icons.numbers
                                     ),
-                                    hint: 'Age',
+                                    hint: AppLocalizations.of(context)!.translate('age').toString(),
                                     controller: ageController,
                                     textInputType: TextInputType.number,
-                                    validText: 'Please enter your age',
+                                    validText: AppLocalizations.of(context)!.translate('ageValidateMsg').toString(),
                                   ),
                                 ),
 
@@ -215,7 +213,7 @@ class _NextScreenState extends State<NextScreen> {
                                     prefixWidget: const Icon(
                                         Icons.code
                                     ),
-                                    hint: 'Invite code',
+                                    hint: AppLocalizations.of(context)!.translate('inviteCode').toString(),
                                     controller: codeController,
                                     textInputType: TextInputType.number,
                                   ),
@@ -229,7 +227,8 @@ class _NextScreenState extends State<NextScreen> {
                                   ),
                                   child: Align(
                                     alignment: AlignmentDirectional.topStart,
-                                    child: Text('Select your skills :',
+                                    child: Text(
+                                      AppLocalizations.of(context)!.translate('selectYourSkills').toString(),
                                       style: GoogleFonts.aBeeZee(
                                           color: ColorManager.black,
                                           fontWeight: FontWeight.w400,
@@ -535,7 +534,7 @@ class _NextScreenState extends State<NextScreen> {
                                          ));
                                       }
                                     },
-                                    text: 'Next',
+                                    text: AppLocalizations.of(context)!.translate('next').toString(),
                                     color: ColorManager.primary,
                                   ),
                                 ),

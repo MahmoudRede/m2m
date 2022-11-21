@@ -25,9 +25,8 @@ class AppCubit extends Cubit<AppStates>{
 
   static AppCubit get(context) => BlocProvider.of(context);
 
-  final manager=CacheManager(
-    Config('customCacheKey',
-      stalePeriod: const Duration(days: 15),maxNrOfCacheObjects: 100,),
+  final manager = CacheManager(
+    Config('customCacheKey', stalePeriod: const Duration(days: 15),maxNrOfCacheObjects: 100,),
   );
 
   UserModel ?userModel;
@@ -67,21 +66,20 @@ class AppCubit extends Cubit<AppStates>{
     unConfirmedUsers=[];
     emit(GetUsersLoadingState());
 
-    FirebaseFirestore.instance.collection('users')
-        .get().then((value) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .get()
+        .then((value) {
 
       for (var element in value.docs) {
         users.add(UserModel.fromMap(element.data()));
-
         if(element.data()['isConfirmed'] ==false){
           unConfirmedUsers.add(UserModel.fromMap(element.data()));
         }
-
       }
 
       emit(GetUsersSuccessState());
     }).catchError((error){
-
       debugPrint('Error is ${error.toString()}');
       emit(GetUsersErrorState());
     });
@@ -136,11 +134,9 @@ class AppCubit extends Cubit<AppStates>{
     FirebaseFirestore.instance
         .collection('tokens')
         .doc('$uId')
-        .set(
-        {
+        .set({
           "token":token
-        }
-    ).then((value){
+        }).then((value){
 
       debugPrint('Save Token Success');
       emit(SaveTokenSuccessState());

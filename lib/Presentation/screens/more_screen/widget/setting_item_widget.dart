@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/styles/icon_broken.dart';
@@ -22,7 +23,7 @@ class SettingItemWidget extends StatelessWidget {
         padding: EdgeInsets.all(SizeConfig.height*.015),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(SizeConfig.height*.015),
-            color: Colors.grey[300],
+            color: ColorManager.whiteDark,
         ),
         child: Row(
           children: [
@@ -41,7 +42,13 @@ class SettingItemWidget extends StatelessWidget {
             ),
 
 
-            const Icon(IconBroken.Arrow___Right_2),
+            CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
+              IconBroken.Arrow___Right_2,
+              color: ColorManager.black,
+            ):Icon(
+              IconBroken.Arrow___Left_2,
+              color: ColorManager.black,
+            ),
 
           ],
         ),

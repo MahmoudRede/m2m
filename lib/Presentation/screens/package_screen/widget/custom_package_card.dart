@@ -4,6 +4,7 @@ import 'package:m2m/Presentation/screens/details_screen/screen/details_screen.da
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 
 class CustomPackageCard extends StatelessWidget {
   final String image;
@@ -57,7 +58,7 @@ class CustomPackageCard extends StatelessWidget {
                       SizeConfig.height*0.01,
                     ),
                     child: Text(
-                      "More",
+                      AppLocalizations.of(context)!.translate('more').toString(),
                       style: textManager(
                         color: ColorManager.black,
                         fontSize: SizeConfig.headline3Size,
@@ -71,7 +72,7 @@ class CustomPackageCard extends StatelessWidget {
                 child: Lottie.asset(image),
               ),
               Text(
-                tasksNum,
+                "$tasksNum ${AppLocalizations.of(context)!.translate('tasks').toString()}",
                 style: textManager(
                   color: ColorManager.black,
                   fontSize: SizeConfig.headline2Size,

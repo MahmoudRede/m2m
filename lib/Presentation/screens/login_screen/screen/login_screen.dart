@@ -16,6 +16,7 @@ import 'package:m2m/Presentation/widgets/default_form_field.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/login_cubit/login_cubit.dart';
 import 'package:m2m/business_logic/login_cubit/login_state.dart';
 
@@ -42,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context,state){
            if(state is UserLoginSuccessState){
 
-             customToast(title: 'Welcome Back',color:ColorManager.primary );
+             customToast(title: AppLocalizations.of(context)!.translate('loginScreenWelcomeMsg').toString(),color:ColorManager.primary );
              CashHelper.saveData(key: 'uId',value: state.uid);
              AppCubit.get(context).getUser();
              navigateAndRemove(context,const PackageScreen());
@@ -51,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
            if(state is UserLoginErrorState){
 
-             customToast(title: 'Email or Password isn\'t correct',color:ColorManager.red );
+             customToast(title: AppLocalizations.of(context)!.translate('loginScreenErrorMsg').toString(),color:ColorManager.red );
 
            }
         },
@@ -94,16 +95,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             SizedBox(height: size.height *.05,),
                             Text(
-                              'Welcome back',
+                              AppLocalizations.of(context)!.translate('loginScreenWelcomeMsg').toString(),
                               style: GoogleFonts.aBeeZee(
                                   color: ColorManager.black,
                                   fontSize: size.height*.045,
                                   fontWeight: FontWeight.w600
                               ),
                             ),
-                            SizedBox(height: size.height *.01,),
                             Text(
-                              'Login to your account',
+                              AppLocalizations.of(context)!.translate('loginScreenWelcomeMsg2').toString(),
                               style: textManager(
                                 color: Colors.grey.shade500,
                                 fontSize: size.height*.022,
@@ -120,10 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 prefixWidget: const Icon(
                                     IconBroken.User
                                 ),
-                                hint: 'Email',
+                                hint: AppLocalizations.of(context)!.translate('email').toString(),
                                 controller: emailController,
                                 textInputType: TextInputType.emailAddress,
-                                validText: 'Please enter your email',
+                                validText: AppLocalizations.of(context)!.translate('emailValidateMsg').toString(),
                               ),
                             ),
                             Container(
@@ -142,11 +142,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                   });
                                 },
-                                hint: 'Password',
+                                hint: AppLocalizations.of(context)!.translate('password').toString(),
                                 isPassword: isPassword,
                                 controller: passController,
                                 textInputType: TextInputType.visiblePassword,
-                                validText: 'Please enter your password',
+                                validText: AppLocalizations.of(context)!.translate('passwordValidateMsg').toString(),
                               ),
                             ),
                             Align(
@@ -159,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       vertical: 10
                                   ),
                                   child: Text(
-                                    'Forget password',
+                                    AppLocalizations.of(context)!.translate('forgetPassword').toString(),
                                     style: textManager(
                                       color: ColorManager.lightBlue,
                                       fontSize: SizeConfig.headline3Size,
@@ -197,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   }
                                 },
                                 color: ColorManager.lightBlue,
-                                text: 'Sign in',
+                                text: AppLocalizations.of(context)!.translate('signIn').toString(),
                               ),
                             ),
                             SizedBox(height: size.height *0.05,),
@@ -205,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Don\'t have an account?',
+                                AppLocalizations.of(context)!.translate('doNotHaveAccount').toString(),
                                   style: textManager(
                                       color: Colors.grey.shade700,
                                       fontSize: size.height*.02,
@@ -215,10 +215,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                 GestureDetector(
                                   onTap: (){
-                                    navigateAndRemove(context,const RegisterScreen());
+                                    navigateTo(context,const RegisterScreen());
                                   },
                                   child: Text(
-                                    ' Sign Up',
+                                    ' ${AppLocalizations.of(context)!.translate('signUp').toString()}',
                                     style: textManager(
                                         color: ColorManager.primary,
                                         fontSize: size.height*.023,
