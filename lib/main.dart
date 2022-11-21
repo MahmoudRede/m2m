@@ -96,6 +96,7 @@ class _MyAppState extends State<MyApp> {
               Locale("en",""),
               Locale("ar",""),
             ],
+
             locale: LocalizationCubit.get(context).appLocal,
             localeResolutionCallback: (currentLang , supportLang){
               if(currentLang != null) {
