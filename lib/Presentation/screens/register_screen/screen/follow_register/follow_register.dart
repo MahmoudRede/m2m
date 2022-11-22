@@ -208,6 +208,7 @@ class FollowRegister extends StatelessWidget {
                                userSkill6: cubit.userSills6,
                                userSkill7: cubit.userSills7,
                                userSkill8: cubit.userSills8,
+                               context: context
                            );
 
                          }else{

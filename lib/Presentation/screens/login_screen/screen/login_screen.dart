@@ -1,10 +1,13 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/screens/admin_screens/admin_home/admin_home.dart';
+import 'package:m2m/Presentation/screens/forget_password/forget_password.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
+import 'package:m2m/Presentation/screens/privacy_terms/privacy_terms.dart';
 import 'package:m2m/Presentation/screens/register_screen/screen/register_screen/register_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
@@ -31,6 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
   var emailController=TextEditingController();
 
   var passController=TextEditingController();
+
+  bool isCheckBoxTrue = false;
 
   GlobalKey<FormState> formKey = GlobalKey();
 
@@ -152,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Align(
                               alignment: Alignment.topRight,
                               child: GestureDetector(
-                                onTap: (){},
+                                onTap: ()=>navigateTo(context, const ForgetPassword()),
                                 child: Container(
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 25,
@@ -168,7 +173,61 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: size.height *.045,),
+
+
+                            // privacy and terms
+                            SizedBox(
+                              height: size.height * .04,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Checkbox(
+                                    value: isCheckBoxTrue,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(2.0),
+                                    ),
+                                    side: MaterialStateBorderSide.resolveWith(
+                                          (states) => BorderSide(
+                                          width: 1.0, color: ColorManager.grey),
+                                    ),
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        isCheckBoxTrue = true;
+                                      });
+                                    }),
+                                Text.rich(
+                                  TextSpan(
+                                      text: AppLocalizations.of(context)!.translate('agreeTooOur').toString(),
+                                      style: textManager(color: ColorManager.grey),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: AppLocalizations.of(context)!.translate('privacyPolicies').toString(),
+                                          style: TextStyle(
+                                            fontSize: SizeConfig.height*.02,
+                                            color: ColorManager.primary,
+                                            decoration: TextDecoration.underline,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                    const PrivacyPolicies(),
+                                                  ));
+                                              // code to open / launch terms of service link here
+                                            },
+                                        ),
+                                      ]),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: size.height * .04,
+                            ),
+
+
                             Container(
                               margin: const EdgeInsets.symmetric(
                                   horizontal: 25,
@@ -182,17 +241,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: (){
                                   if(formKey.currentState!.validate()){
 
-                                    if( emailController.text == 'M2M2022@gmail.com' && passController.text == '123456789')
-                                      {
-                                        navigateTo(context, const AdminHome());
-                                        customToast(title: 'Welcome to Dashboard', color: ColorManager.primary);
-                                      }
-                                    else{
-                                      cubit.userLogin(
-                                          email: emailController.text,
-                                          password: passController.text
-                                      );
-                                    }
+                                     if(isCheckBoxTrue==true){
+
+                                       if( emailController.text == 'M2M2022@gmail.com' && passController.text == '123456789')
+                                       {
+                                         navigateTo(context, const AdminHome());
+                                         customToast(title: AppLocalizations.of(context)!.translate('welcomeToDashboard').toString(), color: ColorManager.primary);
+                                       }
+                                       else{
+                                         cubit.userLogin(
+                                             email: emailController.text,
+                                             password: passController.text
+                                         );
+                                       }
+                                       
+                                     }
+                                     else{
+                                       
+                                       customToast(title: AppLocalizations.of(context)!.translate('privacyPoliciesMsg').toString(), color: ColorManager.red);
+                                       
+                                     }
 
                                   }
                                 },

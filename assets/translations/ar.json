@@ -71,6 +71,14 @@
   "points": "النقط",
   "blockUser": "وقف حساب المستخدم",
   "settingScreen": "صفحه الاعدادت",
+  "forgetPasswordMsg" : "ادخل ايميلك سوف نرسل ليك لتغير كلمه المرور الخاص بيك",
+  "verifyEmail" : "تم ارسال الكود , رجاء افحص ايميلك الشخصي",
+
+  "agreeTooOur" : "توافق علي ",
+  "welcomeToDashboard" : "اهلا بيك في صفحه التحكم",
+  "privacyPolicies" : "سياسات الخصوصيه",
+  "privacyPoliciesMsg" : "يجب الموافقه علي سياسات الخصوصيه اولا",
+
 
   "language": "اللغه",
   "about": "عن التطبيق",
@@ -83,6 +91,7 @@
   "courses": "الدورات",
 
   "logout": "الخروج",
+  "send": "ارسال",
 
 
 

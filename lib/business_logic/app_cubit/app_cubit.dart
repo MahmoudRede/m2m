@@ -937,15 +937,18 @@ class AppCubit extends Cubit<AppStates>{
   Future<void> sendPublicChat({
     required String dateTime,
     required String text,
+    String ?senderName,
+    String ?senderImage,
+    String ?id
 
   })async{
 
     PublicChatModel publicChatModel =PublicChatModel(
-        senderId: uId,
+        senderId: id??uId,
         dateTime: dateTime,
         text: text,
-        senderName:userModel!.username,
-        senderImage: userModel!.profileImage
+        senderName:senderName??userModel!.username,
+        senderImage: senderImage??userModel!.profileImage
     );
 
     emit(SendPublicChatLoadingState());
@@ -1079,7 +1082,27 @@ class AppCubit extends Cubit<AppStates>{
       debugPrint('Error When unsubscribe user : ${error.toString()}');
       emit(UnsubscribeUserErrorState());
     });
+  }
 
+
+  Future<void> forgetPassword({
+     required String email,
+   })async{
+
+    emit(ForgetPasswordLoadingState());
+    FirebaseAuth.instance
+        .sendPasswordResetEmail(email: email)
+        .then((value) {
+
+      debugPrint('Link send to email=====> Reset password');
+      emit(ForgetPasswordSuccessState());
+
+    }).catchError((error){
+
+      debugPrint('Error im forgetPassword ${error.toString()}');
+      emit(ForgetPasswordErrorState());
+
+    });
 
   }
 

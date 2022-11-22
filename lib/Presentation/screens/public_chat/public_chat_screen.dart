@@ -33,6 +33,68 @@ class _PublicChatScreenState extends State<PublicChatScreen> {
   void initState() {
 
     super.initState();
+
+    // chat_bot message
+
+    if( CashHelper.getData(key: 'oneValue')==null && AppCubit.get(context).userModel!.wallet.money>=250 && AppCubit.get(context).userModel!.wallet.money<500){
+
+      AppCubit.get(context).sendPublicChat(
+          dateTime: DateTime.now().toString(),
+          text: '${AppCubit.get(context).userModel!.username} gain ${AppCubit.get(context).userModel!.wallet.money}',
+          senderImage: 'https://firebasestorage.googleapis.com/v0/b/m2mapp-91014.appspot.com/o/5500_1_06.jpg?alt=media&token=68645781-c54e-4ff0-ab92-0579f49067a0',
+          senderName: 'System',
+          id:'12225'
+      ).then((value) {
+        CashHelper.saveData(key: 'oneValue',value: true);
+      });
+
+    }
+    else if(AppCubit.get(context).userModel!.wallet.money>=500 && AppCubit.get(context).userModel!.wallet.money<1000 && CashHelper.getData(key: 'twoValue')==null){
+
+      AppCubit.get(context).sendPublicChat(
+          dateTime: DateTime.now().toString(),
+          text: '${AppCubit.get(context).userModel!.username} gain ${AppCubit.get(context).userModel!.wallet.money}',
+          senderImage: 'https://firebasestorage.googleapis.com/v0/b/m2mapp-91014.appspot.com/o/5500_1_06.jpg?alt=media&token=68645781-c54e-4ff0-ab92-0579f49067a0',
+          senderName: 'System',
+          id: '12225'
+      ).then((value) {
+
+        CashHelper.saveData(key: 'twoValue',value: true);
+
+      });
+
+    }
+    else if(AppCubit.get(context).userModel!.wallet.money>=1000 && AppCubit.get(context).userModel!.wallet.money<1500 && CashHelper.getData(key: 'threeValue')==null){
+
+      AppCubit.get(context).sendPublicChat(
+          dateTime: DateTime.now().toString(),
+          text: '${AppCubit.get(context).userModel!.username} gain ${AppCubit.get(context).userModel!.wallet.money}',
+          senderImage: 'https://firebasestorage.googleapis.com/v0/b/m2mapp-91014.appspot.com/o/5500_1_06.jpg?alt=media&token=68645781-c54e-4ff0-ab92-0579f49067a0',
+          senderName: 'System',
+          id: '12225'
+      ).then((value) {
+
+        CashHelper.saveData(key: 'threeValue',value: true);
+
+      });
+
+    }
+    else if(AppCubit.get(context).userModel!.wallet.money>=1500 && AppCubit.get(context).userModel!.wallet.money<2000 && CashHelper.getData(key: 'fourValue')==null){
+
+      AppCubit.get(context).sendPublicChat(
+          dateTime: DateTime.now().toString(),
+          text: '${AppCubit.get(context).userModel!.username} gain ${AppCubit.get(context).userModel!.wallet.money}',
+          senderImage: 'https://firebasestorage.googleapis.com/v0/b/m2mapp-91014.appspot.com/o/5500_1_06.jpg?alt=media&token=68645781-c54e-4ff0-ab92-0579f49067a0',
+          senderName: 'System',
+          id: '12225'
+      ).then((value) {
+
+        CashHelper.saveData(key: 'fourValue',value: true);
+
+      });
+
+    }
+
     if(scrollController.hasClients){
       scrollController.animateTo(scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 100), curve: Curves.linear);
     }
@@ -132,8 +194,9 @@ class _PublicChatScreenState extends State<PublicChatScreen> {
                                   itemCount: AppCubit.get(context).publicChat.length),
                             ),
                           ),
-
+                          
                           // write a message && send message
+                          AppCubit.get(context).userModel!.wallet.money>=100?
                           Padding(
                               padding: const EdgeInsets.all(8),
                               child: Row(
@@ -192,7 +255,8 @@ class _PublicChatScreenState extends State<PublicChatScreen> {
                                                 HapticFeedback.vibrate();
                                                 AppCubit.get(context).sendPublicChat(
                                                     dateTime: DateTime.now().toString(),
-                                                    text: textMessage.text);
+                                                    text: textMessage.text
+                                                );
                                                 textMessage.clear();
                                               },
                                               color: ColorManager.primary,
@@ -205,7 +269,17 @@ class _PublicChatScreenState extends State<PublicChatScreen> {
                                   SizedBox(width: SizeConfig.height*.005,),
                                 ],
                               )
-                          ),
+                          ) :
+                              Container(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.all( SizeConfig.height*.02),
+                                height: SizeConfig.height*.07,
+                                width: double.infinity,
+                                color: ColorManager.primary,
+                                child: Text('Not allow foy you to send messages',
+                                  style: textManager(color: Colors.white,fontSize:SizeConfig.height*.02 ),
+                                ),
+                              )
 
                         ],
                       ),

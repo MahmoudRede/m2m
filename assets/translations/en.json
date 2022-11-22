@@ -54,6 +54,7 @@
 
 
   "send_task": "Send Task",
+  "send": "Send",
   "select_all": "Select All",
   "all_users": "All Users",
   "payment_screens": "Payment Screens",
@@ -166,6 +167,8 @@
   "emailValidateMsg" : "Please enter your email",
   "passwordValidateMsg" : "Please enter your password",
   "forgetPassword" : "Forget Password",
+  "forgetPasswordMsg" : "Enter your email we will send you to change password",
+  "verifyEmail" : "Code Sent , Please check your email",
   "doNotHaveAccount" : "Don\\'t have an account?",
   "signUp" : "Sign Up",
   "signIn" : "Sign In",
@@ -181,8 +184,16 @@
   "completeRegistration" : "Complete Registration",
   "idNationalCard" : "Id National Card",
   "personalImage" : "Personal Image",
+
+  "agreeTooOur" : "Agree to our ",
+  "welcomeToDashboard" : "Welcome to Dashboard",
+  "privacyPolicies" : "Privacy Policies",
+  "privacyPoliciesMsg" : "You Must Agree To Privacy Policies First",
+
   "pleaseSelectRequireImage" : "Please upload required image",
   "registerErrorMsg" : "Invalid data , please try again",
+
+
   "next":"Next",
   "more":"More"
 

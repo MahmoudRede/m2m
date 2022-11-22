@@ -59,31 +59,35 @@ class ResieverPublicChatWidget extends StatelessWidget {
                         bottomRight: Radius.circular(SizeConfig.height*.02),
                       ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Column(
 
-                        // user name
-                        Text('${cubit.publicChat[index!].senderName}',
-                          style:textManager(
-                            fontWeight: FontWeight.w500,
-                            fontSize: SizeConfig.height*.01,
-                            color: ColorManager.white,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          // user name
+                          Text('${cubit.publicChat[index!].senderName}',
+                            style:textManager(
+                              fontWeight: FontWeight.w500,
+                              fontSize: SizeConfig.height*.01,
+                              color: ColorManager.white,
+                            ),
+
                           ),
+                          SizedBox(height: SizeConfig.height*.01,),
 
-                        ),
-                        SizedBox(height: SizeConfig.height*.01,),
+                          // message
+                          Text('${cubit.publicChat[index!].text}',
+                            style:textManager(
+                              fontWeight: FontWeight.w500,
+                              fontSize: SizeConfig.height*.02,
+                              color: ColorManager.white,
+                            ),
+                          )
 
-                        // message
-                        Text(' ${cubit.publicChat[index!].text}',
-                          style:textManager(
-                            fontWeight: FontWeight.w500,
-                            fontSize: SizeConfig.height*.02,
-                            color: ColorManager.white,
-                          ),
-                        )
-
-                      ],
+                        ],
+                      ),
                     ),
                   )
 

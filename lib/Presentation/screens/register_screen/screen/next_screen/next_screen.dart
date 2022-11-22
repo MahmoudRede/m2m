@@ -48,30 +48,30 @@ class _NextScreenState extends State<NextScreen> {
 
     List<String> governmentNames=[
       AppLocalizations.of(context)!.translate('alexandria').toString(),
-      AppLocalizations.of(context)!.translate('ismailia').toString(),
       AppLocalizations.of(context)!.translate('aswan').toString(),
       AppLocalizations.of(context)!.translate('asyut').toString(),
-      AppLocalizations.of(context)!.translate('luxor').toString(),
-      AppLocalizations.of(context)!.translate('red_Sea').toString(),
-      AppLocalizations.of(context)!.translate('beheira').toString(),
       AppLocalizations.of(context)!.translate('bani_Sweif').toString(),
-      AppLocalizations.of(context)!.translate('port_Said').toString(),
-      AppLocalizations.of(context)!.translate('south_of_Sina').toString(),
-      AppLocalizations.of(context)!.translate('giza').toString(),
-      AppLocalizations.of(context)!.translate('dakahlia').toString(),
-      AppLocalizations.of(context)!.translate('damietta').toString(),
-      AppLocalizations.of(context)!.translate('sohag').toString(),
-      AppLocalizations.of(context)!.translate('suez').toString(),
-      AppLocalizations.of(context)!.translate('northOfSinai').toString(),
-      AppLocalizations.of(context)!.translate('gharbiya').toString(),
-      AppLocalizations.of(context)!.translate('fayoum').toString(),
+      AppLocalizations.of(context)!.translate('beheira').toString(),
       AppLocalizations.of(context)!.translate('cairo').toString(),
+      AppLocalizations.of(context)!.translate('damietta').toString(),
+      AppLocalizations.of(context)!.translate('dakahlia').toString(),
+      AppLocalizations.of(context)!.translate('fayoum').toString(),
+      AppLocalizations.of(context)!.translate('giza').toString(),
       AppLocalizations.of(context)!.translate('qalyubia').toString(),
       AppLocalizations.of(context)!.translate('qana').toString(),
+      AppLocalizations.of(context)!.translate('gharbiya').toString(),
+      AppLocalizations.of(context)!.translate('ismailia').toString(),
       AppLocalizations.of(context)!.translate('kafrEl-Sheikh').toString(),
-      AppLocalizations.of(context)!.translate('mursiMuttrah').toString(),
+      AppLocalizations.of(context)!.translate('luxor').toString(),
       AppLocalizations.of(context)!.translate('menoufia').toString(),
+      AppLocalizations.of(context)!.translate('mursiMuttrah').toString(),
       AppLocalizations.of(context)!.translate('minya').toString(),
+      AppLocalizations.of(context)!.translate('northOfSinai').toString(),
+      AppLocalizations.of(context)!.translate('port_Said').toString(),
+      AppLocalizations.of(context)!.translate('red_Sea').toString(),
+      AppLocalizations.of(context)!.translate('sohag').toString(),
+      AppLocalizations.of(context)!.translate('south_of_Sina').toString(),
+      AppLocalizations.of(context)!.translate('suez').toString(),
       AppLocalizations.of(context)!.translate('theNewValley').toString(),
 
     ];
@@ -131,6 +131,9 @@ class _NextScreenState extends State<NextScreen> {
                                       fontWeight: FontWeight.w600
                                   ),
                                 ),
+
+                                SizedBox(height: size.height *.01,),
+
                                 Text(
                                   AppLocalizations.of(context)!.translate('singUpMsg').toString(),
                                   style: textManager(
@@ -156,8 +159,8 @@ class _NextScreenState extends State<NextScreen> {
                                       horizontal: SizeConfig.height*.015,
                                     ),
                                     child: DropdownButton(
-                                      menuMaxHeight: SizeConfig.height*.2,
-                                      dropdownColor: ColorManager.black.withOpacity(1),
+                                      menuMaxHeight: SizeConfig.height*.3,
+                                      dropdownColor: ColorManager.primary.withOpacity(.95),
                                       elevation: 0,
                                       hint:cubit.governmentDropDown ==''
                                           ?  Text(AppLocalizations.of(context)!.translate('government').toString(), style: textManager(color: Colors.black54,fontSize: SizeConfig.height*.022))

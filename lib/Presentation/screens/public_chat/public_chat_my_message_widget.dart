@@ -47,30 +47,33 @@ class MyMessagePublicChatWidget extends StatelessWidget {
                         bottomLeft: Radius.circular(SizeConfig.height*.02),
                       ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
 
-                        // user name
-                        Text(cubit.userModel!.username,
-                          style:textManager(
-                              fontWeight: FontWeight.w500,
-                              fontSize: SizeConfig.height*.01,
-                              color: ColorManager.white,
+                          // user name
+                          Text(cubit.userModel!.username,
+                            style:textManager(
+                                fontWeight: FontWeight.w500,
+                                fontSize: SizeConfig.height*.01,
+                                color: ColorManager.white,
+                            ),
                           ),
-                        ),
 
-                        SizedBox(height: SizeConfig.height*.01,),
+                          SizedBox(height: SizeConfig.height*.01,),
 
-                        // message
-                        Text(' ${AppCubit.get(context).publicChat[index!].text}',
-                          style:textManager(
-                              fontWeight: FontWeight.w500,
-                              fontSize: SizeConfig.height*.02,
-                              color: ColorManager.white,
-                          ),
-                        )
-                      ],
+                          // message
+                          Text('${AppCubit.get(context).publicChat[index!].text}',
+                            style:textManager(
+                                fontWeight: FontWeight.w500,
+                                fontSize: SizeConfig.height*.02,
+                                color: ColorManager.white,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],

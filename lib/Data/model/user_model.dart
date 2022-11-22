@@ -13,6 +13,8 @@ class UserModel {
     required this.age,
     required this.skills,
     required this.inviteCode,
+    required this.userCode,
+    required this.rank,
     required this.isConfirmed,
     required this.month,
     required this.year,
@@ -39,6 +41,8 @@ class UserModel {
   final String age;
   final String skills;
   final String inviteCode;
+  final String rank;
+  final String userCode;
   final bool isConfirmed;
   final String month;
   final String year;
@@ -65,6 +69,8 @@ class UserModel {
     age: json["age"],
     skills: json["skills"],
     inviteCode: json["inviteCode"],
+    userCode: json["userCode"],
+    rank: json["rank"],
     isConfirmed: json["isConfirmed"],
     month: json["month"],
     year: json["year"],
@@ -92,6 +98,8 @@ class UserModel {
     "age": age,
     "skills": skills,
     "inviteCode": inviteCode,
+    "userCode": userCode,
+    "rank": rank,
     "isConfirmed": isConfirmed,
     "month": month,
     "year": year,

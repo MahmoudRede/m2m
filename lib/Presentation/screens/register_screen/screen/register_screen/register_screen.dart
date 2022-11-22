@@ -90,6 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           fontWeight: FontWeight.w600
                                       ),
                                     ),
+                                    SizedBox(height: size.height *.01,),
                                     Text(
                                       AppLocalizations.of(context)!.translate('singUpMsg').toString(),
                                       style: textManager(

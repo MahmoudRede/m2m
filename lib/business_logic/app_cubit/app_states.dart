@@ -103,3 +103,7 @@ class GetLastProfitState extends AppStates{}
 class UnsubscribeUserSuccessState extends AppStates {}
 class UnsubscribeUserErrorState extends AppStates {}
 class UnsubscribeUserLoadingState extends AppStates {}
+
+class ForgetPasswordSuccessState extends AppStates {}
+class ForgetPasswordErrorState extends AppStates {}
+class ForgetPasswordLoadingState extends AppStates {}

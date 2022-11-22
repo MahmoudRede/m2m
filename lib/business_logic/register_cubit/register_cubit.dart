@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:image_picker/image_picker.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Data/model/user_model.dart';
+import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_state.dart';
 import 'package:m2m/constants/constants.dart';
 
@@ -114,6 +116,7 @@ class RegisterCubit extends Cubit<RegisterState>{
   }
 
 
+
   Future<void> userRegister(
       {
          required String email,
@@ -136,6 +139,7 @@ class RegisterCubit extends Cubit<RegisterState>{
          required String userSkill7,
          required String userSkill8,
          String ?inviteCode,
+        context
 
       }
       )async{
@@ -151,6 +155,7 @@ class RegisterCubit extends Cubit<RegisterState>{
       uId=value.user!.uid;
 
       saveUserInfo(
+        context: context,
         email: email,
         name: name,
         phone: phone,
@@ -204,8 +209,13 @@ class RegisterCubit extends Cubit<RegisterState>{
         required String userSkill6,
         required String userSkill7,
         required String userSkill8,
+        context,
+
       }
       )async{
+
+      Random random = Random();
+      int randomCode = random.nextInt(10000);
 
       UserModel model =UserModel(
         email: email,
@@ -231,7 +241,9 @@ class RegisterCubit extends Cubit<RegisterState>{
         userSkill6: userSills6,
         userSkill7: userSills7,
         userSkill8: userSills8,
-        inviteCode: inviteCode??''
+        inviteCode: inviteCode??'',
+        userCode: '$randomCode',
+        rank: 'Beginner'
       );
 
     emit(SaveInfoLoadingState());
