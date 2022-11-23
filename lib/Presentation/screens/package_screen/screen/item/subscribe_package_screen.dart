@@ -6,13 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:m2m/Presentation/screens/more_screen/more_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/widget/package_slider_item.dart';
-import 'package:m2m/Presentation/screens/package_screen/widget/screen_drawer.dart';
 import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/custome_action_button.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
+import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
 import 'package:m2m/business_logic/payment_cubit/payment_states.dart';
@@ -57,7 +58,7 @@ class SubscribePackageScreen extends StatelessWidget {
                       backgroundColor: ColorManager.secondDarkColor,
                       boxIcon: FontAwesomeIcons.bars,
                       iconColor: ColorManager.white,
-                      onTap: ()=> scaffoldKey.currentState!.openDrawer(),
+                      onTap: ()=> navigateTo(context, const MoreScreen()),
                     ),
                     Expanded(
                       child: Row(
@@ -145,7 +146,7 @@ class SubscribePackageScreen extends StatelessWidget {
                             child: LineGraph(
                               features: [
                                 Feature(
-                                  title: "profit",
+                                  title: AppLocalizations.of(context)!.translate('profit').toString(),
                                   color: ColorManager.lightBlue,
                                   data: [0.0, 0.2, 0.4, 0.5, PaymentCubit.get(context).dayProfit/10],
                                 ),
@@ -154,7 +155,7 @@ class SubscribePackageScreen extends StatelessWidget {
                               labelX: const ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
                               labelY: const ['20%', '40%', '60%', '80%', '100%'],
                               showDescription: true,
-                              graphColor: Colors.black,
+                              graphColor: ColorManager.secondDarkColor,
                               graphOpacity: 0.2,
                               verticalFeatureDirection: true,
                               descriptionHeight: SizeConfig.height*0.1,

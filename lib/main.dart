@@ -4,16 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intl/intl.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
-import 'package:m2m/Presentation/screens/admin_screens/admin_home/admin_home.dart';
-import 'package:m2m/Presentation/screens/admin_screens/all_users/all_users.dart';
-import 'package:m2m/Presentation/screens/change_language_screen/change_language_screen.dart';
-import 'package:m2m/Presentation/screens/forget_password/forget_password.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/package_screen/screen/package_screen.dart';
-import 'package:m2m/Presentation/screens/splash_screen/screen/splash_screen.dart';
-import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/app_localization.dart';
@@ -84,7 +77,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
-            home: const LoginScreen(),
+            home: const PackageScreen(),
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -93,7 +86,6 @@ class _MyAppState extends State<MyApp> {
               DefaultCupertinoLocalizations.delegate,
             ],
             supportedLocales: const [
-              
               Locale("en",""),
               Locale("ar",""),
             ],

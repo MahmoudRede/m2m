@@ -29,7 +29,7 @@ class AppCubit extends Cubit<AppStates>{
     Config('customCacheKey', stalePeriod: const Duration(days: 15),maxNrOfCacheObjects: 100,),
   );
 
-  UserModel ?userModel;
+  UserModel? userModel;
 
   Future<void>getUser()async{
 
@@ -38,22 +38,68 @@ class AppCubit extends Cubit<AppStates>{
     await FirebaseFirestore.instance.collection('users')
         .doc(uId)
         .get()
-        .then((value) {
+        .then((value) async{
       debugPrint('Get User Success');
       userModel=UserModel.fromMap(value.data()!);
       debugPrint(userModel!.email);
+
+      await updateUserRank(userModel!);
 
       CashHelper.saveData(key: 'userName',value: userModel!.username);
       CashHelper.saveData(key: 'userGovernment',value: userModel!.government);
       CashHelper.saveData(key: 'userPackage',value: userModel!.package.packageName);
       CashHelper.saveData(key: 'userPhone',value: userModel!.phone);
       CashHelper.saveData(key: 'userEmail',value: userModel!.email);
-      updateWalletAndTasksState(userModel!.wallet.money);
+
+      updateWalletAndTasksState(userModel!.wallet.money, userModel!.rank.toString());
+
       emit(GetUserSuccessState());
     }).catchError((error){
       debugPrint('Error When get user data ${error.toString()}');
       emit(GetUserErrorState());
     });
+  }
+
+
+  // update user rank
+  Future<void> updateUserRank(UserModel userModel)async{
+    print('loading');
+    if(userModel.wallet.money>=0 && userModel.wallet.money<100){
+      FirebaseFirestore.instance.collection('users')
+          .doc(uId)
+          .update({"rank" : "beginner"})
+          .then((value) {
+        emit(UserUpdateRankSuccessState());
+        debugPrint("User rank update : ${userModel.rank.toString()}");
+      }).catchError((error){
+        debugPrint("Error when update user rank : ${error.toString()}");
+        emit(UserUpdateRankErrorState());
+      });
+    }
+    else if(userModel.wallet.money>100 && userModel.wallet.money<200){
+      FirebaseFirestore.instance.collection('users')
+          .doc(uId)
+          .update({"rank" : "intermediate"})
+          .then((value) {
+        emit(UserUpdateRankSuccessState());
+        debugPrint("User rank update : ${userModel.rank.toString()}");
+      }).catchError((error){
+        debugPrint("Error when update user rank : ${error.toString()}");
+        emit(UserUpdateRankErrorState());
+      });
+    }
+    else if(userModel.wallet.money>200 && userModel.wallet.money<300){
+      FirebaseFirestore.instance.collection('users')
+          .doc(uId)
+          .update({"rank" : "advanced"})
+          .then((value) {
+        emit(UserUpdateRankSuccessState());
+        debugPrint("User rank update : ${userModel.rank.toString()}");
+      }).catchError((error){
+        debugPrint("Error when update user rank : ${error.toString()}");
+        emit(UserUpdateRankErrorState());
+      });
+    }
   }
 
 
@@ -70,7 +116,6 @@ class AppCubit extends Cubit<AppStates>{
         .collection('users')
         .get()
         .then((value) {
-
       for (var element in value.docs) {
         users.add(UserModel.fromMap(element.data()));
         if(element.data()['isConfirmed'] ==false){
@@ -921,11 +966,7 @@ class AppCubit extends Cubit<AppStates>{
 
   }
 
-  Future <void> toCourseLink(
-      {
-        required String courseLink
-      })async
-  {
+  Future <void> toCourseLink({required String courseLink})async {
     String url= courseLink;
     await launch(url , forceSafariVC: false);
     emit(NavigateToCourseLinkSuccessState());
@@ -943,7 +984,7 @@ class AppCubit extends Cubit<AppStates>{
 
   })async{
 
-    PublicChatModel publicChatModel =PublicChatModel(
+    PublicChatModel publicChatModel = PublicChatModel(
         senderId: id??uId,
         dateTime: dateTime,
         text: text,
@@ -1030,9 +1071,9 @@ class AppCubit extends Cubit<AppStates>{
   late String yesterdayDate;
   final now = DateTime.now();
 
-  Future<void> updateWalletAndTasksState(wallet)async{
+  Future<void> updateWalletAndTasksState(wallet , rank)async{
     _setupDateDisplay().then((todayDate){
-      _checkDate(todayDate, wallet);
+      _checkDate(todayDate, wallet, rank);
     });
     emit(ChangeLastWalletState());
   }
@@ -1043,19 +1084,23 @@ class AppCubit extends Cubit<AppStates>{
     return todayDate;
   }
 
-  _checkDate(String todayDate , wallet) async{
+  _checkDate(String todayDate , wallet , rank) async{
     String yesterdayDate = CashHelper.getData(key: CashHelper.lastWalletDateUpdateKey) ?? '';
 
     if (todayDate != yesterdayDate){
+
       //SHOW NEW CONTENT
       CashHelper.saveData(key: CashHelper.lastWalletDateUpdateKey, value: todayDate);
       CashHelper.saveData(key: CashHelper.lastWalletAmountKey, value: wallet);
+      CashHelper.saveData(key: CashHelper.userRankKey, value: rank);
       debugPrint('wallet is updated ${CashHelper.getData(key: CashHelper.lastWalletAmountKey)}');
       CashHelper.saveData(key: CashHelper.lastWalletDateUpdateKey, value: todayDate);
-      FirebaseFirestore.instance.collection('adminTasks').doc(userModel!.uId).delete().then((value) {
+      FirebaseFirestore.instance.collection('adminTasks').doc(userModel!.uId).delete().then((value){
         debugPrint('user tasks are deleted success');
       });
+
     }else{
+
       //SHOW SAME CONTENT
       String currentWallet = CashHelper.getData(key: CashHelper.lastWalletAmountKey).toString();
       debugPrint('my Current wallet is : $currentWallet');

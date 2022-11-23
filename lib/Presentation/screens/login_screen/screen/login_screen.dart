@@ -74,235 +74,244 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               body: Form(
                 key: formKey,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      child: Image(
-                        height:size.height*.32,
-                        width: size.width,
-                        fit: BoxFit.cover,
-                        image: const AssetImage(AssetsManager.login),
-                      ),
-                    ),
-                    Positioned(
-                      top: size.height*.22,
-                      child: Container(
-                        width: size.width,
-                        height: size.height,
-                        decoration: BoxDecoration(
-                            color: ColorManager.white,
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(60)
-                            )
+                child: SingleChildScrollView(
+                  child: SizedBox(
+                    height: SizeConfig.height,
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: 0,
+                          child: Image(
+                            height:size.height*.32,
+                            width: size.width,
+                            fit: BoxFit.cover,
+                            image: const AssetImage(AssetsManager.login),
+                          ),
                         ),
-                        child: Column(
-                          children: [
-                            SizedBox(height: size.height *.05,),
-                            Text(
-                              AppLocalizations.of(context)!.translate('loginScreenWelcomeMsg').toString(),
-                              style: GoogleFonts.aBeeZee(
-                                  color: ColorManager.black,
-                                  fontSize: size.height*.045,
-                                  fontWeight: FontWeight.w600
-                              ),
+                        Positioned(
+                          top: size.height*.22,
+                          child: Container(
+                            width: size.width,
+                            height: size.height,
+                            decoration: BoxDecoration(
+                                color: ColorManager.white,
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(60)
+                                )
                             ),
-                            Text(
-                              AppLocalizations.of(context)!.translate('loginScreenWelcomeMsg2').toString(),
-                              style: textManager(
-                                color: Colors.grey.shade500,
-                                fontSize: size.height*.022,
-
-                              ),
-                            ),
-                            SizedBox(height: size.height *.05,),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 25,
-                                  vertical: 10
-                              ),
-                              child: DefaultFormField(
-                                prefixWidget: const Icon(
-                                    IconBroken.User
+                            child: Column(
+                              children: [
+                                SizedBox(height: size.height *.05,),
+                                Text(
+                                  AppLocalizations.of(context)!.translate('loginScreenWelcomeMsg').toString(),
+                                  style: GoogleFonts.aBeeZee(
+                                      color: ColorManager.black,
+                                      fontSize: size.height*.045,
+                                      fontWeight: FontWeight.w600
+                                  ),
                                 ),
-                                hint: AppLocalizations.of(context)!.translate('email').toString(),
-                                controller: emailController,
-                                textInputType: TextInputType.emailAddress,
-                                validText: AppLocalizations.of(context)!.translate('emailValidateMsg').toString(),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 25,
-                                  vertical: 10
-                              ),
-                              child: DefaultFormField(
-                                prefixWidget: const Icon(
-                                    IconBroken.Lock
-                                ),
-                                suffixIcon: isPassword? Icons.visibility_off:Icons.visibility,
-                                suffixFunction: (){
-                                  setState(() {
-                                    isPassword=!isPassword;
+                                Text(
+                                  AppLocalizations.of(context)!.translate('loginScreenWelcomeMsg2').toString(),
+                                  style: textManager(
+                                    color: Colors.grey.shade500,
+                                    fontSize: size.height*.022,
 
-                                  });
-                                },
-                                hint: AppLocalizations.of(context)!.translate('password').toString(),
-                                isPassword: isPassword,
-                                controller: passController,
-                                textInputType: TextInputType.visiblePassword,
-                                validText: AppLocalizations.of(context)!.translate('passwordValidateMsg').toString(),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: GestureDetector(
-                                onTap: ()=>navigateTo(context, const ForgetPassword()),
-                                child: Container(
+                                  ),
+                                ),
+                                SizedBox(height: size.height *.05,),
+
+                                Container(
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 25,
                                       vertical: 10
                                   ),
-                                  child: Text(
-                                    AppLocalizations.of(context)!.translate('forgetPassword').toString(),
-                                    style: textManager(
-                                      color: ColorManager.lightBlue,
-                                      fontSize: SizeConfig.headline3Size,
+                                  child: DefaultFormField(
+                                    prefixWidget: const Icon(
+                                        IconBroken.User
                                     ),
+                                    hint: AppLocalizations.of(context)!.translate('email').toString(),
+                                    controller: emailController,
+                                    textInputType: TextInputType.emailAddress,
+                                    validText: AppLocalizations.of(context)!.translate('emailValidateMsg').toString(),
                                   ),
                                 ),
-                              ),
-                            ),
-
-
-                            // privacy and terms
-                            SizedBox(
-                              height: size.height * .04,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Checkbox(
-                                    value: isCheckBoxTrue,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(2.0),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 25,
+                                      vertical: 10
+                                  ),
+                                  child: DefaultFormField(
+                                    prefixWidget: const Icon(
+                                        IconBroken.Lock
                                     ),
-                                    side: MaterialStateBorderSide.resolveWith(
-                                          (states) => BorderSide(
-                                          width: 1.0, color: ColorManager.grey),
-                                    ),
-                                    onChanged: (bool? value) {
+                                    suffixIcon: isPassword? Icons.visibility_off:Icons.visibility,
+                                    suffixFunction: (){
                                       setState(() {
-                                        isCheckBoxTrue = true;
+                                        isPassword=!isPassword;
+
                                       });
-                                    }),
-                                Text.rich(
-                                  TextSpan(
-                                      text: AppLocalizations.of(context)!.translate('agreeTooOur').toString(),
-                                      style: textManager(color: ColorManager.grey),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: AppLocalizations.of(context)!.translate('privacyPolicies').toString(),
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.height*.02,
-                                            color: ColorManager.primary,
-                                            decoration: TextDecoration.underline,
-                                          ),
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                    const PrivacyPolicies(),
-                                                  ));
-                                              // code to open / launch terms of service link here
-                                            },
+                                    },
+                                    hint: AppLocalizations.of(context)!.translate('password').toString(),
+                                    isPassword: isPassword,
+                                    controller: passController,
+                                    textInputType: TextInputType.visiblePassword,
+                                    validText: AppLocalizations.of(context)!.translate('passwordValidateMsg').toString(),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: GestureDetector(
+                                    onTap: ()=>navigateTo(context, const ForgetPassword()),
+                                    child: Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 25,
+                                          vertical: 10
+                                      ),
+                                      child: Text(
+                                        AppLocalizations.of(context)!.translate('forgetPassword').toString(),
+                                        style: textManager(
+                                          color: ColorManager.lightBlue,
+                                          fontSize: SizeConfig.headline3Size,
                                         ),
-                                      ]),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: size.height * .04,
-                            ),
-
-
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 25,
-                                  vertical: 10
-                              ),
-                              child: state is UserLoginLoadingState?
-                                const CircularProgressIndicator(
-                                  color: ColorManager.primary,
-                                )
-                                :DefaultButton(
-                                onPressed: (){
-                                  if(formKey.currentState!.validate()){
-
-                                     if(isCheckBoxTrue==true){
-
-                                       if( emailController.text == 'M2M2022@gmail.com' && passController.text == '123456789')
-                                       {
-                                         navigateTo(context, const AdminHome());
-                                         customToast(title: AppLocalizations.of(context)!.translate('welcomeToDashboard').toString(), color: ColorManager.primary);
-                                       }
-                                       else{
-                                         cubit.userLogin(
-                                             email: emailController.text,
-                                             password: passController.text
-                                         );
-                                       }
-                                       
-                                     }
-                                     else{
-                                       
-                                       customToast(title: AppLocalizations.of(context)!.translate('privacyPoliciesMsg').toString(), color: ColorManager.red);
-                                       
-                                     }
-
-                                  }
-                                },
-                                color: ColorManager.lightBlue,
-                                text: AppLocalizations.of(context)!.translate('signIn').toString(),
-                              ),
-                            ),
-                            SizedBox(height: size.height *0.05,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                AppLocalizations.of(context)!.translate('doNotHaveAccount').toString(),
-                                  style: textManager(
-                                      color: Colors.grey.shade700,
-                                      fontSize: size.height*.02,
-                                      fontWeight: FontWeight.w500
-                                  ),
-                                ),
-
-                                GestureDetector(
-                                  onTap: (){
-                                    navigateTo(context,const RegisterScreen());
-                                  },
-                                  child: Text(
-                                    ' ${AppLocalizations.of(context)!.translate('signUp').toString()}',
-                                    style: textManager(
-                                        color: ColorManager.primary,
-                                        fontSize: size.height*.023,
-                                        fontWeight: FontWeight.w500
+                                      ),
                                     ),
-                                    textAlign: TextAlign.center,
                                   ),
                                 ),
 
+
+                                // privacy and terms
+                                SizedBox(
+                                  height: size.height * .04,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Checkbox(
+                                        value: isCheckBoxTrue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(2.0),
+                                        ),
+                                        side: MaterialStateBorderSide.resolveWith(
+                                              (states) => BorderSide(
+                                              width: 1.0, color: ColorManager.grey),
+                                        ),
+                                        onChanged: (bool? value) {
+                                          setState(() {
+                                            isCheckBoxTrue = true;
+                                          });
+                                        }),
+                                    Text.rich(
+                                      TextSpan(
+                                          text: AppLocalizations.of(context)!.translate('agreeTooOur').toString(),
+                                          style: textManager(color: ColorManager.grey),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text: AppLocalizations.of(context)!.translate('privacyPolicies').toString(),
+                                              style: TextStyle(
+                                                fontSize: SizeConfig.height*.02,
+                                                color: ColorManager.primary,
+                                                decoration: TextDecoration.underline,
+                                              ),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                        const PrivacyPolicies(),
+                                                      ));
+                                                  // code to open / launch terms of service link here
+                                                },
+                                            ),
+                                          ]),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: size.height * .02,
+                                ),
+
+
+                                // login button
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 25,
+                                      vertical: 10
+                                  ),
+                                  child: state is UserLoginLoadingState?
+                                    const CircularProgressIndicator(
+                                      color: ColorManager.primary,
+                                    )
+                                    :DefaultButton(
+                                    onPressed: (){
+                                      if(formKey.currentState!.validate()){
+
+                                         if(isCheckBoxTrue==true){
+
+                                           if( emailController.text == 'M2M2022@gmail.com' && passController.text == '123456789')
+                                           {
+                                             navigateTo(context, const AdminHome());
+                                             customToast(title: AppLocalizations.of(context)!.translate('welcomeToDashboard').toString(), color: ColorManager.primary);
+                                           }
+                                           else{
+                                             cubit.userLogin(
+                                                 email: emailController.text,
+                                                 password: passController.text
+                                             );
+                                           }
+
+                                         }
+                                         else{
+
+                                           customToast(title: AppLocalizations.of(context)!.translate('privacyPoliciesMsg').toString(), color: ColorManager.red);
+
+                                         }
+
+                                      }
+                                    },
+                                    color: ColorManager.lightBlue,
+                                    text: AppLocalizations.of(context)!.translate('signIn').toString(),
+                                  ),
+                                ),
+                                SizedBox(height: size.height *0.05,),
+
+                                // don't have an account
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                    AppLocalizations.of(context)!.translate('doNotHaveAccount').toString(),
+                                      style: textManager(
+                                          color: Colors.grey.shade700,
+                                          fontSize: size.height*.02,
+                                          fontWeight: FontWeight.w500
+                                      ),
+                                    ),
+
+                                    GestureDetector(
+                                      onTap: (){
+                                        navigateTo(context,const RegisterScreen());
+                                      },
+                                      child: Text(
+                                        ' ${AppLocalizations.of(context)!.translate('signUp').toString()}',
+                                        style: textManager(
+                                            color: ColorManager.primary,
+                                            fontSize: size.height*.023,
+                                            fontWeight: FontWeight.w500
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               )
 
