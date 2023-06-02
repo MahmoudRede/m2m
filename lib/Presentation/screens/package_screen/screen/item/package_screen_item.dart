@@ -26,24 +26,18 @@ class PackageScreenItem extends StatelessWidget {
     '1st Package 200\$',
     '2nd Package 350\$',
     '3th Package 650\$',
-    'VIP Package 3000\$',
-    'VIP+ Package 5000\$',
   ];
 
   final List<String> packageTasks = [
     '5',
     '7',
     '10',
-    '20',
-    '40',
   ];
 
   final List<String> packageImage = [
     AssetsManager.firstPackageImage,
     AssetsManager.secondPackageImage,
     AssetsManager.thirdPackageImage,
-    AssetsManager.investmentImage,
-    AssetsManager.investmentImage,
   ];
 
   final List carouselImage = [
@@ -70,6 +64,7 @@ class PackageScreenItem extends StatelessWidget {
               SizedBox(
                 height: SizeConfig.topPadding,
               ),
+
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal:SizeConfig.height*0.03,
@@ -78,7 +73,7 @@ class PackageScreenItem extends StatelessWidget {
                 child: Row(
                   children: [
                     CustomActionButton(
-                      backgroundColor: ColorManager.secondDarkColor,
+                      backgroundColor: ColorManager.primary,
                       boxIcon: FontAwesomeIcons.bars,
                       iconColor: ColorManager.white,
                       onTap: ()=> navigateTo(context,const MoreScreen()),
@@ -112,7 +107,6 @@ class PackageScreenItem extends StatelessWidget {
 
 
               Expanded(
-                flex: 1,
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -206,7 +200,7 @@ class PackageScreenItem extends StatelessWidget {
                         child: DefaultButton(
                           text: AppLocalizations.of(context)!.translate('viewTasks').toString(),
                           onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>const TasksScreen())),
-                          color: ColorManager.secondDarkColor,
+                          color: ColorManager.primary,
                         ),
                       ),
                     ],

@@ -47,7 +47,7 @@ class DetailsScreen extends StatelessWidget {
                   child: CustomActionButton(
                     boxIcon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?IconBroken.Arrow___Left_2:IconBroken.Arrow___Right_2,
                     iconColor: ColorManager.white,
-                    backgroundColor: ColorManager.secondDarkColor,
+                    backgroundColor: ColorManager.primary,
                     onTap: ()=>  Navigator.pop(context),
                   ),
                 ),
@@ -78,7 +78,7 @@ class DetailsScreen extends StatelessWidget {
                         Text(
                           "1st Package 200\$",
                           style: GoogleFonts.roboto(
-                            color: ColorManager.lightGrey2,
+                            color: ColorManager.white,
                             fontSize: SizeConfig.headline1Size,
                             fontWeight: FontWeight.bold,
                             // fontWeight: FontWeight.bold,
@@ -129,6 +129,7 @@ class DetailsScreen extends StatelessWidget {
 
                         // payment button
                         DefaultButton(
+                          color: ColorManager.primary,
                           text: AppLocalizations.of(context)!.translate('payment').toString(),
                           onPressed: ()=>PaymentCubit.get(context).urlLunch(paymentLink: 'https://paypal.me/MmdouhMohamed?country.x=EG&locale.x=ar_EG'),
                         ),
@@ -140,6 +141,7 @@ class DetailsScreen extends StatelessWidget {
 
                         // confirm payment button
                         DefaultButton(
+                            color: ColorManager.primary,
                             text: AppLocalizations.of(context)!.translate('confirmPayment').toString(),
                             onPressed: ()=>navigateTo( context, const VerifyPaymentScreen())
                         ),

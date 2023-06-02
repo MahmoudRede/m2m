@@ -28,7 +28,7 @@ class CustomPackageCard extends StatelessWidget {
         height:  SizeConfig.height * 0.55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: ColorManager.lightBlue2,
+          color: ColorManager.primary,
         ),
         child: Padding(
           padding: const EdgeInsets.all(30.0),
@@ -39,7 +39,7 @@ class CustomPackageCard extends StatelessWidget {
               Text(
                 title,
                 style: textManager(
-                  color: ColorManager.black,
+                  color: ColorManager.white,
                   fontSize: 25,
                   fontWeight: FontWeight.w500,
                 ),
@@ -74,7 +74,7 @@ class CustomPackageCard extends StatelessWidget {
               Text(
                 "$tasksNum ${AppLocalizations.of(context)!.translate('tasks').toString()}",
                 style: textManager(
-                  color: ColorManager.black,
+                  color: ColorManager.white,
                   fontSize: SizeConfig.headline2Size,
                   fontWeight: FontWeight.w500,
                 ),

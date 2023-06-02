@@ -65,6 +65,7 @@ class MoreScreen extends StatelessWidget {
 
 
             body: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Container(
                 padding: EdgeInsets.only(
                   top: SizeConfig.height*.02,

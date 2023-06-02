@@ -170,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: Text(
                                         AppLocalizations.of(context)!.translate('forgetPassword').toString(),
                                         style: textManager(
-                                          color: ColorManager.lightBlue,
+                                          color: ColorManager.primary,
                                           fontSize: SizeConfig.headline3Size,
                                         ),
                                       ),
@@ -269,7 +269,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                       }
                                     },
-                                    color: ColorManager.lightBlue,
+                                    color: ColorManager.primary,
                                     text: AppLocalizations.of(context)!.translate('signIn').toString(),
                                   ),
                                 ),

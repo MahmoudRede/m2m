@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if(uId == null){
         return navigateTo(context,OnBoarding());
       }else{
-        return navigateTo(context,PackageScreen());
+        return navigateTo(context,const PackageScreen());
 
       }
 
@@ -43,7 +43,6 @@ class _SplashScreenState extends State<SplashScreen> {
       appBar: AppBar(
         elevation: 0.0,
         toolbarHeight: 0.0,
-        backwardsCompatibility: false,
         systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.dark,
             statusBarColor: Colors.white
