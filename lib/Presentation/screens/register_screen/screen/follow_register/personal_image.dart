@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:m2m/Presentation/screens/register_screen/screen/follow_register/follow_register.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/styles/icon_broken.dart';
 import 'package:m2m/Presentation/widgets/custom_toast.dart';
-import 'package:m2m/Presentation/widgets/navigate_to.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_state.dart';
 
@@ -33,7 +33,7 @@ class PersonalImage extends StatelessWidget {
 
         if(state is UploadPersonalImageErrorState){
 
-          customToast(title: 'Error in Something ,Please try again', color: ColorManager.red);
+          customToast(title: AppLocalizations.of(context)!.translate('registerErrorMsg').toString(), color: ColorManager.red);
 
         }
 
@@ -46,22 +46,26 @@ class PersonalImage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: ColorManager.white,
             elevation: 0.0,
-            title: Text('Personal Image',style: GoogleFonts.aBeeZee(
+            title: Text(
+              AppLocalizations.of(context)!.translate('personalImage').toString(),
+              style: GoogleFonts.aBeeZee(
                 color: ColorManager.black,
                 fontWeight: FontWeight.w500,
                 fontSize: size.height*.03
             ),),
             titleSpacing: 0,
             leading: IconButton(
-              icon: Icon(
+              icon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
                 IconBroken.Arrow___Left_2,
+                color: ColorManager.black,
+              ):Icon(
+                IconBroken.Arrow___Right_2,
                 color: ColorManager.black,
               ),
               onPressed: (){
                 Navigator.pop(context);
               },
             ),
-            backwardsCompatibility: false,
             systemOverlayStyle: const SystemUiOverlayStyle(
                 statusBarIconBrightness: Brightness.dark,
                 statusBarColor: Colors.white

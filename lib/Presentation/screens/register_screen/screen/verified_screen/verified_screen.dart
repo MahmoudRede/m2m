@@ -6,7 +6,6 @@ import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/styles/icon_broken.dart';
-import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/business_logic/register_cubit/register_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_state.dart';
 
@@ -22,7 +21,10 @@ class _VerifiedRegisterState extends State<VerifiedRegister> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3),(){
-      return navigateTo( context,LoginScreen(),);
+      return Navigator.of(context)
+          .pushAndRemoveUntil(MaterialPageRoute(builder: (_){
+            return const LoginScreen();
+          }),(Route<dynamic> route) => false);
     });
     super.initState();
   }
@@ -35,7 +37,6 @@ class _VerifiedRegisterState extends State<VerifiedRegister> {
 
       },
       builder: (context,state){
-        var cubit=RegisterCubit.get(context);
         return Scaffold(
           backgroundColor: ColorManager.white,
           appBar: AppBar(
@@ -52,14 +53,13 @@ class _VerifiedRegisterState extends State<VerifiedRegister> {
 
               },
             ),
-            backwardsCompatibility: false,
             systemOverlayStyle: const SystemUiOverlayStyle(
                 statusBarIconBrightness: Brightness.dark,
                 statusBarColor: Colors.white
             ),
           ),
           body: Center(
-            child: Container(
+            child: SizedBox(
               height: size.height*.5,
               width: size.width,
 

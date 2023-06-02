@@ -1,16 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:m2m/Presentation/screens/login_screen/screen/login_screen.dart';
 import 'package:m2m/Presentation/screens/on_boarding_screen/widget/custom_title.dart';
 import 'package:m2m/Presentation/screens/on_boarding_screen/widget/pageview_item.dart';
-import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
-import 'package:m2m/Presentation/widgets/text_manager.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class onBoardingModel{
@@ -45,7 +41,7 @@ class _OnBoardingState extends State<OnBoarding> {
     timer = Timer.periodic(const Duration(seconds: 10), (timer) {
       Future.delayed(const Duration(seconds: 7),(){
         if(currentIndex==3){
-          navigateAndRemove(context,LoginScreen());
+          navigateAndRemove(context,const LoginScreen());
         }
         else{
           currentIndex++;
@@ -60,6 +56,7 @@ class _OnBoardingState extends State<OnBoarding> {
   void dispose() {
     // TODO: implement dispose
     timer.cancel();
+    pageController.dispose();
     super.dispose();
   }
 
@@ -73,7 +70,6 @@ class _OnBoardingState extends State<OnBoarding> {
       appBar: AppBar(
         elevation: 0.0,
         toolbarHeight: 0.0,
-        backwardsCompatibility: false,
         systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.dark,
             statusBarColor: Colors.white
@@ -113,11 +109,11 @@ class _OnBoardingState extends State<OnBoarding> {
             ),
             SizedBox(height: size.height*.03,),
             DefaultButton(
-              color: ColorManager.lightBlue,
+              color: ColorManager.primary,
               text: 'Get Started',
               onPressed: (){
 
-                navigateAndRemove(context,LoginScreen());
+                navigateAndRemove(context,const LoginScreen());
 
               },
             ),

@@ -14,7 +14,7 @@ class InvestmentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var amountController = TextEditingController();
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: SizeConfig.height,
         width: SizeConfig.width,
         child: Column(

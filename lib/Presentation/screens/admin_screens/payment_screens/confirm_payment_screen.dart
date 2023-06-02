@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:m2m/Presentation/screens/tasks_screen/screen/tasks_screen.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
+import 'package:m2m/Data/model/payment_model.dart';
+import 'package:m2m/Presentation/screens/admin_screens/payment_screens/payment_requests_screen.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/Presentation/styles/icon_broken.dart';
 import 'package:m2m/Presentation/widgets/custom_toast.dart';
 import 'package:m2m/Presentation/widgets/default_button.dart';
 import 'package:m2m/Presentation/widgets/navigate_to.dart';
 import 'package:m2m/business_logic/app_localization.dart';
-import 'package:m2m/business_logic/tasks_cubit/tasks_cubit.dart';
-import 'package:m2m/business_logic/tasks_cubit/tasks_states.dart';
+import 'package:m2m/business_logic/payment_cubit/payment_cubit.dart';
+import 'package:m2m/business_logic/payment_cubit/payment_states.dart';
 
-class UploadTaskScreen extends StatelessWidget {
-  const UploadTaskScreen({Key? key}) : super(key: key);
+class ConfirmPaymentScreen extends StatelessWidget {
+  final PaymentModel paymentModel;
+  const ConfirmPaymentScreen({Key? key, required this.paymentModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TasksCubit,TasksStates>(
+    return BlocConsumer<PaymentCubit,PaymentStates>(
       listener: (context,state){},
       builder: (context,state){
-        var cubit = TasksCubit.get(context);
-
+        var cubit = PaymentCubit.get(context);
+        debugPrint(paymentModel.paymentImage.toString());
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Upload Task',
+              AppLocalizations.of(context)!.translate('confirmPayment').toString(),
               style: TextStyle(
                 fontSize: SizeConfig.headline2Size,
                 fontWeight: FontWeight.bold,
@@ -31,19 +35,28 @@ class UploadTaskScreen extends StatelessWidget {
               ),
             ),
             centerTitle: true,
+            leading: IconButton(
+              icon: CashHelper.getData(key: CashHelper.languageKey).toString()=='en'?Icon(
+                IconBroken.Arrow___Left_2,
+                color: ColorManager.black,
+              ):Icon(
+                IconBroken.Arrow___Right_2,
+                color: ColorManager.black,
+              ),
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
           ),
           body: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical :SizeConfig.height*0.02,
-              horizontal :SizeConfig.height*0.03,
+            padding: EdgeInsets.all(
+              SizeConfig.height*0.02,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-
                 // uploaded image widget
-                InkWell(
-                  onTap: ()=>cubit.getTaskImage(),
+                Expanded(
                   child: Container(
                     height: SizeConfig.height*0.7,
                     width: double.infinity,
@@ -55,28 +68,11 @@ class UploadTaskScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       color: ColorManager.white,
                     ),
-                    child: cubit.uploadedTaskImage == null ? Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [
-                        Icon(
-                          Icons.image_outlined,
-                          color: ColorManager.lightBlue,
-                          size: SizeConfig.height*0.05,
-                        ),
-                        Text(
-                          'Upload your task screen',
-                          style: TextStyle(
-                            fontSize: SizeConfig.headline4Size,
-                            color: ColorManager.lightBlue,
-                          ),
-                        ),
-                      ],
-                    ) :
-                    Material(
+                    child: Material(
                       borderRadius: BorderRadius.circular(10),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: Image(
-                        image: FileImage(cubit.uploadedTaskImage!),
+                        image: NetworkImage(paymentModel.paymentImage.toString()),
                         fit: BoxFit.fill,
                         height: double.maxFinite,
                         width: double.maxFinite,
@@ -85,25 +81,20 @@ class UploadTaskScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: SizeConfig.height*0.05,
+                  height: SizeConfig.height*0.02,
                 ),
 
                 // upload button
-                state is UploadTaskScreenLoadingState?
+                state is ConfirmPaymentLoadingState?
                 const CircularProgressIndicator(
                   color: ColorManager.primary,
                 ):DefaultButton(
-                  text: AppLocalizations.of(context)!.translate('upload').toString(),
+                  text: AppLocalizations.of(context)!.translate('confirm').toString(),
                   onPressed: (){
-                    if(cubit.uploadedTaskImage != null){
-                      cubit.uploadTaskScreen().then((value) async{
-                            await customToast(title: 'Task is uploaded', color: ColorManager.gold);
-                            cubit.uploadedTaskImage = null;
-                            await navigateAndRemove(context, const TasksScreen());
-                      });
-                    }else{
-                      customToast(title: 'please select image', color: ColorManager.red);
-                    }
+                    cubit.confirmPayment(paymentModel: paymentModel).then((value) {
+                      customToast(title: AppLocalizations.of(context)!.translate('confirmPaymentSuccess').toString() , color: ColorManager.gold);
+                      navigateAndRemove(context, const PaymentRequestsScreen());
+                    });
                   },
                   color: ColorManager.secondDarkColor,
                 ),

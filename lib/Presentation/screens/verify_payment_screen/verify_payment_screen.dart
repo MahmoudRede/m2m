@@ -42,7 +42,7 @@ class VerifyPaymentScreen extends StatelessWidget {
 
                 // uploaded image widget
                 InkWell(
-                  onTap: ()=>cubit.getTaskImage(),
+                  onTap: ()=>cubit.getPaymentImage(),
                   child: Container(
                     height: SizeConfig.height*0.7,
                     width: double.infinity,

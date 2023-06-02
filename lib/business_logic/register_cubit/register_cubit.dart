@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:image_picker/image_picker.dart';
 import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Data/model/user_model.dart';
+import 'package:m2m/business_logic/app_cubit/app_cubit.dart';
 import 'package:m2m/business_logic/register_cubit/register_state.dart';
 import 'package:m2m/constants/constants.dart';
 
@@ -114,6 +116,7 @@ class RegisterCubit extends Cubit<RegisterState>{
   }
 
 
+
   Future<void> userRegister(
       {
          required String email,
@@ -125,7 +128,18 @@ class RegisterCubit extends Cubit<RegisterState>{
          required String skills,
          required String nationalIdImage,
          required String personalImage,
+         required String month,
+         required String year,
+         required String userSkill1,
+         required String userSkill2,
+         required String userSkill3,
+         required String userSkill4,
+         required String userSkill5,
+         required String userSkill6,
+         required String userSkill7,
+         required String userSkill8,
          String ?inviteCode,
+        context
 
       }
       )async{
@@ -141,6 +155,7 @@ class RegisterCubit extends Cubit<RegisterState>{
       uId=value.user!.uid;
 
       saveUserInfo(
+        context: context,
         email: email,
         name: name,
         phone: phone,
@@ -151,6 +166,16 @@ class RegisterCubit extends Cubit<RegisterState>{
         skills: skills,
         age: age,
         inviteCode: inviteCode,
+        month: month,
+        year: year,
+        userSkill1: userSills1,
+        userSkill2: userSills2,
+        userSkill3: userSills3,
+        userSkill4: userSills4,
+        userSkill5: userSills5,
+        userSkill6: userSills6,
+        userSkill7: userSills7,
+        userSkill8: userSills8,
       );
       emit(UserRegisterSuccessState());
     }).catchError((error){
@@ -171,11 +196,26 @@ class RegisterCubit extends Cubit<RegisterState>{
         required String government,
         required String nationalIdImage,
         String ?inviteCode,
+        String ?profileImage,
         required String personalImage,
         required String id,
-        String ?package,
+        required String month,
+        required String year,
+        required String userSkill1,
+        required String userSkill2,
+        required String userSkill3,
+        required String userSkill4,
+        required String userSkill5,
+        required String userSkill6,
+        required String userSkill7,
+        required String userSkill8,
+        context,
+
       }
       )async{
+
+      Random random = Random();
+      int randomCode = random.nextInt(10000);
 
       UserModel model =UserModel(
         email: email,
@@ -184,12 +224,26 @@ class RegisterCubit extends Cubit<RegisterState>{
         nationalIdImage: nationalIdImage,
         personalImage: personalImage,
         uId: id,
-        package: package??'not selected yet',
+        profileImage: profileImage??'https://firebasestorage.googleapis.com/v0/b/m2mapp-91014.appspot.com/o/user-svgrepo-com.png?alt=media&token=2a3faefa-613f-4d0e-a3b6-5b6556530ed7',
+        package: Package(packageName: "not selected" , packageId: "id", isVerified: false),
+        wallet: Wallet(money: 0.0 , point: 0.0),
         isConfirmed: false,
         age: age,
+        month: month,
+        year: year,
         government: government,
         skills: skills,
-        inviteCode: inviteCode??''
+        userSkill1: userSills1,
+        userSkill2: userSills2,
+        userSkill3: userSills3,
+        userSkill4: userSills4,
+        userSkill5: userSills5,
+        userSkill6: userSills6,
+        userSkill7: userSills7,
+        userSkill8: userSills8,
+        inviteCode: inviteCode??'',
+        userCode: '$randomCode',
+        rank: 'Beginner'
       );
 
     emit(SaveInfoLoadingState());
@@ -198,13 +252,26 @@ class RegisterCubit extends Cubit<RegisterState>{
         .then((value) {
 
          debugPrint('Create User Success');
-         emit(UserRegisterSuccessState());
+         emit(SaveInfoSuccessState());
     }).catchError((error){
 
-      debugPrint('Error in Crete User is ${error.toString()}');
-      emit(UserRegisterErrorState());
+      debugPrint('Error in Create User is ${error.toString()}');
+      emit(SaveInfoErrorState());
     });
 
   }
+
+  String governmentDropDown='' ;
+
+  void changeGovernmentDropDown(value)
+  {
+    governmentDropDown = value ;
+    emit(ChangeGovernmentDropDownState());
+  }
+
+  String userSills1='',userSills2='',userSills3='',userSills4='',userSills5='',userSills6='',userSills7='',userSills8='';
+
+  bool selectSills1=false,selectSills2=false,selectSills3=false,selectSills4=false,selectSills5=false,selectSills6=false,selectSills7=false,selectSills8=false;
+
 
 }

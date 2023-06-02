@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:m2m/Data/core/local/cash_helper.dart';
 import 'package:m2m/Data/model/payment_model.dart';
 import 'package:m2m/Data/model/user_model.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
@@ -19,7 +21,8 @@ class PaymentCubit extends Cubit<PaymentStates>{
 
   static PaymentCubit get(context) => BlocProvider.of(context);
 
-  UserModel ?userModel;
+  UserModel? userModel;
+  static dynamic walletMoney = 0;
 
   Future<void>getUser()async{
 
@@ -28,8 +31,11 @@ class PaymentCubit extends Cubit<PaymentStates>{
         .doc(uId)
         .get().then((value) {
       debugPrint('Get User Success');
-      userModel=UserModel.formJson(value.data()!);
-      debugPrint(userModel!.email);
+      userModel=UserModel.fromMap(value.data()!);
+      walletMoney = userModel!.wallet.money;
+      debugPrint("user email ==> ${userModel!.email}   user wallet ==> $walletMoney");
+      updateWalletState(walletMoney);
+      getLastProfitState();
       emit(GetUserSuccessState());
     }).catchError((error){
       debugPrint('Error is ${error.toString()}');
@@ -41,7 +47,7 @@ class PaymentCubit extends Cubit<PaymentStates>{
   File? uploadedPaymentImage;
   var imagePicker = ImagePicker();
 
-  Future <void> getTaskImage() async {
+  Future <void> getPaymentImage() async {
     final pickedFile = await imagePicker.pickImage(
       source: ImageSource.gallery,
     );
@@ -76,10 +82,10 @@ class PaymentCubit extends Cubit<PaymentStates>{
             packageId: 'packageId',
             paymentImage: value.toString(),
             userName: userModel!.username.toString(),
-            userImage: userModel!.personalImage.toString(),
+            userImage: userModel!.profileImage.toString(),
             userUId: userModel!.uId.toString(),
             isVerified: false,
-            packageName: userModel!.package.toString(),
+            packageName: "packageName",
             userPhone: userModel!.phone.toString(),
         );
 
@@ -111,6 +117,117 @@ class PaymentCubit extends Cubit<PaymentStates>{
       emit(UploadPaymentImageErrorState());
     });
   }
+
+  List<PaymentModel> paymentData =[];
+  Future<void> getPaymentData ()async{
+    emit(GetPaymentDataLoadingState());
+    
+    FirebaseFirestore.instance
+        .collection('paymentImages')
+        .get().then((value) {
+          for (var element in value.docs) {
+            paymentData.add(PaymentModel.fromMap(element.data()));
+          }
+          debugPrint("get payment data success ==> ${paymentData[0].paymentImage}");
+          emit(GetPaymentDataSuccessState());
+    }).catchError((error){
+      debugPrint("Error when get payment data ==> ${error.toString()}");
+      emit(GetPaymentDataErrorState());
+    });
+  }
+  
+  
+  Future<void> confirmPayment ({
+    required PaymentModel paymentModel
+  })async{
+    emit(ConfirmPaymentLoadingState());
+    // get user data
+    UserModel? userModel ;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(paymentModel.userUId.toString())
+        .get()
+        .then((value){
+          userModel = UserModel.fromMap(value.data()!);
+          debugPrint('payment user data ==> ${userModel!.username}');
+          emit(GetUserSuccessState());
+    })
+        .catchError((error){
+      debugPrint('Error when payment user data :${error.toString()}');
+      emit(GetUserErrorState());
+    });
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(paymentModel.userUId.toString())
+        .update({
+      "package":{
+        "packageName":userModel!.package.packageName.toString(),
+        "packageId":userModel!.package.packageId.toString(),
+        "isVerified":true,
+      },
+    }).then((value) async{
+      await FirebaseFirestore.instance
+          .collection('paymentImages')
+          .doc(paymentModel.userUId.toString())
+          .update({
+        "isVerified": true,
+      });
+      debugPrint('Payment Confirmed successful');
+      emit(ConfirmPaymentSuccessState());
+    }).catchError((error){
+      debugPrint('Error when confirm Payment ==> ${error.toString()}');
+      emit(ConfirmPaymentErrorState());
+    });
+  }
+
+
+  late String todayDate;
+  late String yesterdayDate;
+  final now = DateTime.now();
+
+  Future<void> updateWalletState(wallet)async{
+    _setupDateDisplay().then((todayDate){
+      _checkDate(todayDate, wallet);
+    });
+    emit(ChangeLastWalletState());
+  }
+
+  Future<String> _setupDateDisplay() async {
+
+    todayDate = DateFormat.yMMMMd().format(now);
+    return todayDate;
+  }
+
+  _checkDate(String todayDate , wallet) async{
+    String yesterdayDate = CashHelper.getData(key: CashHelper.lastWalletDateUpdateKey) ?? '';
+
+    if (todayDate != yesterdayDate){
+      //SHOW NEW CONTENT
+      CashHelper.saveData(key: CashHelper.lastWalletDateUpdateKey, value: todayDate);
+      CashHelper.saveData(key: CashHelper.lastWalletAmountKey, value: wallet);
+      debugPrint('wallet is updated ${CashHelper.getData(key: CashHelper.lastWalletAmountKey)}');
+    }else{
+      //SHOW SAME CONTENT
+      String currentWallet = CashHelper.getData(key: CashHelper.lastWalletAmountKey).toString();
+      debugPrint('my Current wallet is : $currentWallet');
+    }
+
+  }
+
+
+
+  dynamic myWallet = 0;
+  dynamic dayProfit = 0;
+
+  Future<void> getLastProfitState()async{
+    myWallet = CashHelper.getData(key: CashHelper.lastWalletAmountKey);
+    dayProfit = walletMoney - myWallet;
+    debugPrint("my current profit : $dayProfit");
+    emit(GetLastProfitState());
+  }
+
+
 
 
 

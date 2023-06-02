@@ -4,6 +4,7 @@ import 'package:m2m/Presentation/screens/details_screen/screen/details_screen.da
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 import 'package:m2m/Presentation/widgets/text_manager.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 
 class CustomPackageCard extends StatelessWidget {
   final String image;
@@ -27,7 +28,7 @@ class CustomPackageCard extends StatelessWidget {
         height:  SizeConfig.height * 0.55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: ColorManager.lightBlue2,
+          color: ColorManager.primary,
         ),
         child: Padding(
           padding: const EdgeInsets.all(30.0),
@@ -38,7 +39,7 @@ class CustomPackageCard extends StatelessWidget {
               Text(
                 title,
                 style: textManager(
-                  color: ColorManager.black,
+                  color: ColorManager.white,
                   fontSize: 25,
                   fontWeight: FontWeight.w500,
                 ),
@@ -47,20 +48,20 @@ class CustomPackageCard extends StatelessWidget {
                 height: 10,
               ),
               InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const DetailsScreen()));
-                },
+                onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) => const DetailsScreen())),
                 child: Container(
                   decoration: BoxDecoration(
                       color: ColorManager.white,
                       borderRadius: BorderRadius.circular(10)),
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(
+                      SizeConfig.height*0.01,
+                    ),
                     child: Text(
-                      "More",
+                      AppLocalizations.of(context)!.translate('more').toString(),
                       style: textManager(
                         color: ColorManager.black,
-                        fontSize: 14,
+                        fontSize: SizeConfig.headline3Size,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -71,10 +72,10 @@ class CustomPackageCard extends StatelessWidget {
                 child: Lottie.asset(image),
               ),
               Text(
-                tasksNum,
+                "$tasksNum ${AppLocalizations.of(context)!.translate('tasks').toString()}",
                 style: textManager(
-                  color: ColorManager.black,
-                  fontSize: 20,
+                  color: ColorManager.white,
+                  fontSize: SizeConfig.headline2Size,
                   fontWeight: FontWeight.w500,
                 ),
               ),

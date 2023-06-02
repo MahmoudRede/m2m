@@ -27,7 +27,7 @@ class PaymentModel {
     userUId: json["userUId"]??"",
     isVerified: json["isVerified"]??false,
     packageName: json["packageName"]??"",
-    userPhone: json["phone"]??"",
+    userPhone: json["userPhone"]??"",
   );
 
   Map<String, dynamic> toMap() => {

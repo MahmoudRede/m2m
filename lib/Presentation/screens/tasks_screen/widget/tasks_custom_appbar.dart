@@ -64,22 +64,22 @@ class TasksCustomAppbar extends StatelessWidget {
                           cubit.userModel!.username.toString(),
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                            fontSize: SizeConfig.headline1Size,
+                            fontSize: SizeConfig.headline2Size,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  cubit.userModel!.personalImage != null? CircleAvatar(
-                    radius: SizeConfig.width *0.075,
-                    backgroundImage: NetworkImage(
-                      cubit.userModel!.personalImage.toString(),
-                    ),
-                  ):CircleAvatar(
+                  cubit.userModel!.profileImage == "null"?CircleAvatar(
                     radius: SizeConfig.width *0.08,
                     backgroundImage:  const AssetImage(
                       AssetsManager.userImage,
+                    ),
+                  ):CircleAvatar(
+                    radius: SizeConfig.width *0.075,
+                    backgroundImage: NetworkImage(
+                      cubit.userModel!.profileImage.toString(),
                     ),
                   ),
                 ],

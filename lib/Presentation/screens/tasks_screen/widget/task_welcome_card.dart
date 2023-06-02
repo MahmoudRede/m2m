@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/assets_manager.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
+import 'package:m2m/business_logic/app_localization.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class TaskWelcomeCard extends StatelessWidget {
@@ -11,9 +12,9 @@ class TaskWelcomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10.0,
-        vertical: 10.0,
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeConfig.height*0.02,
+        vertical: SizeConfig.height*0.02,
       ),
       child: Container(
         height: SizeConfig.height * 0.19,
@@ -23,7 +24,9 @@ class TaskWelcomeCard extends StatelessWidget {
           color: ColorManager.secondDarkColor,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(
+            SizeConfig.height*0.01,
+          ),
           child: Column(
             children: [
               Expanded(
@@ -36,10 +39,10 @@ class TaskWelcomeCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Have a nice day!',
+                            AppLocalizations.of(context)!.translate('haveNiceDay').toString(),
                             textAlign: TextAlign.left,
                             style:  TextStyle(
-                              fontSize: 22.0,
+                              fontSize: SizeConfig.headline2Size,
                               fontWeight: FontWeight.bold,
                               color: ColorManager.white,
                             ),
@@ -48,11 +51,11 @@ class TaskWelcomeCard extends StatelessWidget {
                             height: 10,
                           ),
                           Text(
-                            'Start perform out your tasks right now.',
+                            AppLocalizations.of(context)!.translate('taskScreenMessage').toString(),
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: SizeConfig.headline3Size,
                               color: ColorManager.lightGrey,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ],
@@ -69,6 +72,9 @@ class TaskWelcomeCard extends StatelessWidget {
                 percent: 0.9,
                 linearStrokeCap: LinearStrokeCap.roundAll,
                 progressColor: ColorManager.lightBlue,
+              ),
+              SizedBox(
+                height: SizeConfig.height*0.01,
               ),
             ],
           ),

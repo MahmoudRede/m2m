@@ -14,8 +14,8 @@ class PageViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     List onBoardingScreens=[
       onBoardingModel(
-          title: 'Marketing',
-          content: 'we have young and professional team that will as soon as possible to your doorstep',
+          title: 'Freelancer',
+          content: 'A freelancer is a self-employed individual who offers services to clients on a project basis, often working remotely and managing their own business',
           image: AssetsManager.onBoarding1
       ),
       onBoardingModel(

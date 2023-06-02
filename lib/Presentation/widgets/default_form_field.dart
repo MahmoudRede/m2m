@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:m2m/Presentation/styles/app_size_config.dart';
 import 'package:m2m/Presentation/styles/color_manager.dart';
 
 
@@ -9,11 +10,11 @@ class DefaultFormField extends StatelessWidget {
   final bool isPassword;
   final TextInputType textInputType;
   final TextEditingController controller;
-  IconData ?suffixIcon;
-  Function ?suffixFunction;
+  IconData? suffixIcon;
+  Function? suffixFunction;
   Widget? prefixWidget;
-  String ?validText;
-  int ?maxLines;
+  String? validText;
+  int? maxLines;
 
   DefaultFormField({
     required this.hint,
@@ -26,7 +27,7 @@ class DefaultFormField extends StatelessWidget {
     this.validText,
     this.maxLines=1,
     Key? key
-  }) : super(key: key);
+  }):super(key: key);
 
 
   @override
@@ -38,12 +39,10 @@ class DefaultFormField extends StatelessWidget {
         iconColor: ColorManager.primary,
         fillColor: Colors.grey[150],
         hintStyle: GoogleFonts.lato(
-          fontSize: 14.0,
+          fontSize: SizeConfig.height*0.017,
           color: Colors.black54,
         ),
-        errorStyle: GoogleFonts.roboto(
-
-        ),
+        errorStyle: GoogleFonts.roboto(),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide.none
@@ -53,19 +52,16 @@ class DefaultFormField extends StatelessWidget {
       ),
       style: GoogleFonts.roboto(
         color: Colors.black,
-        fontSize: 15,
+        fontSize: SizeConfig.height*0.018,
       ),
       maxLines: maxLines,
       controller: controller,
       keyboardType: textInputType,
       obscureText: isPassword,
-
       validator: (value){
         if(value!.isEmpty){
           return validText;
-        }
-        else
-        {
+        } else {
           return null;
         }
       },
